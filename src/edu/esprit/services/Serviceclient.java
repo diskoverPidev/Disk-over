@@ -27,20 +27,62 @@ public class Serviceclient implements Iservice<Client> {
 
     @Override
     public void ajouter(Client u) {
-       try {
-         String req = "INSERT INTO client (cin, nom,prenom,email,pwd) VALUES (?,?,?,?,?)";
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1,u.getCin());
-            ps.setString(2, u.getNom());
-            ps.setString(3, u.getPrenom());
-            ps.setString(4, u.getEmail());
-            ps.setString(5, u.getPwd());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+    try {
        
+         String req1 = "SELECT COUNT(*) FROM client WHERE cin = ?";
+        PreparedStatement ps1 = cnx.prepareStatement(req1);
+        ps1.setString(1, u.getCin());
+        ResultSet rs = ps1.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        if (count > 0) {
+            System.out.println("Un client avec le même numéro CIN existe déjà.");
+            return;
+        }
+        // Vérifier que tous les champs obligatoires sont remplis
+        if (u.getCin().isEmpty() || u.getNom().isEmpty() || u.getPrenom().isEmpty() || u.getEmail().isEmpty() || u.getPwd().isEmpty()) {
+            System.out.println("Veuillez remplir tous les champs obligatoires du client.");
+            return;
+        }
+        if (u.getPwd().length() < 8) {
+            System.out.println("Le mot de passe doit contenir au moins 8 caractères.");
+            return;
+        }
+         if (u.getCin().length() != 8) {
+            System.out.println("Le numéro CIN doit contenir exactement 8 caractères.");
+            return;
+        }
+        // Vérifier que l'adresse email est valide
+        if (!isValidEmail(u.getEmail())) {
+            System.out.println("Adresse email invalide du client .");
+            return;
+        }
+        
+        String req = "INSERT INTO client (cin, nom, prenom, email, pwd) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, u.getCin());
+        ps.setString(2, u.getNom());
+        ps.setString(3, u.getPrenom());
+        ps.setString(4, u.getEmail());
+        ps.setString(5, u.getPwd());
+        ps.executeUpdate();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
+}
+
+// Fonction pour valider une adresse email
+private boolean isValidEmail(String email) {
+    // Utiliser une expression régulière pour vérifier que l'adresse email est valide
+    String regex = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+    return email.toUpperCase().matches(regex);
+}
+
+
+
+
+
+
 
     @Override
     public void supprimer(int id) {

@@ -29,20 +29,57 @@ public class Servicechauffeur implements Iservice<Chauffeur>{
 
    
     public void ajouter(Chauffeur u) {
-       try {
-         String req = "INSERT INTO chauffeur (cin, nom,prenom,email,pwd) VALUES (?,?,?,?,?)";
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1,u.getCin());
-            ps.setString(2, u.getNom());
-            ps.setString(3, u.getPrenom());
-            ps.setString(4, u.getEmail());
-            ps.setString(5, u.getPwd());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+    try {
+         String req1 = "SELECT COUNT(*) FROM chauffeur WHERE cin = ?";
+        PreparedStatement ps1 = cnx.prepareStatement(req1);
+        ps1.setString(1, u.getCin());
+        ResultSet rs = ps1.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        if (count > 0) {
+            System.out.println("Un chauffeur avec le même numéro CIN existe déjà.");
+            return;
         }
-       
+        // Validate input
+        if (u.getCin().isEmpty() || u.getNom().isEmpty() || u.getPrenom().isEmpty() || u.getEmail().isEmpty() || u.getPwd().isEmpty()) {
+            System.out.println("Veuillez saisir toutes les informations nécessaires.");
+            return;
+        }
+        if (u.getPwd().length() < 8) {
+            System.out.println("Le mot de passe doit contenir au moins 8 caractères.");
+            return;
+        }
+        if (u.getCin().length() != 8) {
+            System.out.println("Le numéro CIN doit contenir exactement 8 caractères.");
+            return;
+        }
+        if (!isValidEmail(u.getEmail())) {
+            System.out.println("Adresse email invalide du client.");
+            return;
+        }
+        // Check if the chauffeur already exists
+        
+        // Add data to database
+        String req2 = "INSERT INTO chauffeur (cin, nom, prenom, email, pwd) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement ps2 = cnx.prepareStatement(req2);
+        ps2.setString(1, u.getCin());
+        ps2.setString(2, u.getNom());
+        ps2.setString(3, u.getPrenom());
+        ps2.setString(4, u.getEmail());
+        ps2.setString(5, u.getPwd());
+        ps2.executeUpdate();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
+}
+
+private boolean isValidEmail(String email) {
+    // Utiliser une expression régulière pour vérifier que l'adresse email est valide
+    String regex = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+    return email.toUpperCase().matches(regex);
+}
+
+
 
    
     public void supprimer(int id) {

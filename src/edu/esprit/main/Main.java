@@ -25,26 +25,30 @@ public class Main {
         datasource.getInstance();
      Client c =new Client(); 
                Client c1 =new Client("1234","55","hj888hj","j44kjk","jk66kj" ); 
-               // Client c2 =new Client("12345","00","hj888hj","j44kjk","jk66kj" );
-                           //     Client c3 =new Client("1500","mm","xx","xx","haha" );
+               Client c2 =new Client("12345555","dd","hj888hj","mohamed.jouini@esprit.tn","jk66kddj" );
+                             Admin a =new Admin("55884","mm","xx","xx","ha" );
 
 
      Serviceclient sp =new Serviceclient() ; 
      Servicechauffeur sp2 = new Servicechauffeur();
      Serviceadmin sp3 = new Serviceadmin() ;    
      
-     //Chauffeur ch= new Chauffeur("155","0dd0","hj8d88hj","jjk","jk66kj") ; 
-         // Chauffeur ch2= new Chauffeur("15","0dd0","hj8d88hj","jjk","jk66kj") ; 
+     Chauffeur ch= new Chauffeur("155","0dd0","hj8d88hj","jjk","jk66kjhh") ; 
+         Chauffeur ch2= new Chauffeur("15","","hj8d88hj","jjk","jk66kj") ; 
 
      
     //sp2.ajouter(ch);
-     // sp2.ajouter(ch1);
+    //  sp2.ajouter(ch2);
     // System.out.println(sp2.getall()) ;
      // System.out.println(sp2.getOneById(15)) ;
    //  sp2.supprimer("15") ; 
-     
-   sp.ajouter(c1) ; 
-   //  sp.ajouter(c2) ;
+     sp.ajouter(c2) ;
+   /*sp3.ajouter(a) ; 
+   
+          //sp2.ajouter(ch2) ;
+          //sp3.ajouter(a);
+          sp2.ajouter(ch);
+
 //          sp.ajouter(c3) ;
 
      
@@ -59,7 +63,7 @@ public class Main {
      
   /// System.out.println(sp.getall()) ;
  //  System.out.println(sp.getOneById(1)) ;
-List<Client> listc=sp.getall() ; 
+/*List<Client> listc=sp.getall() ; 
 List<Chauffeur> listch=sp2.getall() ; 
 List<Admin> lista=sp3.getall() ;
 List<Client> tri_client=sp.trier(listc) ;    
@@ -73,7 +77,7 @@ System.out.println(recherche_chauffeur);
 List<Admin> tri_admin=sp3.trier(lista) ;    
 System.out.println(tri_admin);
 List<Admin> recherche_admin=sp3.rechercher(lista,"","hj888hj") ; 
-System.out.println(recherche_admin);
+System.out.println(recherche_admin);*/
 
 
 

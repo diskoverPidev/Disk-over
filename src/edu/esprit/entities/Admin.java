@@ -5,6 +5,7 @@
  */
 package edu.esprit.entities;
 
+import java.security.MessageDigest;
 import java.util.Objects;
 
 /**
@@ -30,6 +31,8 @@ public class Admin {
     {
         
     }
+
+   
 
     public String getCin() {
         return cin_Admin;
@@ -69,6 +72,8 @@ public class Admin {
     }
 
    
+
+   
     
 
     public void setPrenom(String prenom) {
@@ -81,7 +86,10 @@ public class Admin {
 
     public void setPwd(String pwd) {
         this.pwd_Admin = pwd;
+         
     }
+   
+            
 
     @Override
     public int hashCode() {

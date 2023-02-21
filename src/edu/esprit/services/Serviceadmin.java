@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.security.*;
+
 
 /**
  *
@@ -42,14 +44,23 @@ public void ajouter(Admin u) {
             ps.setString(2, u.getNom());
             ps.setString(3, u.getPrenom());
             ps.setString(4, u.getEmail());
-            ps.setString(5, u.getPwd());
+            ps.setString(5, hashPassword(u.getPwd()));
             ps.executeUpdate();
         } else {
             System.out.println("L'administrateur avec le même CIN existe déjà.");
         }
-    } catch (SQLException ex) {
+    } catch (SQLException | NoSuchAlgorithmException ex) {
         System.out.println(ex.getMessage());
     }
+}
+private String hashPassword(String password) throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
+    byte[] hash = md.digest(password.getBytes());
+    StringBuilder sb = new StringBuilder();
+    for (byte b : hash) {
+        sb.append(String.format("%02x", b));
+    }
+    return sb.toString();
 }
 
     @Override
@@ -110,7 +121,8 @@ public void ajouter(Admin u) {
                 a.setNom(rs.getString("nom"));
                 a.setPrenom(rs.getString("Prenom"));
                 a.setEmail(rs.getString("Email"));
-                a.setPwd(rs.getString("pwd"));
+               String hashedPwd = rs.getString("pwd");
+                a.setPwd(hashedPwd);
                
                 listeadmin.add(a);
             }
