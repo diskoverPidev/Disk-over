@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1063.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.testapplication.gui2.AdminController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="204.0" fitWidth="200.0" layoutX="-5.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/admin.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="#2f5e2f" fontSmoothingType="LCD" layoutX="39.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service administratif" wrappingWidth="160.6708984375">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="69.0" fitWidth="84.0" layoutX="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logo45.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="737.0" prefWidth="821.0" style="-fx-background-color: #12477A;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="idcin" layoutX="47.0" layoutY="184.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="idnom" layoutX="49.0" layoutY="238.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="idprenom" layoutX="49.0" layoutY="296.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="idemail" layoutX="49.0" layoutY="437.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="idpassword" layoutX="49.0" layoutY="501.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <ChoiceBox fx:id="choicebox2" layoutX="49.0" layoutY="371.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="savebtn" layoutX="19.0" layoutY="574.0" mnemonicParsing="false" onAction="#saveUser" prefHeight="31.0" prefWidth="78.0" style="-fx-background-color: #2FBB5E;" text="Save" textFill="#f5f3f3" />
+            <Button fx:id="updatebtn" layoutX="107.0" layoutY="574.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="Update" textFill="#eeeeee" />
+            <Button fx:id="deletebtn" layoutX="213.0" layoutY="574.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #2FBB5E;" text="Delete" textFill="#f5f3f3" />
+            <Text fill="#eeebeb" layoutX="268.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion  d'administration" textAlignment="CENTER">
+               <font>
+                  <Font name="Bell MT Bold" size="32.0" />
+               </font>
+            </Text>
+            <TableView fx:id="table" layoutX="304.0" layoutY="208.0" onMouseClicked="#getData" prefHeight="326.0" prefWidth="549.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6;">
+              <columns>
+                <TableColumn fx:id="collcin" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Cin" />
+                <TableColumn fx:id="collnom" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Nom" />
+                  <TableColumn fx:id="collprenom" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Prenom" />
+                  <TableColumn fx:id="collrole" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Role" />
+                  <TableColumn fx:id="collemail" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Email" />
+                  <TableColumn fx:id="collpwd" prefWidth="165.0" style="-fx-background-color: #F0F2F6;" text="Password" />
+              </columns>
+            </TableView>
+            <Button fx:id="tribtn" layoutX="725.0" layoutY="559.0" mnemonicParsing="false" onAction="#triusers" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="Trier" textFill="#eeeeee" />
+            <TextField fx:id="idcin1" layoutX="526.0" layoutY="158.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom ou Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="tribtn1" layoutX="679.0" layoutY="166.0" mnemonicParsing="false" onAction="#rechercheuser" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="rechercher" textFill="#eeeeee" />
+            <Button fx:id="consultbtn" layoutX="608.0" layoutY="559.0" mnemonicParsing="false" onAction="#afficheruser" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="consulter" textFill="#eeeeee" />
+            <Button fx:id="homebtn" layoutX="778.0" layoutY="696.0" mnemonicParsing="false" onAction="#adminnavigation" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: #41A0FF;" text="home" textFill="#eeeeee" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

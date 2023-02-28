@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.testapplication.gui2.ForgetpwdController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blanc;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="147.0" fitWidth="148.0" layoutX="27.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/mail.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #12477A;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="emailid" layoutX="66.0" layoutY="200.0" prefHeight="31.0" prefWidth="221.0" promptText="Entrer votre email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="valider" layoutX="287.0" layoutY="260.0" mnemonicParsing="false" onAction="#validermail" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #2FBB5E;" text="valider" textFill="#f2f2f2" />
+            <Button fx:id="valider1" layoutX="386.0" layoutY="260.0" mnemonicParsing="false" onAction="#gotosignin" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #2FBB5E;" text="sign in" textFill="#f2f2f2" />
+            <Text fill="#e8e2e2" layoutX="66.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="votre mot de passe sera envoyé par email !">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

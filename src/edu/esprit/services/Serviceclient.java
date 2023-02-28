@@ -11,11 +11,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import edu.esprit.utils.datasource;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -29,7 +33,7 @@ public class Serviceclient implements Iservice<Client> {
     public void ajouter(Client u) {
     try {
        
-         String req1 = "SELECT COUNT(*) FROM client WHERE cin = ?";
+         String req1 = "SELECT COUNT(*) FROM user WHERE cin = ?";
         PreparedStatement ps1 = cnx.prepareStatement(req1);
         ps1.setString(1, u.getCin());
         ResultSet rs = ps1.executeQuery();
@@ -39,8 +43,10 @@ public class Serviceclient implements Iservice<Client> {
             System.out.println("Un client avec le même numéro CIN existe déjà.");
             return;
         }
+        
+        
         // Vérifier que tous les champs obligatoires sont remplis
-        if (u.getCin().isEmpty() || u.getNom().isEmpty() || u.getPrenom().isEmpty() || u.getEmail().isEmpty() || u.getPwd().isEmpty()) {
+        if (u.getCin().isEmpty() || u.getNom().isEmpty() || u.getPrenom().isEmpty() || u.getEmail().isEmpty() || u.getPwd().isEmpty() || u.getRole().isEmpty()) {
             System.out.println("Veuillez remplir tous les champs obligatoires du client.");
             return;
         }
@@ -58,17 +64,30 @@ public class Serviceclient implements Iservice<Client> {
             return;
         }
         
-        String req = "INSERT INTO client (cin, nom, prenom, email, pwd) VALUES (?, ?, ?, ?, ?)";
+        String req = "INSERT INTO user (cin, nom, prenom,role, email, pwd) VALUES (?, ?, ?,?, ?, ?)";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, u.getCin());
         ps.setString(2, u.getNom());
         ps.setString(3, u.getPrenom());
-        ps.setString(4, u.getEmail());
-        ps.setString(5, u.getPwd());
+                ps.setString(4, u.getRole());
+
+        ps.setString(5, u.getEmail());
+       ps.setString(6, hashPassword(u.getPwd()));
         ps.executeUpdate();
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
+    }   catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Serviceclient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+     private String hashPassword(String password) throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
+    byte[] hash = md.digest(password.getBytes());
+    StringBuilder sb = new StringBuilder();
+    for (byte b : hash) {
+        sb.append(String.format("%02x", b));
     }
+    return sb.toString();
 }
 
 // Fonction pour valider une adresse email
@@ -84,10 +103,10 @@ private boolean isValidEmail(String email) {
 
 
 
-    @Override
-    public void supprimer(int id) {
+   
+    public void supprimer(String cin) {
        try {
-            String req = "DELETE FROM client WHERE id = " + id;
+            String req = "DELETE FROM user WHERE cin = " + cin;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("client deleted !");
@@ -99,7 +118,7 @@ private boolean isValidEmail(String email) {
     @Override
     public void modifier(Client u) {
         try {
-            String req = "UPDATE client SET nom = '" + u.getNom() + "', prenom = '" + u.getPrenom() + "' WHERE client.`id` = " + u.getId_Client();
+            String req = "UPDATE user SET cin = '" + u.getCin() + "',nom = '" + u.getNom() + "', prenom = '" + u.getPrenom() + "', email = '" + u.getEmail() + "', pwd = '" + u.getPwd() + "', role = '" + u.getRole() + "' WHERE user.`cin` = " + u.getCin();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("client updated !");
@@ -107,10 +126,23 @@ private boolean isValidEmail(String email) {
             System.out.println(ex.getMessage());
         }
     }
+    public void modifierpwd(Client u) throws NoSuchAlgorithmException {
+    try {
+        String req = "UPDATE user SET pwd = ? WHERE email = ?";
+        PreparedStatement st = cnx.prepareStatement(req);
+        st.setString(1, hashPassword(u.getPwd())); 
+        st.setString(2, u.getEmail());
+        st.executeUpdate();
+        System.out.println("client updated !");
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+    
     
 
-   public Client getOneById(int id) {
-        String query = "SELECT * FROM client WHERE id = " + id + "";
+   public Client getOneById(String cin) {
+        String query = "SELECT * FROM user WHERE cin = " + cin + "";
         Client c = new Client();
         try{
             Statement ste = cnx.createStatement();
@@ -119,6 +151,8 @@ private boolean isValidEmail(String email) {
                 c.setCin(rs.getString("cin"));
                 c.setNom(rs.getString("nom"));
                 c.setPrenom(rs.getString("Prenom"));
+                                c.setRole(rs.getString("role"));
+
                 c.setEmail(rs.getString("Email"));
                 c.setPwd(rs.getString("pwd"));
             }
@@ -128,20 +162,36 @@ private boolean isValidEmail(String email) {
         }
         return c;
     }
+   public String getPwdByEmail(String email) {
+    String query = "SELECT pwd FROM user WHERE email = '" + email + "'";
+    String pwd = null;
+    try {
+        Statement ste = cnx.createStatement();
+        ResultSet rs = ste.executeQuery(query);
+        if (rs.next()) {
+            pwd = rs.getString("pwd");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return pwd;
+}
 
     @Override
     public List<Client> getall() {
         List<Client> listeclient = new ArrayList<>();
-        String query = "SELECT * FROM client ";
+        String query = "SELECT * FROM user ";
         try{
             Statement ste = cnx.createStatement();
             ResultSet rs = ste.executeQuery(query);
             while (rs.next()){
                 Client c = new Client();
-                c.setId_Client(rs.getInt("id")) ; 
+
                 c.setCin(rs.getString("cin"));
                 c.setNom(rs.getString("nom"));
                 c.setPrenom(rs.getString("Prenom"));
+                                c.setRole(rs.getString("role"));
+
                 c.setEmail(rs.getString("Email"));
                 c.setPwd(rs.getString("pwd"));
                
@@ -160,10 +210,10 @@ private boolean isValidEmail(String email) {
                 .sorted(Comparator.comparing(Client::getCin))
                 .collect(Collectors.toList());
     }
-   public static List<Client> rechercher(List<Client> listc,String nom, String prenom)
+   public static List<Client> rechercher(List<Client> listc,String recherche)
    {
        return (List<Client>) listc.stream()
-        .filter(a -> a.getNom().equalsIgnoreCase(nom) || a.getPrenom().equalsIgnoreCase(prenom)).collect(Collectors.toList());
+        .filter(a -> a.getNom().equalsIgnoreCase(recherche) || a.getPrenom().equalsIgnoreCase(recherche)).collect(Collectors.toList());
        
    }
     

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="636.0" prefWidth="960.0" style="-fx-background-color: #12477A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.testapplication.gui2.HomeController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <right>
+            <Text fill="#d6e1dc" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: black;" text="Disk'over " wrappingWidth="492.6708984375" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Arial Bold Italic" size="61.0" />
+               </font>
+            </Text>
+         </right>
+      </BorderPane>
+      <Button fx:id="btnwelcome" layoutX="382.0" layoutY="570.0" mnemonicParsing="false" onAction="#welcome" prefHeight="35.0" prefWidth="154.0" style="-fx-background-color: #2fb82f;" text="Welcome" textFill="#eff5ef" />
+      <ImageView fitHeight="104.0" fitWidth="114.0" layoutX="846.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: blanc;">
+         <image>
+            <Image url="@../../../images/logo45.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="356.0" layoutY="399.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/naveco-removebg-preview.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="71.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="413.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/image-removebg-preview%20(22).jpg" />
+         </image>
+      </ImageView>
+      <Text fill="#72c380" layoutX="332.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are the future">
+         <font>
+            <Font name="System Bold Italic" size="35.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

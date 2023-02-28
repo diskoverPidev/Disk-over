@@ -5,6 +5,8 @@
  */
 package edu.testapplication.gui2;
 
+import java.awt.Image;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -22,15 +26,28 @@ import javafx.stage.Stage;
 public class FirstWindow extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-      
-        Parent root = FXMLLoader.load(getClass().getResource("")) ;
-        Scene scene = new Scene(root, 300, 250);
+    public void start(Stage primaryStage) throws IOException {
         
-        primaryStage.setTitle("Hello World!");
+try{
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+  
+ BorderPane borderPane = new BorderPane();
+Parent root = loader.load();
+//borderPane.setCenter(root);
+ Scene scene = new Scene(root);
+  primaryStage.setScene(scene);
+ primaryStage.show();
+         /*FXMLLoader loader= FXMLLoader.load(getClass().getResource("inscription.fxml")) ;
+      
+        Parent root =loader.load();
+        Scene scene = new Scene(root);
+        
+        primaryStage.setTitle("gestion d'utilisateur");
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show();*/
+    }catch (Exception e){
+        System.out.println(e.getMessage());
+    }
     }
 
     /**

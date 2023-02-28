@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/edu/testapplication/gui2/ForgetpwdController.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>73</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/entities/Admin.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/InscriptionController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/main/Main.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/ForgetpwdController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/editprofil.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/services/Serviceadmin.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/entities/Client.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/EditprofilController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/FirstWindow.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/choixutilisateur.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/admin.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/services/Serviceclient.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/entities/User.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/services/Iservice.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/ChoixutilisateurController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/home.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/forgetpwd.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/inscription.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/SignupController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/HomeController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/Signup.fxml</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/testapplication/gui2/AdminController.java</file>
+            <file>file:/C:/Users/lenovo/Desktop/PIDEV/pi_diskover/src/edu/esprit/services/Servicechauffeur.java</file>
+        </group>
+    </open-files>
+</project-private>

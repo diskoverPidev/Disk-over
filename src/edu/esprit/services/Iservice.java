@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface Iservice<U> {
     public void ajouter(U u); 
-    public void supprimer(int id) ; 
+    public void supprimer(String cin) ; 
     public void modifier(U u) ;
-    public U getOneById(int id) ; 
+    public U getOneById(String cin) ; 
     public List<U> getall() ; 
     
 }

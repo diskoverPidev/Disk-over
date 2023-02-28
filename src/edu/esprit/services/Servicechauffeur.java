@@ -9,6 +9,8 @@ import com.mysql.jdbc.Connection;
 import edu.esprit.entities.Chauffeur;
 import edu.esprit.entities.Client;
 import edu.esprit.utils.datasource;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +18,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -30,7 +34,7 @@ public class Servicechauffeur implements Iservice<Chauffeur>{
    
     public void ajouter(Chauffeur u) {
     try {
-         String req1 = "SELECT COUNT(*) FROM chauffeur WHERE cin = ?";
+         String req1 = "SELECT COUNT(*) FROM user WHERE cin = ?";
         PreparedStatement ps1 = cnx.prepareStatement(req1);
         ps1.setString(1, u.getCin());
         ResultSet rs = ps1.executeQuery();
@@ -41,7 +45,7 @@ public class Servicechauffeur implements Iservice<Chauffeur>{
             return;
         }
         // Validate input
-        if (u.getCin().isEmpty() || u.getNom().isEmpty() || u.getPrenom().isEmpty() || u.getEmail().isEmpty() || u.getPwd().isEmpty()) {
+        if (u.getCin().isEmpty() || u.getNom().isEmpty() || u.getPrenom().isEmpty() || u.getEmail().isEmpty() || u.getPwd().isEmpty() || u.getRole().isEmpty()) {
             System.out.println("Veuillez saisir toutes les informations nécessaires.");
             return;
         }
@@ -60,17 +64,30 @@ public class Servicechauffeur implements Iservice<Chauffeur>{
         // Check if the chauffeur already exists
         
         // Add data to database
-        String req2 = "INSERT INTO chauffeur (cin, nom, prenom, email, pwd) VALUES (?, ?, ?, ?, ?)";
+        String req2 = "INSERT INTO user (cin, nom, prenom,role,email, pwd) VALUES (?, ?, ?,?,?, ?)";
         PreparedStatement ps2 = cnx.prepareStatement(req2);
         ps2.setString(1, u.getCin());
         ps2.setString(2, u.getNom());
         ps2.setString(3, u.getPrenom());
-        ps2.setString(4, u.getEmail());
-        ps2.setString(5, u.getPwd());
+                ps2.setString(4, u.getRole());
+
+        ps2.setString(5, u.getEmail());
+       ps2.setString(6, hashPassword(u.getPwd()));
         ps2.executeUpdate();
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
+    }  catch (NoSuchAlgorithmException ex) {
+           Logger.getLogger(Servicechauffeur.class.getName()).log(Level.SEVERE, null, ex);
+       }
+}
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
+    byte[] hash = md.digest(password.getBytes());
+    StringBuilder sb = new StringBuilder();
+    for (byte b : hash) {
+        sb.append(String.format("%02x", b));
     }
+    return sb.toString();
 }
 
 private boolean isValidEmail(String email) {
@@ -82,9 +99,9 @@ private boolean isValidEmail(String email) {
 
 
    
-    public void supprimer(int id) {
+    public void supprimer(String cin) {
        try {
-            String req = "DELETE FROM chauffeur WHERE id = " + id;
+            String req = "DELETE FROM user WHERE id = " + cin;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("chauffeur deleted !");
@@ -96,7 +113,7 @@ private boolean isValidEmail(String email) {
     @Override
     public void modifier(Chauffeur u) {
         try {
-            String req = "UPDATE chauffeur SET nom = '" + u.getNom() + "', prenom = '" + u.getPrenom() + "' WHERE chauffeur.`id` = " + u.getId_chauffeur();
+            String req = "UPDATE user SET nom = '" + u.getNom() + "', prenom = '" + u.getPrenom() + "' WHERE chauffeur.`id` = " + u.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("chauffeur updated !");
@@ -106,8 +123,8 @@ private boolean isValidEmail(String email) {
     }
     
 
-   public Chauffeur getOneById(int id) {
-        String query = "SELECT * FROM chauffeur WHERE id = " + id + "";
+   public Chauffeur getOneById(String cin) {
+        String query = "SELECT * FROM user WHERE cn = " + cin + "";
         Chauffeur ch = new Chauffeur();
         try{
             Statement ste = cnx.createStatement();
@@ -116,6 +133,8 @@ private boolean isValidEmail(String email) {
                 ch.setCin(rs.getString("cin"));
                 ch.setNom(rs.getString("nom"));
                 ch.setPrenom(rs.getString("Prenom"));
+                   ch.setRole(rs.getString("role"));
+
                 ch.setEmail(rs.getString("Email"));
                 ch.setPwd(rs.getString("pwd"));
             }
@@ -129,7 +148,7 @@ private boolean isValidEmail(String email) {
     
     public List<Chauffeur> getall() {
         List<Chauffeur> listechauffeur = new ArrayList<>();
-        String query = "SELECT * FROM chauffeur ";
+        String query = "SELECT * FROM user ";
         try{
             Statement ste = cnx.createStatement();
             ResultSet rs = ste.executeQuery(query);
@@ -138,6 +157,8 @@ private boolean isValidEmail(String email) {
                 ch.setCin(rs.getString("cin"));
                 ch.setNom(rs.getString("nom"));
                 ch.setPrenom(rs.getString("Prenom"));
+                ch.setRole(rs.getString("role"));
+
                 ch.setEmail(rs.getString("Email"));
                 ch.setPwd(rs.getString("pwd"));
                

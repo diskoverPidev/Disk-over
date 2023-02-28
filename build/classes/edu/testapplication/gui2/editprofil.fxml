@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.testapplication.gui2.EditprofilController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="75.0" fitWidth="72.0" layoutX="129.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logo45.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/user.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="#2f6831" layoutX="41.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mon profil" wrappingWidth="133.638671875">
+               <font>
+                  <Font name="System Bold Italic" size="21.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="135.0" fitWidth="129.0" layoutX="43.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/image-removebg-preview%20(23).jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="620.0" prefWidth="698.0" style="-fx-background-color: #12477A;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#fff8f8" layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parametres du profil : " wrappingWidth="308.6708984375">
+               <font>
+                  <Font name="System Bold Italic" size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="editid" layoutX="33.0" layoutY="266.0" promptText="ID" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="consulterbtn" layoutX="60.0" layoutY="378.0" mnemonicParsing="false" onAction="#consulterProfil" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: #2FBB5E;" text="consulter profil" textFill="#ebe9e9">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <TextField fx:id="editcin" layoutX="401.0" layoutY="123.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="editnom" layoutX="401.0" layoutY="187.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="editprenom" layoutX="401.0" layoutY="250.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <ChoiceBox fx:id="choicebox3" layoutX="401.0" layoutY="328.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="editemail" layoutX="401.0" layoutY="391.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="editpassword" layoutX="401.0" layoutY="455.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="modifierbtn" layoutX="308.0" layoutY="519.0" mnemonicParsing="false" onAction="#modifierprofil" prefHeight="39.0" prefWidth="126.0" style="-fx-background-color: #2FBB5E;" text="Modifier" textFill="#ebe9e9">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="supprimerbtn" layoutX="462.0" layoutY="519.0" mnemonicParsing="false" onAction="#supprimerProfil" prefHeight="39.0" prefWidth="126.0" style="-fx-background-color: #2FBB5E;" text="Supprimer" textFill="#ebe9e9">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="signinbtn" layoutX="613.0" layoutY="570.0" mnemonicParsing="false" onAction="#reglagenavigation" prefHeight="39.0" prefWidth="80.0" style="-fx-background-color: #2FBB5E;" text="sign in" textFill="#ebe9e9">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

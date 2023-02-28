@@ -31,20 +31,22 @@ public class Serviceadmin implements Iservice<Admin> {
    
 public void ajouter(Admin u) {
     try {
-        String req = "SELECT COUNT(*) FROM admin WHERE cin = ?";
+        String req = "SELECT COUNT(*) FROM user WHERE cin = ?";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, u.getCin());
         ResultSet rs = ps.executeQuery();
         rs.next();
         int count = rs.getInt(1);
         if (count == 0) {
-            req = "INSERT INTO admin (cin, nom, prenom, email, pwd) VALUES (?,?,?,?,?)";
+            req = "INSERT INTO user (cin, nom, prenom,role,email, pwd) VALUES (?,?,?,?,?,?)";
             ps = cnx.prepareStatement(req);
             ps.setString(1, u.getCin());
             ps.setString(2, u.getNom());
             ps.setString(3, u.getPrenom());
-            ps.setString(4, u.getEmail());
-            ps.setString(5, hashPassword(u.getPwd()));
+                        ps.setString(4, u.getRole());
+
+            ps.setString(5, u.getEmail());
+            ps.setString(6, hashPassword(u.getPwd()));
             ps.executeUpdate();
         } else {
             System.out.println("L'administrateur avec le même CIN existe déjà.");
@@ -64,9 +66,9 @@ private String hashPassword(String password) throws NoSuchAlgorithmException {
 }
 
     @Override
-    public void supprimer(int id) {
+    public void supprimer(String cin) {
        try {
-            String req = "DELETE FROM admin WHERE id = " + id;
+            String req = "DELETE FROM user WHERE id = " + cin;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("admin deleted !");
@@ -78,7 +80,7 @@ private String hashPassword(String password) throws NoSuchAlgorithmException {
     @Override
     public void modifier(Admin u) {
         try {
-            String req = "UPDATE admin SET nom = '" + u.getNom() + "', prenom = '" + u.getPrenom() + "' WHERE admin.`id` = " + u.getId_Admin();
+            String req = "UPDATE user SET nom = '" + u.getNom() + "', prenom = '" + u.getPrenom() + "' WHERE admin.`id` = " + u.getId();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("admin updated !");
@@ -88,8 +90,8 @@ private String hashPassword(String password) throws NoSuchAlgorithmException {
     }
     
 
-   public Admin getOneById(int id) {
-        String query = "SELECT * FROM admin WHERE id = " + id + "";
+   public Admin getOneById(String cin) {
+        String query = "SELECT * FROM user WHERE cin = " + cin + "";
         Admin a  = new Admin();
         try{
             Statement ste = cnx.createStatement();
@@ -98,6 +100,9 @@ private String hashPassword(String password) throws NoSuchAlgorithmException {
                 a.setCin(rs.getString("cin"));
                 a.setNom(rs.getString("nom"));
                 a.setPrenom(rs.getString("Prenom"));
+                     a.setRole(rs.getString("role"));
+
+                
                 a.setEmail(rs.getString("Email"));
                 a.setPwd(rs.getString("pwd"));
             }
@@ -111,7 +116,7 @@ private String hashPassword(String password) throws NoSuchAlgorithmException {
     
     public List<Admin> getall() {
         List<Admin> listeadmin = new ArrayList<>();
-        String query = "SELECT * FROM admin ";
+        String query = "SELECT * FROM user ";
         try{
             Statement ste = cnx.createStatement();
             ResultSet rs = ste.executeQuery(query);
@@ -120,6 +125,8 @@ private String hashPassword(String password) throws NoSuchAlgorithmException {
                 a.setCin(rs.getString("cin"));
                 a.setNom(rs.getString("nom"));
                 a.setPrenom(rs.getString("Prenom"));
+                a.setRole(rs.getString("role"));
+
                 a.setEmail(rs.getString("Email"));
                String hashedPwd = rs.getString("pwd");
                 a.setPwd(hashedPwd);
