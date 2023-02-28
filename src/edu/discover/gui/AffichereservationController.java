@@ -10,6 +10,8 @@ import edu.discover.services.Crudcolaboration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,10 +26,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -47,24 +53,18 @@ public class AffichereservationController implements Initializable {
     private TextField prixi;
     @FXML
     private DatePicker datei;
-    @FXML
-    private TableColumn<Colaborationevent, String> namecol;
-    @FXML
-    private TableColumn<Colaborationevent, Date> datecol;
-    @FXML
-    private TableColumn<Colaborationevent, String> adresscol;
-    @FXML
-    private TableColumn<Colaborationevent, Integer> nbrcol;
-    @FXML
-    private TableColumn<Colaborationevent, Integer> prixcol;
-    @FXML
+//    private TableColumn<Colaborationevent, String> namecol;
+//    private TableColumn<Colaborationevent, Date> datecol;
+//    private TableColumn<Colaborationevent, String> adresscol;
+//    private TableColumn<Colaborationevent, Integer> nbrcol;
+//    private TableColumn<Colaborationevent, Integer> prixcol;
+   @FXML
     private Button btnadd;
     @FXML
     private Button btnupdate;
     @FXML
     private Button btndelete;
-    @FXML
-    private TableView<Colaborationevent> tableView;
+//    private TableView<Colaborationevent> tableView;
     @FXML
     private Button btnaffiche;
     @FXML
@@ -72,6 +72,12 @@ public class AffichereservationController implements Initializable {
 
     @FXML
     private TextField search;
+    @FXML
+    private AnchorPane ev;
+    @FXML
+    private ListView<?> listviewevent;
+    @FXML
+    private VBox vbox;
 
     @FXML
     private void listeres(ActionEvent event) throws IOException {
@@ -90,26 +96,26 @@ public class AffichereservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        btnaffiche.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //    showsEvent();
-                //  Crudcolaboration sr = new Crudcolaboration();
-                Crudcolaboration sr = new Crudcolaboration();
-                ObservableList<Colaborationevent> observableClients;
-                observableClients = FXCollections.observableArrayList();
-
-                namecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("NomEvent"));
-                datecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Date>("DateEvent"));
-                adresscol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("AdresseEvent"));
-                nbrcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("NbrPlaceVehicule"));
-                prixcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("PrixVehiculeEvent"));
-                observableClients.addAll(sr.getAll());
-
-                System.out.println(observableClients);
-                tableView.setItems(observableClients);
-            }
-        });
+//        btnaffiche.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                //    showsEvent();
+//                //  Crudcolaboration sr = new Crudcolaboration();
+//                Crudcolaboration sr = new Crudcolaboration();
+//                ObservableList<Colaborationevent> observableClients;
+//                observableClients = FXCollections.observableArrayList();
+//
+//                namecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("NomEvent"));
+//                datecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Date>("DateEvent"));
+//                adresscol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("AdresseEvent"));
+//                nbrcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("NbrPlaceVehicule"));
+//                prixcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("PrixVehiculeEvent"));
+//                observableClients.addAll(sr.getAll());
+//
+//                System.out.println(observableClients);
+//                tableView.setItems(observableClients);
+//            }
+//        });
 
     }
 
@@ -126,18 +132,55 @@ public class AffichereservationController implements Initializable {
     @FXML
     public void showsEvent(ActionEvent event) {
         //   Crudcolaboration sr = new Crudcolaboration();
-        Crudcolaboration sr = new Crudcolaboration();
-        ObservableList<Colaborationevent> observableClients;
-        observableClients = FXCollections.observableArrayList();
-
-        namecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("NomEvent"));
-        datecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Date>("DateEvent"));
-        adresscol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("AdresseEvent"));
-        nbrcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("NbrPlaceVehicule"));
-        prixcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("PrixVehiculeEvent"));
-        observableClients.addAll(sr.getAll());
-        System.out.println(sr.getAll());
-        tableView.setItems(observableClients);
+//        Crudcolaboration sr = new Crudcolaboration();
+//        ObservableList<Colaborationevent> observableClients;
+//        observableClients = FXCollections.observableArrayList();
+           List <Colaborationevent> even= new ArrayList();
+            Crudcolaboration sr = new Crudcolaboration();
+            listviewevent.getItems();
+             even =sr.getAll();
+             System.out.println(ev);
+            int x=0,y=0;
+            for (Colaborationevent e:even){
+                AnchorPane an =new AnchorPane();
+                an.setLayoutX(x);
+                an.setLayoutY(y);
+                Label name =new Label(e.getNomevent());
+                name.setLayoutX(x+14);
+                name.setLayoutY(x+17);
+                String d= String.valueOf(e.getDateevent());
+                Label date = new Label(d);
+                date.setLayoutX(x+109);
+                date.setLayoutY(x+17);
+                Label adress =new Label(e.getAdresseevent());
+                adress.setLayoutX(x+194);
+                adress.setLayoutY(x+17);
+//                Label nbrplace =new Label(e.getNbrplacevehicule());
+//                nbrplace.setLayoutX(x+312);
+//                nbrplace.setLayoutY(x+17);
+//                Label prix =new Label(e.getPrixvehiculeevent());
+//                prix.setLayoutX(x+446);
+//                prix.setLayoutY(x+17);
+                Button btnaffiche = new Button("Affichage");
+                an.getChildren().addAll(name,date,adress);
+                ev.getChildren().addAll(an);
+                vbox.getChildren().add(an);
+                
+                
+                
+            }
+        
+        
+        
+//
+//        namecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("NomEvent"));
+//        datecol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Date>("DateEvent"));
+//        adresscol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, String>("AdresseEvent"));
+//        nbrcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("NbrPlaceVehicule"));
+//        prixcol.setCellValueFactory(new PropertyValueFactory<Colaborationevent, Integer>("PrixVehiculeEvent"));
+//        observableClients.addAll(sr.getAll());
+//        System.out.println(sr.getAll());
+//        tableView.setItems(observableClients);
 
     }
 
