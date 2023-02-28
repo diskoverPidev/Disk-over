@@ -18,7 +18,6 @@ public class Reponse {
     private final int num;
     private final String resultat;
     private final Date dateR;
-    private Reclamation idJ;
 
     public Reponse(int idclient, int idchauffeur, int num, String resultat, Date dateR) {
         this.idclient = idclient;
@@ -28,21 +27,13 @@ public class Reponse {
         this.dateR = dateR;
     }
 
-    public void setId(Reclamation id) {
-        this.idJ = id;
-    }
-
-    public Reclamation getId() {
-        return idJ;
-    }
-
     public Reponse(int idclient, int idchauffeur, int num, String resultat, Date dateR, Reclamation id) {
         this.idclient = idclient;
         this.idchauffeur = idchauffeur;
         this.num = num;
         this.resultat = resultat;
         this.dateR = dateR;
-        this.idJ = id;
+
     }
 
     public Reponse(int aInt, int aInt0, String string, Date date) {
@@ -108,9 +99,32 @@ public class Reponse {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void setObjet(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setResultat(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setIdClient(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setIdChauffeur(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setNum(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setDate(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public class getResultat {
 
-     
         public getResultat() {
         }
     }

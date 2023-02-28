@@ -7,10 +7,11 @@ package edu.esprit.entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Objects;
-
-
-
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -22,13 +23,17 @@ public class Reclamation {
     private String type;
     private String objet;
     private String message;
-    private Date date;
+    public Date date;
 
     public Reclamation(int id, String type, String objet, String message) {
         this.id = id;
         this.type = type;
         this.objet = objet;
         this.message = message;
+    }
+
+    public Reclamation(int id) {
+        this.id = id;
     }
 
     public Reclamation(String type, String objet, String message, Date date) {
@@ -38,10 +43,9 @@ public class Reclamation {
         this.date = date;
     }
 
-    public Reclamation(String string, String string0, String string1, Date date, String string2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
+ 
     public int getId() {
         return id;
     }
@@ -70,7 +74,17 @@ public class Reclamation {
         }
     }
 
-   
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setObjet(String objet) {
+        this.objet = objet;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @Override
     public int hashCode() {
@@ -115,8 +129,15 @@ public class Reclamation {
         return "Reclamation{" + "id=" + id + ", type=" + type + ", objet=" + objet + ", message=" + message + ", date=" + date + '}';
     }
 
-    public void setMessage(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setMessage(String message) {
+        this.message = message;
     }
+
+  
+   
+
+
+
+
 
 }

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import static jdk.nashorn.internal.runtime.Debug.id;
@@ -44,12 +43,12 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
 
     public void ajouter(Reclamation t) {
-     
+
         if (!String.valueOf(t.getId()).matches("[a-zA-Z0-9]+")) {
             try {
                 throw new Exception("L'identifiant ne doit contenir que des lettres et des chiffres");
             } catch (Exception ex) {
-                Logger.getLogger(ServiceReclamation.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("erreur");
             }
         }
 
@@ -70,7 +69,7 @@ public class ServiceReclamation implements IService<Reclamation> {
 
             if (isOffensive) {
                 // Si le message contient des mots offensants, remplacer le contenu de l'objet par des étoiles
-                t.setMessage("***");
+                t.setMessage("*******");
             }
 
             ps.setString(1, t.getType());
@@ -79,7 +78,7 @@ public class ServiceReclamation implements IService<Reclamation> {
             ps.setDate(4, t.getDate());
             ps.executeUpdate();
             System.out.println("reclamation added ");
-              // Afficher une notification système pour l'administrateur
+            // Afficher une notification système pour l'administrateur
             SystemTray tray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().createImage("icon.png"); // chemin vers une icône pour la notification
             TrayIcon trayIcon = new TrayIcon(image, "Nouvelle réclamation");
@@ -90,21 +89,22 @@ public class ServiceReclamation implements IService<Reclamation> {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Une erreur s'est produite lors de l'ajout de la réclamation : " + ex.getMessage(), "Erreur de base de données", JOptionPane.ERROR_MESSAGE);
         } catch (AWTException ex) {
-            Logger.getLogger(ServiceReclamation.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("essayer de nouveau");
         }
     }
 
     @Override
-    public void supprimer(int idR) {
-        try {
-            String req = "DELETE FROM reclamation WHERE id = ? ";
-            PreparedStatement st = cnx.prepareStatement(req);
-            st.setInt(1, idR);
-            st.executeUpdate();
-            System.out.println("reclamation deleted");
+    public void supprimer(Reclamation t) {
+     
+            String req = "DELETE FROM reclamation WHERE id="+t.getId(); 
+           try {
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Reclamation supprimee !");
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
+      
     }
 
     @Override
@@ -136,14 +136,15 @@ public class ServiceReclamation implements IService<Reclamation> {
 
         return t;
     }
+    
 
     @Override
     public List<Reclamation> getAll() {
         List<Reclamation> list = new ArrayList<>();
-        String reqs ="SELECT i.type,i.objet, i.message, i.date " +
-                    "FROM reclamation t " +
-                    "JOIN reponse i ON t.idJ = t.idJ " +
-                    "WHERE i.idJ = ?";
+        String reqs = "SELECT i.type,i.objet, i.message, i.date "
+                + "FROM reclamation t "
+                + "JOIN reponse i ON t.idJ = t.idJ "
+                + "WHERE i.idJ = ?";
         try {
             String req = "Select * from reclamation";
             Statement st = cnx.createStatement();
@@ -161,29 +162,14 @@ public class ServiceReclamation implements IService<Reclamation> {
 
     public static List<Reclamation> trier(List<Reclamation> listc) {
         return listc.stream()
-                .sorted(Comparator.comparing(reclamation -> reclamation.getId()))
+                .sorted(Comparator.comparing(reclamation -> reclamation.getDate()))
                 .collect(Collectors.toList());
     }
 
-    public static List<Reclamation> rechercher(List<Reclamation> listc, String objet, String type) {
+    public static List<Reclamation> rechercher(List<Reclamation> listc, String input) {
 
         return listc.stream()
-                .filter(t -> t.getObjet().equalsIgnoreCase(objet) || t.getType().equalsIgnoreCase(type))
+                .filter(t -> t.getObjet().equalsIgnoreCase(input) || t.getType().equalsIgnoreCase(input))
                 .collect(Collectors.toList());
     }
-
-    private int isIdUnique(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
- 
 }
-
- 
-
-
-
-
-
-    
-
-

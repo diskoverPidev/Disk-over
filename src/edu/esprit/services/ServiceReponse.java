@@ -58,15 +58,16 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
     }
 
     @Override
-    public void supprimer(int numR) {
+    public void supprimer(Reponse i) {
+    
+            String req = "DELETE FROM reponse WHERE num = " +i.getNum();
+        
         try {
-            String req = "DELETE FROM reponse WHERE num = ? ";
-            PreparedStatement st = cnx.prepareStatement(req);
-            st.setInt(1, numR);
-            st.executeUpdate();
-            System.out.println("reponse deleted");
+            Statement st = cnx.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Reponse supprimee !");
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -129,7 +130,7 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
 
     public static List<Reponse> trier(List<Reponse> listr) {
         return listr.stream()
-                .sorted(Comparator.comparing((reponse) -> reponse.getNum()))
+                .sorted(Comparator.comparing((reponse) -> reponse.getDateR()))
                 .collect(Collectors.toList());
     }
 
@@ -139,5 +140,7 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
                 .filter(t -> t.getResultat().equalsIgnoreCase(resultat))
                 .collect(Collectors.toList());
     }
+
+  
 
 }

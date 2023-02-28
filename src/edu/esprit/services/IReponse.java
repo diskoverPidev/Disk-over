@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IReponse<I> {
     public void ajouter(I i);
-    public void supprimer (int numR);
+    public void supprimer (I i);
     public void modifier (I i);
     public I getOneById (int numR);
     public List<I> getAll();

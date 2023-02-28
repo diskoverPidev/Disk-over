@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: red; -fx-background-color: #12477A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.BackController">
+   <children>
+      <TextField fx:id="idC" layoutX="6.0" layoutY="23.0" prefHeight="25.0" prefWidth="182.0" promptText="IdClient" />
+      <TextField fx:id="idCh" layoutX="6.0" layoutY="65.0" prefHeight="25.0" prefWidth="182.0" promptText="IdChauffeur" />
+      <TextField fx:id="numR" layoutX="6.0" layoutY="106.0" prefHeight="25.0" prefWidth="182.0" promptText="Num Reponse" />
+      <TextField fx:id="resR" layoutX="8.0" layoutY="146.0" prefHeight="25.0" prefWidth="182.0" promptText="Resultat" />
+      <DatePicker fx:id="dateR" layoutX="5.0" layoutY="188.0" prefHeight="25.0" prefWidth="182.0" promptText="date" />
+      <TableView fx:id="tableView" layoutX="216.0" layoutY="106.0" onSort="#afficherReponse" prefHeight="188.0" prefWidth="376.0">
+        <columns>
+          <TableColumn fx:id="idi" prefWidth="75.0" text="IdClient" />
+          <TableColumn fx:id="idic" prefWidth="75.0" text="IdChauffeur" />
+            <TableColumn fx:id="numir" prefWidth="75.0" text="Num reponse" />
+            <TableColumn fx:id="resir" prefWidth="75.0" text="Resultat" />
+            <TableColumn fx:id="dateir" prefWidth="75.0" text="Date" />
+        </columns>
+      </TableView>
+      <Button fx:id="repondre" layoutX="59.0" layoutY="233.0" mnemonicParsing="false" onAction="#ajouterReponse" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Repondre" textAlignment="RIGHT" textOverrun="CLIP" underline="true" />
+      <Button fx:id="btnSupp" layoutX="59.0" layoutY="331.0" mnemonicParsing="false" onAction="#supprimerReponse" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Supprimer" textAlignment="RIGHT" textOverrun="CLIP" underline="true" />
+      <Button fx:id="btnmodif" layoutX="59.0" layoutY="281.0" mnemonicParsing="false" onAction="#modifierReponse" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Modifier" textAlignment="RIGHT" textOverrun="CLIP" underline="true" />
+      <Separator layoutX="198.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="407.0" prefWidth="11.0" />
+   </children>
+</AnchorPane>
