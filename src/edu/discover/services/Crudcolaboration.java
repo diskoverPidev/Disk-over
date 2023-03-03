@@ -128,7 +128,7 @@ public class Crudcolaboration implements IService<Colaborationevent> {
 
         List<Colaborationevent> colaboration = new ArrayList<>();
         try {
-            String req = "SELECT * FROM `colaborationevent`";
+            String req = "SELECT * FROM colaborationevent";
             PreparedStatement ps = cnx.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -199,6 +199,36 @@ public class Crudcolaboration implements IService<Colaborationevent> {
     @Override
     public void supprimer(Colaborationevent t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    
+    public Colaborationevent AffichagePDF(){
+        Colaborationevent r= null;
+        try {
+            int size=0;
+            
+            String req = "SELECT * FROM reservations";
+            
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            
+            while(rs.next()){
+            size++ ;
+            }
+            rs.absolute(size);
+           String s=  rs.getString("idevent");
+           //ServiceEvents se = new ServiceEvents();
+           //Events e = se.getOneById(rs.getInt("id_event"));
+           
+           r = new Colaborationevent(Integer.valueOf(rs.getString("idevent")),rs.getString("nomevent"),rs.getDate("dateevent") , rs.getString("adresseevent"), Integer.valueOf(rs.getString("nbrplacevehicule")),Integer.valueOf(rs.getString("prixvehiculeevent")));
+          
+        } catch (SQLException ex) {
+           
+        }
+      return r;
+    
     }
 
 }

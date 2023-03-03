@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -34,7 +36,11 @@ public class AjouterReservationController implements Initializable {
    
     @FXML
     private Button retourr;
-
+    @FXML
+    private Label mylabel;
+    @FXML
+    private ChoiceBox<String> mychoixbox;
+    private final String[] event = {"online", "cinematic", "literature", "theatre", "salle_exposition_des_tableaux", "salle_exposition_des_sculpture"};
     @FXML
     private void listeres(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Evenement.fxml"));
@@ -53,6 +59,15 @@ public class AjouterReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+       mychoixbox.getItems().addAll(event);
+        mychoixbox.setOnAction(this::getEvent); 
+        
+    } 
+    public void getEvent(ActionEvent event) {
+        String myEvent = mychoixbox.getValue();
+        mylabel.setText(myEvent);
+
+    }
+    
     
 }

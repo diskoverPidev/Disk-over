@@ -34,11 +34,11 @@
       <TextField fx:id="nbrp" layoutX="288.0" layoutY="290.0" promptText="Nbr Persone" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
       <Button fx:id="reserver" layoutX="425.0" layoutY="422.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="92.0" style="-fx-background-color: #27ae60;" text="Reserver !" textFill="WHITE" />
       <Button fx:id="retourr" layoutX="548.0" layoutY="422.0" mnemonicParsing="false" onAction="#listeres" prefHeight="37.0" prefWidth="83.0" style="-fx-background-color: #27ae60;" text="Retour" textFill="WHITE" />
-      <Label layoutX="153.0" layoutY="333.0" text="Evenement :" textFill="WHITE">
+      <Label fx:id="mylabel" layoutX="153.0" layoutY="333.0" text="Evenement :" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="choixEvent" layoutX="288.0" layoutY="335.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="mychoixbox" layoutX="288.0" layoutY="335.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
