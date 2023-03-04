@@ -52,7 +52,7 @@ public class CategorieController implements Initializable {
 
     @FXML
     private void moyenne(ActionEvent event) throws IOException {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("Client.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientMoyenne.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

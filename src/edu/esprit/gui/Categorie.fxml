@@ -9,11 +9,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #12477A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.CategorieController">
    <children>
-      <ImageView fitHeight="143.0" fitWidth="263.0" layoutX="204.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../Downloads/Capture_d_écran_2023-02-28_102534-removebg-preview.png" />
-         </image>
-      </ImageView>
       <Button fx:id="hauteid" layoutX="93.0" layoutY="273.0" mnemonicParsing="false" onAction="#haute" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #3cba64;" text="Haute gamme">
          <font>
             <Font name="System Bold Italic" size="12.0" />
@@ -30,6 +25,11 @@
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="461.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/lgog.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="156.0" fitWidth="249.0" layoutX="206.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Capture_d_écran_2023-02-28_102534-removebg-preview%20(1).png" />
          </image>
       </ImageView>
    </children>
