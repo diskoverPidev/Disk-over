@@ -11,9 +11,11 @@
    <children>
       <Pane layoutY="87.0" prefHeight="318.0" prefWidth="600.0" style="-fx-background-color: #12477A;">
          <children>
-            <TextField fx:id="email" focusTraversable="false" layoutX="94.0" layoutY="107.0" prefHeight="25.0" prefWidth="191.0" promptText="Exemple@exemple.com" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="email" focusTraversable="false" layoutX="89.0" layoutY="43.0" prefHeight="25.0" prefWidth="191.0" promptText="Exemple@exemple.com" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" />
             <Button fx:id="send" layoutX="320.0" layoutY="187.0" mnemonicParsing="false" onAction="#Notifier" prefHeight="31.0" prefWidth="72.0" style="-fx-background-color: #27ae60;" text="Envoyer" textFill="WHITE" />
             <Button fx:id="retour" layoutX="411.0" layoutY="187.0" mnemonicParsing="false" onAction="#retourpage" prefHeight="31.0" prefWidth="72.0" style="-fx-background-color: #27ae60;" text="Retour" textFill="WHITE" />
+            <TextField fx:id="Msg" layoutX="84.0" layoutY="120.0" prefHeight="43.0" prefWidth="202.0" promptText="Message" />
+            <TextField fx:id="subject" focusTraversable="false" layoutX="86.0" layoutY="81.0" prefHeight="25.0" prefWidth="191.0" promptText="Subject" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" />
          </children>
       </Pane>
       <Text layoutX="240.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mailling">

@@ -39,6 +39,10 @@ public class MailingController implements Initializable {
     private TextField email;
     @FXML
     private Button retour;
+    @FXML
+    private TextField Msg;
+    @FXML
+    private TextField subject;
 
     /**
      * Initializes the controller class.
@@ -106,13 +110,13 @@ public class MailingController implements Initializable {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
+            message.setSubject(subject.getText());
 
             
                 
                 
             
-            message.setText("Message" );
+            message.setText(Msg.getText() );
 
             System.out.println("sending...");
             // Send message

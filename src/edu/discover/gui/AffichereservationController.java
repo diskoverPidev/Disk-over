@@ -23,9 +23,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,6 +56,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 /**
  * FXML Controller class
  *
@@ -69,18 +74,14 @@ public class AffichereservationController implements Initializable {
     private TextField prixi;
     @FXML
     private DatePicker datei;
-//    private TableColumn<Colaborationevent, String> namecol;
-//    private TableColumn<Colaborationevent, Date> datecol;
-//    private TableColumn<Colaborationevent, String> adresscol;
-//    private TableColumn<Colaborationevent, Integer> nbrcol;
-//    private TableColumn<Colaborationevent, Integer> prixcol;
+
     @FXML
     private Button btnadd;
     @FXML
     private Button btnupdate;
     @FXML
     private Button btndelete;
-//    private TableView<Colaborationevent> tableView;
+
     @FXML
     private Button btnaffiche;
     @FXML
@@ -112,7 +113,12 @@ public class AffichereservationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //vide
+        //actualiser chaque 5sec 
+        Timeline timeline = new Timeline(
+    new KeyFrame(Duration.millis(5000), e -> showsEvent(null))
+);
+timeline.setCycleCount(Animation.INDEFINITE);
+timeline.play();
 
     }
 
@@ -127,58 +133,60 @@ public class AffichereservationController implements Initializable {
     }
 
     @FXML
-    public void showsEvent(ActionEvent event) {
+   
+public void showsEvent(ActionEvent event) {
 
-        List<Colaborationevent> even = new ArrayList();
-        Crudcolaboration se = new Crudcolaboration();
+    List<Colaborationevent> even = new ArrayList();
+    Crudcolaboration se = new Crudcolaboration();
 
-        even = se.getAll();
-        System.out.println(ev);
-        int x = 0, y = 0;
-        // listevent.getItems().addAll(even);
-        for (Colaborationevent e : even) {
+    even = se.getAll();
+    System.out.println(ev);
 
-            AnchorPane an = new AnchorPane();
-            an.setLayoutX(x);
-            an.setLayoutY(y);
+    // clear the vbox before displaying the new elements
+    vbox.getChildren().clear();
 
-            Label name = new Label(e.getNomevent());
-            name.setLayoutX(x + 14);
-            name.setLayoutY(y + 22);
-            String d = String.valueOf(e.getDateevent());
-            Label date = new Label(d);
-            date.setLayoutX(x + 135);
-            date.setLayoutY(y + 22);
-            Label location = new Label(e.getAdresseevent());
-            location.setLayoutX(x + 214);
-            location.setLayoutY(y + 22);
-            String u = String.valueOf(e.getNbrplacevehicule());
-            Label nbr = new Label(u);
-            nbr.setLayoutX(x + 312);
-            nbr.setLayoutY(y + 22);
+    int x = 0, y = 0;
+    for (Colaborationevent e : even) {
+        AnchorPane an = new AnchorPane();
+        an.setLayoutX(x);
+        an.setLayoutY(y);
 
-            String nb = String.valueOf(e.getPrixvehiculeevent());
-            Label prix = new Label(nb);
-            prix.setLayoutX(x + 446);
-            prix.setLayoutY(y + 22);
+        Label name = new Label(e.getNomevent());
+        name.setLayoutX(x + 14);
+        name.setLayoutY(y + 22);
+        String d = String.valueOf(e.getDateevent());
+        Label date = new Label(d);
+        date.setLayoutX(x + 135);
+        date.setLayoutY(y + 22);
+        Label location = new Label(e.getAdresseevent());
+        location.setLayoutX(x + 214);
+        location.setLayoutY(y + 22);
+        String u = String.valueOf(e.getNbrplacevehicule());
+        Label nbr = new Label(u);
+        nbr.setLayoutX(x + 312);
+        nbr.setLayoutY(y + 22);
 
-            
-            InputStream imgStream = getClass().getResourceAsStream("/img/update.png");
-            Image img = new Image(imgStream, 25, 25, false, false);
-            ImageView imv = new ImageView(img);
-            imv.setOnMouseClicked(MouseEvent ->se.modifier(e, u) );
-            imv.setLayoutX(x + 518);
-            imv.setLayoutY(y + 22);
-            
-            Button btnaffiche = new Button("Affichage");
+        String nb = String.valueOf(e.getPrixvehiculeevent());
+        Label prix = new Label(nb);
+        prix.setLayoutX(x + 446);
+        prix.setLayoutY(y + 22);
 
-            an.getChildren().addAll(name, date, location, nbr, prix,imv);
-            ev.getChildren().addAll(an);
+        InputStream imgStream = getClass().getResourceAsStream("/img/update.png");
+        Image img = new Image(imgStream, 25, 25, false, false);
+        ImageView imv = new ImageView(img);
+        imv.setOnMouseClicked(MouseEvent ->se.modifier(e, u) );
+        imv.setLayoutX(x + 518);
+        imv.setLayoutY(y + 22);
 
-            vbox.getChildren().add(an);
-        }
+        Button btnaffiche = new Button("Affichage");
 
+        an.getChildren().addAll(name, date, location, nbr, prix,imv);
+        ev.getChildren().addAll(an);
+
+        vbox.getChildren().add(an);
     }
+}
+
 
     @FXML
     private void add(ActionEvent event) {

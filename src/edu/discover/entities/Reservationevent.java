@@ -16,6 +16,21 @@ public class Reservationevent {
     private String nomclient;
     private int nbrclient; 
     private Colaborationevent colab;
+    private String nomevnet;
+
+    public String getNomevnet() {
+        return nomevnet;
+    }
+
+    public void setNomevnet(String nomevnet) {
+        this.nomevnet = nomevnet;
+    }
+
+    public Reservationevent(String nomclient, int nbrclient, String nomevnet) {
+        this.nomclient = nomclient;
+        this.nbrclient = nbrclient;
+        this.nomevnet = nomevnet;
+    }
 
     public Reservationevent(int idresrvation, String nomclient, int nbrclient, Colaborationevent colab) {
         this.idresrvation = idresrvation;

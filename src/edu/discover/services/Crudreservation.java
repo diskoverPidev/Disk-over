@@ -130,27 +130,26 @@ Reservationevent c1 = null;
 
     @Override
     public List<Reservationevent> getAll() {
-List<Reservationevent> resercation = new ArrayList<>();
+List<Reservationevent> reservation = new ArrayList<>();
         try {
-                    String req ="SELECT  reservationvehiculee.*,colaborationevent.* FROM reservationvehiculee INNER JOIN colaborationevent ON reservationvehiculee.NomEvent=colaborationevent.NomEvent";
+                    String req ="SELECT * FROM `reservationvehiculee`";
             PreparedStatement ps = cnx.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 
-                Colaborationevent col =new Colaborationevent(result.getString("nomevent"),result.getDate("dateevent"),result.getString("adresseevent"),result.getInt("nbrplacevehicule"),result.getInt("prixvehiculeevent"));
                 Reservationevent rec = new Reservationevent(
                         result.getString("NomClient"),
                         result.getInt("NbrClient"),
-                        col
+                        result.getString("NomEvent")
                 );
-                resercation.add(rec);
+                reservation.add(rec);
             }
             
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
                
-        return resercation;    }
+        return reservation;    }
     
     
     

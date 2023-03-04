@@ -5,6 +5,8 @@ import edu.discover.services.Crudreservation;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,56 +21,44 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 public class ListeReservationController implements Initializable {
 
     @FXML
-    private TableColumn<Reservationevent, String> nomc;
+    private Label nomc;
     @FXML
-    private TableColumn<Reservationevent, Integer> npersone;
+    private Label npersone;
     @FXML
-    private TableColumn<Reservationevent, String> nomevent;
+    private Label nomevent;
     @FXML
     private TextField search;
     @FXML
     private Button btnSupp;
     @FXML
-    private TableView<Reservationevent> tableView;
-    @FXML
     private Button btnAffiche;
     @FXML
     private Button btnMailing;
+    @FXML
+    private VBox vbox;
+    @FXML
+    private AnchorPane ev;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    btnAffiche.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //    showsEvent();
-                //  Crudcolaboration sr = new Crudcolaboration();
-                Crudreservation sr = new Crudreservation();
-                ObservableList<Reservationevent> observableClients;
-                observableClients = FXCollections.observableArrayList();
-
-                nomc.setCellValueFactory(new PropertyValueFactory<Reservationevent, String>("NomClient"));
-                npersone.setCellValueFactory(new PropertyValueFactory<Reservationevent, Integer>("NbrClient"));
-                nomevent.setCellValueFactory(new PropertyValueFactory<Reservationevent, String>("NomEvent"));
-                observableClients.addAll(sr.getAll());
-
-                System.out.println(observableClients);
-                tableView.setItems(observableClients);
-            }
-        });  
-    
-    
+      
     }
+    
+    
      @FXML
     private void listeres(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Mailing.fxml"));
@@ -78,41 +68,52 @@ public class ListeReservationController implements Initializable {
         stage.setScene(newScene);
         stage.show();
     }
-    
-    
-    
-    public void afficherReservations(ActionEvent event) {
-        Crudreservation crudReservation = new Crudreservation();
-        ObservableList<Reservationevent> reservations = FXCollections.observableArrayList();
 
-        nomc.setCellValueFactory(new PropertyValueFactory<>("NomClient"));
-        npersone.setCellValueFactory(new PropertyValueFactory<>("NbrClient"));
-        nomevent.setCellValueFactory(new PropertyValueFactory<>("NomEvent"));
+    
+    public void showsEvent(ActionEvent event) {
 
-        reservations.addAll(crudReservation.getAll());
-        tableView.setItems(reservations);
+    List<Reservationevent> res = new ArrayList();
+    Crudreservation se = new Crudreservation();
+
+    res = se.getAll();
+    System.out.println(ev);
+
+    // clear the vbox before displaying the new elements
+    vbox.getChildren().clear();
+
+    int x = 0, y = 0;
+    for (Reservationevent e : res) {
+        AnchorPane an = new AnchorPane();
+        an.setLayoutX(x);
+        an.setLayoutY(y);
+
+        Label name = new Label(e.getNomclient());
+        name.setLayoutX(x + 14);
+        name.setLayoutY(y + 17);
+        String u = String.valueOf(e.getNbrclient());
+        Label nbr = new Label(u);
+        nbr.setLayoutX(x + 208);
+        nbr.setLayoutY(y + 17);
+        Label nomev = new Label(e.getNomevnet());
+        nomev.setLayoutX(x + 372);
+        nomev.setLayoutY(y + 17);
+
+
+        Button btnAffiche = new Button("Affichage");
+
+        an.getChildren().addAll(name, nbr, nomev);
+        ev.getChildren().addAll(an);
+
+        vbox.getChildren().add(an);
     }
+    }
+    
+    
+    
     
     
     @FXML
     private void supprimerListe(ActionEvent event) {
-        Crudreservation sr = new Crudreservation();
-        Reservationevent t = tableView.getSelectionModel().getSelectedItem();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);// alert de confirmation suppression
-        alert.setTitle("ALERT suppression");
-        alert.setHeaderText(null);
-        alert.setContentText(" VOULEZ VOUS SUPPRIMER la reclamation ?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            sr.supprimer(t);
-
-            JOptionPane.showMessageDialog(null, " rec supprimer ");
-        } else {
-            JOptionPane.showMessageDialog(null, "rec non supprimer ");
-        }
-        sr.getAll();
     }
     
     
