@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="249.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.CalculController">
+   <children>
+      <TextField fx:id="id" layoutX="54.0" layoutY="107.0" prefHeight="35.0" prefWidth="269.0" promptText="Matricule" />
+      <Button fx:id="calculbtn" layoutX="112.0" layoutY="178.0" mnemonicParsing="false" onAction="#calcul" prefHeight="43.0" prefWidth="128.0" style="-fx-background-color: #3cba64;" text="Durée trajet en sec">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnprev" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#prev" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: #3cba64;" text="Prev">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="res" layoutX="253.0" layoutY="187.0" prefHeight="25.0" prefWidth="79.0">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="177.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/lgog.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="an" layoutX="358.0" layoutY="35.0" prefHeight="200.0" prefWidth="308.0">
+         <children>
+            <PieChart fx:id="pie" prefHeight="300.0" prefWidth="372.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Chauffeur.fxml</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/ServiceCategorie.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/IServiceMission.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Mission.fxml</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/VehiculeController.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/VehiculeMain.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/ChauffeurController.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Client.fxml</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/ClientController.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/IService.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/IServiceCategorie.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/IServiceVehicule.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Chauffeur.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/ServiceMission.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/entities/Categorie.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/entities/Mission.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Mission.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/utils/DataSource.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/services/ServiceVehicule.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/MissionController.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/main/Main.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Client.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/entities/Vehicule.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/PiDiskover/src/edu/esprit/gui/Vehicule.fxml</file>
+        </group>
+    </open-files>
+</project-private>
