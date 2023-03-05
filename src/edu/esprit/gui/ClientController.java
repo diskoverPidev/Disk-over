@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +28,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -58,25 +62,25 @@ public class ClientController implements Initializable {
     private ScrollPane scrol;
     @FXML
     private VBox vbox;
+    private String type;
 
     /**
      * Initializes the controller class.
      */
     // méthodes pour récupérer les données et créer les VBox
-    
     private List<Categorie> getData() throws SQLException {
         ServiceCategorie sc = new ServiceCategorie();
-        List<Categorie> categories = sc.getALL();
+        List<Categorie> categories = sc.getALL(type);
         return categories;
     }
 
-    private VBox createVBox(Categorie categorie) {
+    private VBox createVBox(Categorie categorie, String i) {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
         vBox.setPrefSize(150, 150);
         // Chargement de l'image
-        String imagePath = "C:\\Users\\asus\\Documents\\NetBeansProjects\\PiDiskover\\src\\edu\\esprit\\img\\toyota.png"; // chemin d'accès relatif à l'image
+        String imagePath = "C:\\Users\\asus\\Documents\\NetBeansProjects\\PiDiskover final\\src\\edu\\esprit\\img\\"+i+".png"; // chemin d'accès relatif à l'image
         Image image = new Image(new File(imagePath).toURI().toString());
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(200); // ajuste la largeur à 100 pixels
@@ -92,7 +96,16 @@ public class ClientController implements Initializable {
 
         Button reserverButton = new Button("Réserver");
         reserverButton.setOnAction(event -> {
-            // code pour réserver la catégorie sélectionnée
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Categorie.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         reserverButton.setPrefSize(150, 40);
         reserverButton.setMinSize(150, 40);
@@ -108,16 +121,23 @@ public class ClientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            String selectedType = "haute"; // Remplacez "haute" par le type sélectionné par l'utilisateur
+            this.type = selectedType;
+
             List<Categorie> categories = getData();
             vbox.setSpacing(300);
 
             HBox hbox = new HBox(); // nouvelle HBox pour contenir les VBoxes
             hbox.setSpacing(150);//ESPCAE ENTRE LES VBOC
             hbox.setPadding(new Insets(0, 0, 0, 0)); // marge inférieure de 20 pixels
-
+            int i=0;
+            
             for (Categorie categorie : categories) {
-                VBox vBox = createVBox(categorie);
-                hbox.getChildren().add(vBox);
+                if (categorie.getType().equals(selectedType)) { // Remplacez "getType()" par la méthode qui retourne le type de la catégorie
+                    VBox vBox = createVBox(categorie,categorie.getMarque());
+                    i++;
+                    hbox.getChildren().add(vBox);
+                }
             }
 
             vbox.getChildren().add(hbox); // ajouter la HBox à la VBox principale

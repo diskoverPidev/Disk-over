@@ -16,6 +16,7 @@ public interface IServiceCategorie<T> {
      public List<T> recherche(String type);
      public List<T> tri(String marque);
      public int nb_vehicule();
+    public List<T> getALL(String type);
 
      
      

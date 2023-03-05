@@ -28,11 +28,18 @@ public class Main {
        // Categorie c = new Categorie("moyenne", "128tu25", "wg");  
         // Categorie c1 = new Categorie("haute", "128tu25", "wg");   
         // Categorie c2 = new Categorie("moyenne", "128tu25", "wg");   
-         java.sql.Date date = new java.sql.Date(120, 0, 20);
-        Vehicule v1 = new Vehicule(1, 29,date, "bravo");    
-        Categorie c = new Categorie("haute", "167tun2527", "porche", v1);
+         java.sql.Date date = new java.sql.Date(123, 2, 1);
+        Vehicule v1 = new Vehicule(1, 8 ,date, "Bien");    
+        Categorie c = new Categorie("haute", "224Tun6448", "Hyundai", v1);
 //             Categorie c1 = new Categorie("haute", "167tun2525", "ford3", v1);
        ServiceCategorie sc = new ServiceCategorie();
+        System.out.println(sc.getALL());
+      //  System.out.println(sc.getALL("haute"));
+              ServiceVehicule sv = new ServiceVehicule();
+////
+//               sc.ajouter(c);
+//             sv.ajouter(v1);
+
    //     System.out.println(sc.getALL());
 //       List<Categorie> list = sc.getALL();
 //       for (Categorie c1:list){
@@ -56,7 +63,7 @@ public class Main {
 //       sc.supprimer(20);
 //       sc.supprimer(21);
         // sc.supprimer(22);
-       ServiceVehicule sv = new ServiceVehicule();
+    //   ServiceVehicule sv = new ServiceVehicule();
 //         Vehicule v1 = new Vehicule(0, 20, date, "good");
 //           Categorie c1 = new Categorie("haute", "203tun2525", "BMW", v1);
 //           sc.ajouter(c1);
@@ -104,7 +111,7 @@ public class Main {
 //        Timestamp timestamp2 = new Timestamp(cal.getTime().getTime());
 //        Mission m = new Mission("6", "menzah", timestamp, timestamp2);
 //       sm.ajouter(m);
-              System.out.println(sm.calculer_duree_mission_mat("6"));
+  //            System.out.println(sm.calculer_duree_mission_mat("6"));
 
 ////          //  sm.supprimer(1);
 //                Mission m1 = new Mission(3, "manar", timestamp, timestamp2);

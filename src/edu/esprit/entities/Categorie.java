@@ -15,6 +15,13 @@ public class Categorie {
     private String matricule;
     private String marque;
     private Vehicule v;
+
+    public Categorie(int id_categorie, String type, String matricule, String marque) {
+        this.id_categorie = id_categorie;
+        this.type = type;
+        this.matricule = matricule;
+        this.marque = marque;
+    }
     private String image;
 
     public String getImage() {

@@ -50,7 +50,7 @@ public class ServiceVehicule implements IService<Vehicule>, IServiceVehicule<Veh
 
         // SimpleDateFormat sp = new SimpleDateFormat("dd/mm/yy");
         // Date date_entretien = new Date();
-        Date date = new Date(119, 0, 20);
+        Date date = new Date(123, 2, 1);
         String req1 = "SELECT COUNT(*) FROM vehicule WHERE num_entretien = '" + t.getNum_entretien() + "'";
         String req = "INSERT INTO `vehicule`(`disponibilite`, `num_entretien`, `date_entretien`, `res_entretien`) VALUES ('" + t.getDisponibilite() + "','" + t.getNum_entretien() + "','" + date + "','" + t.getRes_entretien() + "')";
 

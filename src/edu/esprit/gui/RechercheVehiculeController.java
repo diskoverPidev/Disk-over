@@ -73,7 +73,7 @@ public class RechercheVehiculeController implements Initializable {
         List<Categorie> vehicule = new ArrayList();
         ServiceCategorie sc = new ServiceCategorie();
         liste.getItems();
-        vehicule = sc.recherche(type);
+        vehicule = sc.getALL(type);
         System.out.println(vehicule);
         int x = 0, y = 0;
 
@@ -96,24 +96,23 @@ public class RechercheVehiculeController implements Initializable {
             Label location = new Label(u1);
             location.setLayoutX(x + 190);
             location.setLayoutY(y + 22);
-            String u = String.valueOf(c.getV().getDisponibilite());
-            Label user = new Label(u);
-            user.setLayoutX(x + 300);
-            user.setLayoutY(y + 22);
-            String u2 = String.valueOf(c.getV().getNum_entretien());
-            Label user1 = new Label(u2);
-            user1.setLayoutX(x + 420);
-            user1.setLayoutY(y + 22);
-            String u3 = String.valueOf(c.getV().getDate_entretien());
-            Label user3 = new Label(u3);
-            user3.setLayoutX(x + 530);
-            user3.setLayoutY(y + 22);
-            String u4 = String.valueOf(c.getV().getRes_entretien());
-            Label user4 = new Label(u4);
-            user4.setLayoutX(x + 690);
-            user4.setLayoutY(y + 22);
-            an.getChildren().addAll(name, date, location, user, user1, user3, user4);
-
+//            String u = String.valueOf(c.getV().getDisponibilite());
+//            Label user = new Label(u);
+//            user.setLayoutX(x + 300);
+//            user.setLayoutY(y + 22);
+//            String u2 = String.valueOf(c.getV().getNum_entretien());
+//            Label user1 = new Label(u2);
+//            user1.setLayoutX(x + 420);
+//            user1.setLayoutY(y + 22);
+//            String u3 = String.valueOf(c.getV().getDate_entretien());
+//            Label user3 = new Label(u3);
+//            user3.setLayoutX(x + 530);
+//            user3.setLayoutY(y + 22);
+//            String u4 = String.valueOf(c.getV().getRes_entretien());
+//            Label user4 = new Label(u4);
+//            user4.setLayoutX(x + 690);
+//            user4.setLayoutY(y + 22);
+            an.getChildren().addAll(name, date, location);
             vbox.getChildren().add(an);
         }
     }

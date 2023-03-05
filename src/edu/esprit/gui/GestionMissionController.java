@@ -81,7 +81,7 @@ public class GestionMissionController implements Initializable {
             an.setLayoutY(y);
 
             Label name = new Label(m.getMatricule());
-            name.setLayoutX(x + 30);
+            name.setLayoutX(x + 5);
             name.setLayoutY(y + 22);
             String d = String.valueOf(m.getDescription());
             Label date = new Label(d);
