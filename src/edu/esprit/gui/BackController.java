@@ -277,35 +277,22 @@ public class BackController implements Initializable {
 
     @FXML
     private void traduire(ActionEvent event) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+       OkHttpClient client = new OkHttpClient();
 
-//        Response response = client.newCall(request).execute();
-        RequestBody body = new FormBody.Builder()
-                .add("q", mssg.getText())
-                .add("target", "fr")
-                .build();
+RequestBody body = new FormBody.Builder()
+	.add("q", "English is hard, but detectably so")
+	.build();
 
-        Request request = new Request.Builder()
-                .url("https://google-translate1.p.rapidapi.com/language/translate/v2")
-                .post(body)
-                .addHeader("content-type", "application/x-www-form-urlencoded")
-                .addHeader("Accept-Encoding", "application/gzip")
-                .addHeader("X-RapidAPI-Key", "cf9df17959msh795e091327e4e77p17dc55jsn58fccd786a0d")
-                .addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
-                .build();
+Request request = new Request.Builder()
+	.url("https://google-translate1.p.rapidapi.com/language/translate/v2/detect")
+	.post(body)
+	.addHeader("content-type", "application/x-www-form-urlencoded")
+	.addHeader("Accept-Encoding", "application/gzip")
+	.addHeader("X-RapidAPI-Key", "cf9df17959msh795e091327e4e77p17dc55jsn58fccd786a0d\"")
+	.addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
+	.build();
 
-        okhttp3.Response response = client.newCall(request).execute();
-        if (response.isSuccessful()) {
-            String responseBody = response.body().string();
-            JSONObject json = new JSONObject(responseBody);
-            String translatedText = json.getJSONObject("data")
-                    .getJSONArray("translations")
-                    .getJSONObject(0)
-                    .getString("translatedText");
-            System.out.println(translatedText);
-        } else {
-            System.out.println("Request failed");
-        }
+
     }
 
     public TextField getMssg() {

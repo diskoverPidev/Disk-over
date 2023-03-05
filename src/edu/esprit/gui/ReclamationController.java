@@ -21,6 +21,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,6 +35,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -40,6 +43,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 
 /**
  * FXML Controller class
@@ -47,6 +51,14 @@ import javafx.stage.Stage;
  * @author abidi
  */
 public class ReclamationController implements Initializable {
+    
+    
+    @FXML
+    private Rating rating;
+
+    @FXML
+    private Label msg;
+
 
     @FXML
     private TextField objetR;
@@ -106,6 +118,15 @@ public class ReclamationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
+        rating.ratingProperty().addListener(new ChangeListener<Number>(){
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number old, Number newT) {
+            msg.setText("Rating: "+newT);
+            }
+            
+        });
 //        showsReclamation();
 
     }
@@ -286,4 +307,3 @@ public class ReclamationController implements Initializable {
     
 
 }
-

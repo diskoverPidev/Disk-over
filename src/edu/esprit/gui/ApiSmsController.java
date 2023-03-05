@@ -32,6 +32,21 @@ public class ApiSmsController implements Initializable {
 
     @FXML
     private Button btnEnvoyer;
+    
+ public  final String ACCOUNT_SID = "";
+  public  final String AUTH_TOKEN = "";
+    
+    public void sendMessage(String assoName,String titlePost){
+    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    Message message = Message.creator(
+      new com.twilio.type.PhoneNumber(""),
+      "MG5c01c879f4f2b9148bd6a3efe7fdd3c9",
+      "Bonjour, l'association "+assoName +" vient de publier un nouvel Post de don intitulé "+titlePost+".")
+    .create();
+
+    System.out.println(message.getSid());
+    }
+  
 
     /**
      * Initializes the controller class.
@@ -40,6 +55,7 @@ public class ApiSmsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
+
 
     @FXML
     void envoyerSMS(ActionEvent event) {
