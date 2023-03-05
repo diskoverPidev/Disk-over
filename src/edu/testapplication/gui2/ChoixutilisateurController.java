@@ -57,4 +57,5 @@ public class ChoixutilisateurController implements Initializable {
     appStage.show() ;
     }
     
+    
 }

@@ -10,6 +10,7 @@ import edu.esprit.entities.Client;
 import edu.esprit.services.Serviceclient;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -32,6 +33,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -51,6 +56,7 @@ public class AdminController implements Initializable {
     private TextField idemail;
     @FXML
     private PasswordField idpassword;
+    
     @FXML
     private ChoiceBox<String> choicebox2;
     @FXML
@@ -60,19 +66,12 @@ public class AdminController implements Initializable {
     @FXML
     private Button deletebtn;
     private TableColumn<Client, Integer> collid;
-    @FXML
     private TableColumn<Client, String> collnom;
-    @FXML
     private TableColumn<Client, String> collprenom;
-    @FXML
     private TableColumn<Client, String > collrole;
-    @FXML
     private TableColumn<Client, String> collemail;
-    @FXML
     private TableView<Client> table;
-    @FXML
     private TableColumn<Client, String> collpwd;
-    @FXML
     private TableColumn<Client, String> collcin;
     @FXML
     private Button tribtn;
@@ -84,6 +83,24 @@ public class AdminController implements Initializable {
     private Button consultbtn;
     @FXML
     private Button homebtn;
+    @FXML
+    private ListView<?> listRes;
+    @FXML
+    private Label nom;
+    @FXML
+    private Label prenom;
+    @FXML
+    private Label role;
+    @FXML
+    private Label email;
+    @FXML
+    private Label pwd;
+    @FXML
+    private VBox vbox;
+    @FXML
+    private AnchorPane ev;
+    @FXML
+    private Label cin;
 
     /**
      * Initializes the controller class.
@@ -93,30 +110,86 @@ public class AdminController implements Initializable {
                 choicebox2.getItems().addAll("admin","Client","Chauffeur");
 
         showsUsers() ; 
-    }   
-    public void showsUsers() {
-                Serviceclient sc= new Serviceclient() ; 
-List<Client> clients = sc.getall();
-ObservableList<Client> observableClients = FXCollections.observableList(clients);
+//        UserSession userSession = UserSession.getInstance();
+//    String cin = userSession.getCin();
+//    System.out.print(cin);
+    }  
+    
+     public void showsUsers() {
+         List<Client> c = new ArrayList();
+        Serviceclient sc = new Serviceclient();
+        listRes.getItems();
+        c = sc.getall();
+        System.out.println(c);
+        //FormulaireR fr = new FormulaireR();
         
-
-
-table.setItems(observableClients) ; 
-collcin.setCellValueFactory(new PropertyValueFactory<>("cin")) ; 
-collnom.setCellValueFactory(new PropertyValueFactory<>("nom")) ;
-collprenom.setCellValueFactory(new PropertyValueFactory<>("prenom")) ; 
-collrole.setCellValueFactory(new PropertyValueFactory<>("role")) ;
-collemail.setCellValueFactory(new PropertyValueFactory<>("email")) ; 
-collpwd.setCellValueFactory(new PropertyValueFactory<>("pwd")) ; 
- 
-
-
-
-
-
-
+        //Res = sf.getOnebyId(fr.getId());
         
-    }
+        int x = 0, y = 0;
+        // listevent.getItems().addAll(even);
+       // c.add(this.fr);
+        for (Client e : c) {
+
+            AnchorPane an = new AnchorPane();
+            an.setLayoutX(x);
+            an.setLayoutY(y);
+
+            Label cin = new Label(e.getCin());
+            cin.setLayoutX(x + 4);
+            cin.setLayoutY(y + 14);
+         
+            Label nom = new Label(e.getNom());
+            nom.setLayoutX(x + 81);
+            nom.setLayoutY(y + 14);
+            Label prenom = new Label(e.getPrenom());
+            prenom.setLayoutX(x + 163);
+            prenom.setLayoutY(y + 14);
+            Label role = new Label(e.getRole());
+            role.setLayoutX(x + 253);
+            role.setLayoutY(y + 14);
+            Label email = new Label(e.getEmail());
+            email.setLayoutX(x + 332);
+            email.setLayoutY(y + 14);
+            Label pwd = new Label(e.getPwd());
+            pwd.setLayoutX(x + 547);
+            pwd.setLayoutY(y + 14);
+
+
+           // Button btnafficher = new Button("Affichage");
+
+            an.getChildren().addAll(cin, nom, prenom, role, email, pwd);
+            ev.getChildren().addAll(an);
+
+            vbox.getChildren().add(an);
+        // TODO
+    }    
+     
+     }
+    
+    
+//    public void showsUsers() {
+//                Serviceclient sc= new Serviceclient() ; 
+//List<Client> clients = sc.getall();
+//ObservableList<Client> observableClients = FXCollections.observableList(clients);
+//        
+//
+//
+//table.setItems(observableClients) ; 
+//collcin.setCellValueFactory(new PropertyValueFactory<>("cin")) ; 
+//collnom.setCellValueFactory(new PropertyValueFactory<>("nom")) ;
+//collprenom.setCellValueFactory(new PropertyValueFactory<>("prenom")) ; 
+//collrole.setCellValueFactory(new PropertyValueFactory<>("role")) ;
+//collemail.setCellValueFactory(new PropertyValueFactory<>("email")) ; 
+//collpwd.setCellValueFactory(new PropertyValueFactory<>("pwd")) ; 
+// 
+//
+//
+//
+//
+//
+//
+//        
+//    }
     
     @FXML
      public void saveUser(ActionEvent event)
@@ -133,9 +206,8 @@ collpwd.setCellValueFactory(new PropertyValueFactory<>("pwd")) ;
                 showsUsers() ; 
 
                 }
-      @FXML
     private void getData(MouseEvent event) {
-        Client client = table.getSelectionModel().getSelectedItem() ; 
+        Client client = (Client) listRes.getSelectionModel().getSelectedItem() ; 
         idcin.setText(client.getCin());
                 idnom.setText(client.getNom());
                         idprenom.setText(client.getPrenom());
@@ -235,6 +307,10 @@ collpwd.setCellValueFactory(new PropertyValueFactory<>("pwd")) ;
     appStage.setScene(signupscene) ; 
     appStage.show() ;
     }
+//    UserSession userSession = UserSession.getInstance();
+//    @FXML
+//Label cin = userSession.getCin();
+
     }
         
     

@@ -43,6 +43,17 @@ public class Serviceclient implements Iservice<Client> {
             System.out.println("Un client avec le même numéro CIN existe déjà.");
             return;
         }
+//         String req2 = "SELECT COUNT(*) FROM user WHERE email = ?";
+//        PreparedStatement ps2 = cnx.prepareStatement(req1);
+//        ps2.setString(5, u.getEmail());
+//        ResultSet rs2 = ps2.executeQuery();
+//        rs2.next();
+//        int count2 = rs2.getInt(1);
+//        if (count2 > 0) {
+//            System.out.println("Un client avec le même numéro CIN existe déjà.");
+//            return;
+//        }
+       
         
         
         // Vérifier que tous les champs obligatoires sont remplis
@@ -175,6 +186,20 @@ private boolean isValidEmail(String email) {
         e.printStackTrace();
     }
     return pwd;
+}
+   public String getidBycin(String cin) {
+    String query = "SELECT id FROM user WHERE cin = '" + cin + "'";
+    String cinn = null;
+    try {
+        Statement ste = cnx.createStatement();
+        ResultSet rs = ste.executeQuery(query);
+        if (rs.next()) {
+            cinn = rs.getString("cin");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return cinn;
 }
 
     @Override

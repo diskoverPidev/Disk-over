@@ -56,9 +56,21 @@ public class EditprofilController implements Initializable {
     /**
      * Initializes the controller class.
      */
+//          UserSession userSession = UserSession.getInstance();
+//      userSession.setCin(cintf.getText());
+//
+//
+//        System.out.print(userSession.getCin());
+//    UserSession userSession = UserSession.getInstance();
+//String cin = userSession.getCin();
+//System.out.print(userSession.getCin());
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          choicebox3.getItems().addAll("Client","Chauffeur");
+             UserSession userSession = UserSession.getInstance();
+String cin = userSession.getCin();
+editid.setText(cin) ; 
+
     }    
 
     @FXML

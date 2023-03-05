@@ -79,6 +79,11 @@
                   <Image url="@../../../images/image-removebg-preview%20(28).png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="201.0" layoutX="30.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/333997974_725431422366658_1750111115337249527_n.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>

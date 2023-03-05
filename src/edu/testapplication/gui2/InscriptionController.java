@@ -27,6 +27,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -47,7 +48,7 @@ public class InscriptionController implements Initializable {
     @FXML
     private Hyperlink forgotpwd;
     @FXML
-    private Button adminid;
+    private Button admin;
    
 
     /**
@@ -103,13 +104,22 @@ return;
         Stage appStage= (Stage)((Node)event.getSource()).getScene().getWindow() ; 
     appStage.setScene(signupscene) ; 
     appStage.show() ; 
+    
+        Notifications.create()
+                .title("Notification")
+                .text("Bonjour ! authentification effectué en tant que admin")
+                .showWarning();
     }
      if (c != null && c.getRole().equals("Client")){
          Parent signup = FXMLLoader.load(getClass().getResource("choixutilisateur.fxml")) ; 
         Scene signupscene = new Scene (signup) ; 
         Stage appStage= (Stage)((Node)event.getSource()).getScene().getWindow() ; 
     appStage.setScene(signupscene) ; 
-    appStage.show() ; 
+    appStage.show() ;
+    Notifications.create()
+                .title("Notification")
+                .text("Bonjour ! authentification effectué en tant que client")
+                .showWarning();
      }
      if (c != null && c.getRole().equals("Chauffeur")){
          Parent signup = FXMLLoader.load(getClass().getResource("choixchauffeur.fxml")) ; 
@@ -117,8 +127,18 @@ return;
         Stage appStage= (Stage)((Node)event.getSource()).getScene().getWindow() ; 
     appStage.setScene(signupscene) ; 
     appStage.show() ; 
+    Notifications.create()
+                .title("Notification")
+                .text("Bonjour ! authentification effectué en tant que chauffeur")
+                .showWarning();
      }
-    
+     
+     UserSession userSession = UserSession.getInstance();
+     userSession.setCin(cintf.getText());
+
+
+   
+
 }
 
 // Cette méthode simule l'authentification de l'utilisateur en vérifiant
@@ -177,6 +197,15 @@ public Client authenticateUser(String cin, String password) throws NoSuchAlgorit
     }
     return sb.toString();
 }
+
+    @FXML
+    private void gotoadmin(ActionEvent event) throws IOException {
+        Parent signup = FXMLLoader.load(getClass().getResource("admin.fxml")) ; 
+        Scene signupscene = new Scene (signup) ; 
+        Stage appStage= (Stage)((Node)event.getSource()).getScene().getWindow() ; 
+    appStage.setScene(signupscene) ; 
+    appStage.show() ;
+    }
 
   
 }

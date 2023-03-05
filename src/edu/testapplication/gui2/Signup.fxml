@@ -29,9 +29,9 @@
                   <Image url="@../../../images/logo2.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="85.0" layoutX="124.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="166.0" layoutX="41.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/logo45.jpg" />
+                  <Image url="@../../../images/333997974_725431422366658_1750111115337249527_n.png" />
                </image>
             </ImageView>
          </children>
@@ -45,12 +45,13 @@
                   <Font name="System Bold Italic" size="19.0" />
                </font>
             </Text>
-            <TextField fx:id="tfcin" layoutX="58.0" layoutY="114.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="tfnom" layoutX="58.0" layoutY="183.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="tfprenom" layoutX="56.0" layoutY="249.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="tfemail" layoutX="56.0" layoutY="371.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="tfpassword" layoutX="56.0" layoutY="425.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <ChoiceBox fx:id="mychoicebox1" accessibleText="Client,Chauffeur" layoutX="56.0" layoutY="313.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="tfcin" layoutX="58.0" layoutY="114.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="tfnom" layoutX="58.0" layoutY="183.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="tfprenom" layoutX="56.0" layoutY="249.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;-fx-text-fill: #ffffff;" />
+            <TextField fx:id="tfemail" layoutX="56.0" layoutY="371.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="tfpassword" layoutX="56.0" layoutY="425.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <ChoiceBox fx:id="mychoicebox1" accessibleText="Client,Chauffeur" layoutX="56.0" layoutY="313.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;
+-fx-text-fill: #ffffff;" />
             <Button fx:id="btnsignup" layoutX="278.0" layoutY="459.0" mnemonicParsing="false" onAction="#savePerson" style="-fx-background-color: #2FBB5E;" text="Sign up" textFill="#f8f3f3" />
             <Button fx:id="signinid" layoutX="379.0" layoutY="459.0" mnemonicParsing="false" onAction="#signinidnavigate" style="-fx-background-color: #2FBB5E;" text="Sign in" textFill="#f8f3f3" />
             <ImageView fitHeight="131.0" fitWidth="193.0" layoutX="269.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">

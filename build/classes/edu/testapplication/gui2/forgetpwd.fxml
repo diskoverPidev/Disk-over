@@ -13,9 +13,14 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blanc;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="147.0" fitWidth="148.0" layoutX="27.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="147.0" fitWidth="148.0" layoutX="27.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mail.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="163.0" layoutX="37.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/333997974_725431422366658_1750111115337249527_n.png" />
                </image>
             </ImageView>
          </children>
@@ -24,10 +29,10 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #12477A;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="emailid" layoutX="66.0" layoutY="200.0" prefHeight="31.0" prefWidth="221.0" promptText="Entrer votre email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="emailid" layoutX="66.0" layoutY="200.0" prefHeight="31.0" prefWidth="221.0" promptText="Entrer votre email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
             <Button fx:id="valider" layoutX="287.0" layoutY="260.0" mnemonicParsing="false" onAction="#validermail" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #2FBB5E;" text="valider" textFill="#f2f2f2" />
             <Button fx:id="valider1" layoutX="386.0" layoutY="260.0" mnemonicParsing="false" onAction="#gotosignin" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #2FBB5E;" text="sign in" textFill="#f2f2f2" />
-            <Text fill="#e8e2e2" layoutX="66.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="votre mot de passe sera envoyé par email !">
+            <Text fill="#e8e2e2" layoutX="66.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre mot de passe sera envoyé par email !">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>

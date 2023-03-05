@@ -20,6 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
@@ -69,12 +71,19 @@ public class SignupController implements Initializable {
     @FXML
     public void savePerson(ActionEvent event) throws IOException
     {
+                Alert alert = new Alert(AlertType.ERROR);
+
         String cin=tfcin.getText() ; 
         String nom=tfnom.getText() ; 
         String prenom=tfprenom.getText() ; 
         String role=mychoicebox1.getValue() ; 
         String email=tfemail.getText() ; 
         String pwd=tfpassword.getText() ; 
+        if(cin.isEmpty() || nom.isEmpty() || prenom.isEmpty()|| role.isEmpty() || email.isEmpty() || pwd.isEmpty())
+        {
+            alert.setContentText("veuillez remplir tout les champs");
+alert.showAndWait();  
+        }
         Client c = new Client(cin,nom,prenom,role,email,pwd) ; 
         Serviceclient sc= new Serviceclient() ; 
         sc.ajouter(c) ; 

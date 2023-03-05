@@ -14,10 +14,6 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="75.0" fitWidth="72.0" layoutX="129.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/logo45.jpg" />
-               </image></ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/user.jpg" />
@@ -33,6 +29,11 @@
                   <Image url="@../../../images/image-removebg-preview%20(23).jpg" />
                </image>
             </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="148.0" layoutX="52.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/333997974_725431422366658_1750111115337249527_n.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
@@ -44,18 +45,18 @@
                   <Font name="System Bold Italic" size="28.0" />
                </font>
             </Text>
-            <TextField fx:id="editid" layoutX="33.0" layoutY="266.0" promptText="ID" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="editid" editable="false" layoutX="33.0" layoutY="266.0" promptText="ID" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
             <Button fx:id="consulterbtn" layoutX="60.0" layoutY="378.0" mnemonicParsing="false" onAction="#consulterProfil" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: #2FBB5E;" text="consulter profil" textFill="#ebe9e9">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <TextField fx:id="editcin" layoutX="401.0" layoutY="123.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="editnom" layoutX="401.0" layoutY="187.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="editprenom" layoutX="401.0" layoutY="250.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <ChoiceBox fx:id="choicebox3" layoutX="401.0" layoutY="328.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="editemail" layoutX="401.0" layoutY="391.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="editpassword" layoutX="401.0" layoutY="455.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="editcin" layoutX="401.0" layoutY="123.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="editnom" layoutX="401.0" layoutY="187.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="editprenom" layoutX="401.0" layoutY="250.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <ChoiceBox fx:id="choicebox3" layoutX="401.0" layoutY="328.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="editemail" layoutX="401.0" layoutY="391.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="editpassword" layoutX="401.0" layoutY="455.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
             <Button fx:id="modifierbtn" layoutX="308.0" layoutY="519.0" mnemonicParsing="false" onAction="#modifierprofil" prefHeight="39.0" prefWidth="126.0" style="-fx-background-color: #2FBB5E;" text="Modifier" textFill="#ebe9e9">
                <font>
                   <Font size="17.0" />

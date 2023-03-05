@@ -2,14 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -27,9 +29,9 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Text>
-            <ImageView fitHeight="69.0" fitWidth="84.0" layoutX="127.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="107.0" fitWidth="155.0" layoutX="42.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/logo45.jpg" />
+                  <Image url="@../../../images/333997974_725431422366658_1750111115337249527_n.png" />
                </image>
             </ImageView>
          </children>
@@ -38,12 +40,12 @@
    <center>
       <AnchorPane prefHeight="737.0" prefWidth="821.0" style="-fx-background-color: #12477A;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="idcin" layoutX="47.0" layoutY="184.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="idnom" layoutX="49.0" layoutY="238.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="idprenom" layoutX="49.0" layoutY="296.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField fx:id="idemail" layoutX="49.0" layoutY="437.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField fx:id="idpassword" layoutX="49.0" layoutY="501.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
-            <ChoiceBox fx:id="choicebox2" layoutX="49.0" layoutY="371.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="idcin" layoutX="47.0" layoutY="184.0" promptText="Cin" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="idnom" layoutX="49.0" layoutY="238.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <TextField fx:id="idprenom" layoutX="49.0" layoutY="296.0" promptText="Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;-fx-text-fill: #ffffff;" />
+            <TextField fx:id="idemail" layoutX="49.0" layoutY="437.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <PasswordField fx:id="idpassword" layoutX="49.0" layoutY="501.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
+            <ChoiceBox fx:id="choicebox2" layoutX="49.0" layoutY="371.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; #ffffff;" />
             <Button fx:id="savebtn" layoutX="19.0" layoutY="574.0" mnemonicParsing="false" onAction="#saveUser" prefHeight="31.0" prefWidth="78.0" style="-fx-background-color: #2FBB5E;" text="Save" textFill="#f5f3f3" />
             <Button fx:id="updatebtn" layoutX="107.0" layoutY="574.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="Update" textFill="#eeeeee" />
             <Button fx:id="deletebtn" layoutX="213.0" layoutY="574.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #2FBB5E;" text="Delete" textFill="#f5f3f3" />
@@ -52,21 +54,35 @@
                   <Font name="Bell MT Bold" size="32.0" />
                </font>
             </Text>
-            <TableView fx:id="table" layoutX="304.0" layoutY="208.0" onMouseClicked="#getData" prefHeight="326.0" prefWidth="549.0" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6;">
-              <columns>
-                <TableColumn fx:id="collcin" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Cin" />
-                <TableColumn fx:id="collnom" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Nom" />
-                  <TableColumn fx:id="collprenom" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Prenom" />
-                  <TableColumn fx:id="collrole" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Role" />
-                  <TableColumn fx:id="collemail" prefWidth="75.0" style="-fx-background-color: #F0F2F6;" text="Email" />
-                  <TableColumn fx:id="collpwd" prefWidth="165.0" style="-fx-background-color: #F0F2F6;" text="Password" />
-              </columns>
-            </TableView>
             <Button fx:id="tribtn" layoutX="725.0" layoutY="559.0" mnemonicParsing="false" onAction="#triusers" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="Trier" textFill="#eeeeee" />
-            <TextField fx:id="idcin1" layoutX="526.0" layoutY="158.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom ou Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="idcin1" layoutX="526.0" layoutY="158.0" prefHeight="33.0" prefWidth="143.0" promptText="Nom ou Prenom" style="-fx-background-color: transparent; -fx-border-color: #F0F2F6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: #ffffff;" />
             <Button fx:id="tribtn1" layoutX="679.0" layoutY="166.0" mnemonicParsing="false" onAction="#rechercheuser" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="rechercher" textFill="#eeeeee" />
             <Button fx:id="consultbtn" layoutX="608.0" layoutY="559.0" mnemonicParsing="false" onAction="#afficheruser" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: #2FBB5E;" text="consulter" textFill="#eeeeee" />
             <Button fx:id="homebtn" layoutX="778.0" layoutY="696.0" mnemonicParsing="false" onAction="#adminnavigation" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: #41A0FF;" text="home" textFill="#eeeeee" />
+            <AnchorPane layoutX="248.0" layoutY="201.0" prefHeight="346.0" prefWidth="610.0">
+               <children>
+                  <ListView fx:id="listRes" prefHeight="349.0" prefWidth="611.0" />
+                  <AnchorPane layoutY="-1.0" prefHeight="349.0" prefWidth="610.0">
+                     <children>
+                        <Label fx:id="cin" layoutX="4.0" layoutY="14.0" prefHeight="21.0" prefWidth="70.0" text="Cin" />
+                        <Label fx:id="nom" layoutX="81.0" layoutY="14.0" prefHeight="21.0" prefWidth="67.0" text="Nom" />
+                        <Label fx:id="prenom" layoutX="163.0" layoutY="14.0" prefHeight="21.0" prefWidth="73.0" text="Prénom" />
+                        <Label fx:id="role" layoutX="253.0" layoutY="14.0" prefHeight="21.0" prefWidth="67.0" text="role" />
+                        <Label fx:id="email" layoutX="332.0" layoutY="14.0" prefHeight="21.0" prefWidth="195.0" text="email" />
+                        <Label fx:id="pwd" layoutX="547.0" layoutY="14.0" prefHeight="21.0" prefWidth="50.0" text="Pwd" />
+                        <ScrollPane layoutY="48.0" prefHeight="302.0" prefWidth="611.0">
+                           <content>
+                              <VBox fx:id="vbox" prefHeight="281.0" prefWidth="593.0">
+                                 <children>
+                                    <AnchorPane fx:id="ev" prefHeight="77.0" prefWidth="593.0" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </center>
