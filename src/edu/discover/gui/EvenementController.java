@@ -24,7 +24,10 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import edu.discover.entities.Colaborationevent;
 import edu.discover.services.Crudcolaboration;
+import java.io.File;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class EvenementController implements Initializable {
 
@@ -58,11 +61,19 @@ public class EvenementController implements Initializable {
         return even;
     }
 
-    private VBox createVBox(Colaborationevent event) {
+    private VBox createVBox(Colaborationevent event, String i) {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
         vBox.setPrefSize(150, 150);
+        
+        // Chargement de l'image
+        String imagePath = "C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\src\\img\\"+i+".png"; // chemin d'accès relatif à l'image
+        Image image = new Image(new File(imagePath).toURI().toString());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(200); // ajuste la largeur à 100 pixels
+        imageView.setFitHeight(150);
+        
 
         Label nomLabel = new Label(event.getNomevent());
         nomLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
@@ -80,8 +91,27 @@ public class EvenementController implements Initializable {
         dateLabel.setPrefHeight(40);
         dateLabel.setMinHeight(40);
         dateLabel.setAlignment(Pos.CENTER);
+        
+        String nbr = String.valueOf(event.getNbrplacevehicule());
+        Label nbrLabel = new Label(nbr);
+        nbrLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        nbrLabel.setPrefWidth(150);
+        nbrLabel.setMinWidth(150);
+        nbrLabel.setPrefHeight(40);
+        nbrLabel.setMinHeight(40);
+        nbrLabel.setAlignment(Pos.CENTER);
+        
+        String prix = String.valueOf(event.getPrixvehiculeevent());
+        Label prixLabel = new Label(prix);
+        prixLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        prixLabel.setPrefWidth(150);
+        prixLabel.setMinWidth(150);
+        prixLabel.setPrefHeight(40);
+        prixLabel.setMinHeight(40);
+        prixLabel.setAlignment(Pos.CENTER);
 
-        vBox.getChildren().addAll(nomLabel, dateLabel);
+
+        vBox.getChildren().addAll(imageView,nomLabel, dateLabel,nbrLabel,prixLabel);
 
         return vBox;
     }
@@ -97,7 +127,7 @@ public class EvenementController implements Initializable {
             hbox.setPadding(new Insets(0, 0, 0, 0));
             int i=0;
             for (Colaborationevent categorie : even) {
-                VBox vBox = createVBox(categorie);
+                VBox vBox = createVBox(categorie,categorie.getNomevent());
                 i++;
                 hbox.getChildren().add(vBox);
             }
