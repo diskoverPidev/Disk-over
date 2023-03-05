@@ -20,7 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import static javafx.fxml.FXMLLoader.load;
+import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 
@@ -44,28 +48,23 @@ public class QRcodeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
     }
 
     @FXML
-    private void generer(ActionEvent event) throws WriterException {
-
+    private void generer(ActionEvent event) throws WriterException, IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Facture.fxml"));
         FactureController fc = new FactureController();
+        Parent root =loader.load();
+        FactureController fc1 = loader.getController();
         
-
-        /*     FXMLLoader loader = new FXMLLoader(getClass().getResource("votre_fichier.fxml"));
-Parent root = loader.load();
-MainController controller = loader.getController();
-         */
-// Récupération de l'ObservableList
-/*List <String> listfact = fc.getListfact().getItems();
-for (String item : listfact) {
-    System.out.println(item);
-}*/
 
 
       // Récupération des valeurs des champs à partir du contrôleur de vue
-String statutValue = fc.getStatut();
+       System.out.println(fc1.getStatut());
+String statutValue = fc1.getStatut();
+
 //String notesValue = String.valueOf(fc.getTfnotes());
 
 String textToEncode = statutValue;

@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import static javafx.fxml.FXMLLoader.load;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -141,6 +142,11 @@ public class RemplirFormController implements Initializable {
         
     FXMLLoader loader = new FXMLLoader(getClass().getResource("InfoReservation.fxml"));
     Parent root = loader.load();
+    InfoReservationController tt= new InfoReservationController();
+InfoReservationController c2=  loader.getController();
+    c2.setFormulaire(fr); 
+    
+    
     Scene scene = new Scene(root);
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);

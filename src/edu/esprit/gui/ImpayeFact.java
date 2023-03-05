@@ -39,9 +39,9 @@ Parent root = FXMLLoader.load(getClass().getResource("ImpayeFact.fxml"));
     public static void main(String[] args) {
         launch(args);
         
-        ImpayeFactController ifc = new ImpayeFactController();
+       // ImpayeFactController ifc = new ImpayeFactController();
         
-        System.out.println(ifc.getStatut());
+       // System.out.println(ifc.getStatut());
     }
     
 }

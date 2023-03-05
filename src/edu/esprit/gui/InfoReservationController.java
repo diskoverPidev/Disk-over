@@ -55,6 +55,8 @@ public class InfoReservationController implements Initializable {
     private Button btnmodifier;
     @FXML
     private Button btnconfirmer;
+    
+    FormulaireR fr = new FormulaireR();
 
     /**
      * Initializes the controller class.
@@ -62,12 +64,15 @@ public class InfoReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        
         // TODO
     }
 
     @FXML
     private void Afficher(ActionEvent event) {
-
+        
+        
+        System.out.println(fr.toString());
         List<FormulaireR> Res = new ArrayList();
         ServiceFormulaire sf = new ServiceFormulaire();
         FormulaireR fr = new FormulaireR();
@@ -76,6 +81,7 @@ public class InfoReservationController implements Initializable {
         System.out.println(an);
         int x = 0, y = 0;
         // listevent.getItems().addAll(even);
+        Res.add(this.fr);
         for (FormulaireR e : Res) {
 
             AnchorPane an1 = new AnchorPane();
@@ -120,6 +126,7 @@ public class InfoReservationController implements Initializable {
             vbox.getChildren().add(an1);
 
         }
+
     }
 
     @FXML
@@ -154,5 +161,7 @@ public class InfoReservationController implements Initializable {
         stage.show();
 
     }
-
+public void setFormulaire(FormulaireR fr){
+        this.fr = fr ;
+        }
 }

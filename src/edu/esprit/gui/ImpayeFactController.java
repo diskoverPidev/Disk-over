@@ -46,7 +46,7 @@ public class ImpayeFactController implements Initializable {
     @FXML
     private Button btnenregistrer;
     
-    String statut;
+    String statut = "Impayé";
 
     
     
@@ -66,6 +66,7 @@ public class ImpayeFactController implements Initializable {
     @FXML
     private void directQRcode(ActionEvent event) throws IOException {
         String statut = bstatut.getValue();
+        
          FXMLLoader loader = new FXMLLoader(getClass().getResource("ImpayeQRcode.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -74,15 +75,19 @@ public class ImpayeFactController implements Initializable {
         stage.show();
     }
 
+    public String getStatut() {
+        return statut;
+    }
+
     public ChoiceBox<String> getBstatut() {
         return bstatut;
     }
     
     
     
-    public String getStatut() {
+  /*  public String getStatut() {
         return statut;
-    }
+    }*/
 
     @FXML
     private void ajouter(ActionEvent event) {

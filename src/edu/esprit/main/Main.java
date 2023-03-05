@@ -29,6 +29,7 @@ public class Main {
         FormulaireR fr2 = new FormulaireR("Eya", 27046924, "ketata.eya@esprit.tn", 2, "Intra", "moyenne_gamme", "Ariana", "El Naser", "rien");
 
         sform.ajouter(fr2);
+        sform.notifier("Nouvelle notif", "Reservation acceptée");
         
         ServiceFacture sfact = new ServiceFacture();
         
@@ -38,7 +39,7 @@ public class Main {
        // sfact.ajouter(fact1);
        // sfact.ajouter(fact2);
         //System.out.println(sfact.getAll());
-        System.out.println(sfact.getOnebyId(2));
+        //System.out.println(sfact.getOnebyId(2));
         //sform.modifier(fr1);
         //sform.supprimer(2);
         

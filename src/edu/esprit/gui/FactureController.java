@@ -68,7 +68,7 @@ public class FactureController implements Initializable {
     private ChoiceBox<String> bstatut;
     ObservableList<String> choice = FXCollections.observableArrayList("Payé");
     
-    String statut;
+    String statut = "payé";
 
     
     
@@ -126,7 +126,7 @@ public ListView getListfact() {
 
     @FXML
         private void Afficher(ActionEvent event) {
-         String statut = bstatut.getValue();
+         
         //String statut = tfstatut.getText();
         String notes = tfnotes.getText();
 
@@ -197,20 +197,27 @@ public ListView getListfact() {
         // listevent.getItems().addAll(even);
     }
      
-        
+      /*  
         public String getStatut() {
-        return bstatut.getValue();
+        return statut;
         }
+*/
+   /* public ChoiceBox<String> getBstatut() {
+        return bstatut;
+    }
+        
+       */ 
   
-    /* 
-    public String getTfstatut(){
-        return tfstatut.setText(value);
+    
+    public String getStatut(){
+        return "payé";
     } 
-     */
+     
      
     @FXML
         private void directQRcode(ActionEvent event) throws IOException {
-        
+        String statut = bstatut.getValue();
+        System.out.println(statut);
 /*
             
         String statut = tfstatut.getText();
