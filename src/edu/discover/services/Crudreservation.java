@@ -66,7 +66,7 @@ public class Crudreservation implements IService<Reservationevent> {
         PreparedStatement st = cnx.prepareStatement(req);
         st.setString(1, t.getNomclient());
         st.setInt(2, t.getNbrclient());
-        st.setString (3, t.getColab().getNomevent());
+        st.setString (3, t.getNomevnet());
         st.executeUpdate();
         System.out.println("Reservation ajouter!");
     } catch (SQLException ex) {

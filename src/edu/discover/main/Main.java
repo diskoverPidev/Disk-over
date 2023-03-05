@@ -55,38 +55,39 @@ public class Main {
        Reservationevent r = new Reservationevent("azi",5,col);
       Crudreservation cr = new Crudreservation();
       Crudcolaboration cl = new  Crudcolaboration();
-      //cl.ajout(col);
-      //cr.ajout(r);
-      cr.supprimer(r);
-      
- 
-      Colaborationevent col2 =new Colaborationevent("eyaaaaaaaaaaaaaa", Date.valueOf("2017-02-28"), "aaaa", 2, 1);
-      Reservationevent rr = new Reservationevent("azi",5,col2);
-     cl.modifier(col2,"iheb");
-      cr.modifier(rr,"Iheb");
-    
-      System.out.println(cr.getOneById(41));
-    
-          
-      
-      
-      
-      
-      System.out.println("_______________________");
-       System.out.println("Affichage Tous reservation :");
-        System.out.println(cr.getAll());
-        
-         System.out.println("_______________________");
-       System.out.println("Tri ASC :");
-      List<Reservationevent> listc=cr.getAll() ; 
-       List<Reservationevent> list_tri=cr.trier(listc) ; 
-       System.out.println(list_tri);
-      
-       System.out.println("_______________________");
-       System.out.println("Recherche :");
-       List<Reservationevent> listr=cr.getAll() ;
-       List<Reservationevent> listr_recherche=cr.rechercher(listr,"lotfi") ; 
-              System.out.println(listr_recherche);
+      System.out.println(cl.getNom());
+//      //cl.ajout(col);
+//      //cr.ajout(r);
+//      cr.supprimer(r);
+//      
+// 
+//      Colaborationevent col2 =new Colaborationevent("eyaaaaaaaaaaaaaa", Date.valueOf("2017-02-28"), "aaaa", 2, 1);
+//      Reservationevent rr = new Reservationevent("azi",5,col2);
+//     cl.modifier(col2,"iheb");
+//      cr.modifier(rr,"Iheb");
+//    
+//      System.out.println(cr.getOneById(41));
+//    
+//          
+//      
+//      
+//      
+//      
+//      System.out.println("_______________________");
+//       System.out.println("Affichage Tous reservation :");
+//        System.out.println(cr.getAll());
+//        
+//         System.out.println("_______________________");
+//       System.out.println("Tri ASC :");
+//      List<Reservationevent> listc=cr.getAll() ; 
+//       List<Reservationevent> list_tri=cr.trier(listc) ; 
+//       System.out.println(list_tri);
+//      
+//       System.out.println("_______________________");
+//       System.out.println("Recherche :");
+//       List<Reservationevent> listr=cr.getAll() ;
+//       List<Reservationevent> listr_recherche=cr.rechercher(listr,"lotfi") ; 
+//              System.out.println(listr_recherche);
       
   }  
 }

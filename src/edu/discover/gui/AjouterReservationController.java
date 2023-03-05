@@ -5,11 +5,16 @@
  */
 package edu.discover.gui;
 
+import edu.discover.entities.Colaborationevent;
 import edu.discover.entities.Reservationevent;
+import edu.discover.services.Crudcolaboration;
 import edu.discover.services.Crudreservation;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +48,7 @@ public class AjouterReservationController implements Initializable {
     private Label mylabel;
     @FXML
     private ChoiceBox<String> mychoixbox;
-    private final String[] event = {"RAMZI", "jouini", "ahlem", "bochra", "kamilia", "housem"};
+    //private final String[] event = {"RAMZI", "jouini", "ahlem", "bochra", "kamilia", "housem"};
 
     @FXML
     private void listeres(ActionEvent event) throws IOException {
@@ -61,32 +66,63 @@ public class AjouterReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        mychoixbox.getItems().addAll(event);
-        mychoixbox.setOnAction(this::getEvent);
+        
+        Crudcolaboration cr=new Crudcolaboration();
+        List<String> even =cr.getNom();
+        ObservableList<String> observableColaborationevents = FXCollections.observableList(even);
+        mychoixbox.setItems(observableColaborationevents);
+        mychoixbox.getSelectionModel().select(0);
+        
+//        mychoixbox.getItems().addAll(event);
+//        mychoixbox.setOnAction(this::getEvent);
 
     }
 
     public void getEvent(ActionEvent event) {
-        String myEvent = mychoixbox.getValue();
-        mylabel.setText(myEvent);
+     
+//        String myEvent = mychoixbox.getValue();
+//        mylabel.setText(myEvent);
 
     }
 
     @FXML
     private void add(ActionEvent event) {
+        
         String nomclient = nom.getText();
         int nbrclient = Integer.parseInt(nbrp.getText());//Integer.parseInt pour forcer la conversion en int
-        String nomev = mychoixbox.getValue();
+        //String Colaborationevent = mychoixbox.getValue().getNomevent();
+        String Colaborationevent = mychoixbox.getValue();
 
-        Reservationevent c = new Reservationevent(nomclient, nbrclient, nomev);
-        Crudreservation cc = new Crudreservation();
-        cc.ajout(c);
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Event Registration");
-        alert.setHeaderText("Event Registration");
-        alert.setContentText("Event Added!");
+        //mena
+        if(Colaborationevent.isEmpty()){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Nom event doit etre remplir !!");
         alert.showAndWait();
+        }else{
+                Reservationevent c = new Reservationevent();
+                c.setNomclient(nomclient);
+                c.setNbrclient(nbrclient);
+                c.setNomevnet(Colaborationevent);
+                Crudreservation cc = new Crudreservation();
+                cc.ajout(c);
+
+        }
+        
+        
+        
+        
+        
+//        Reservationevent c = new Reservationevent(nomclient, nbrclient, nomev);
+//        Crudreservation cc = new Crudreservation();
+//        cc.ajout(c);
+//
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle("Event Registration");
+//        alert.setHeaderText("Event Registration");
+//        alert.setContentText("Event Added!");
+//        alert.showAndWait();
+
     }
 
 }

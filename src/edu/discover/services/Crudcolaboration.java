@@ -171,10 +171,53 @@ public class Crudcolaboration implements IService<Colaborationevent> {
 
     }
     
+  /*  
+    public List<Colaborationevent> getname()
+ {
+        
+
+        List<Colaborationevent> colaboration = new ArrayList<>();
+        try {
+            String req = "SELECT `NomEvent` FROM `colaborationevent`";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Colaborationevent rec = new Colaborationevent(
+                        result.getString("NomEvent")
+                        
+                );
+                colaboration.add(rec);
+                
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return colaboration;
     
+ }
+   */
+     public List<String> getNom(){
+    List<String> colaboration = new ArrayList<>();
+     try {
+            String req = "SELECT `NomEvent` FROM `colaborationevent`";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Colaborationevent rec = new Colaborationevent(result.getString("NomEvent"));
+                        
+               colaboration.add(result.getString("NomEvent"));
+                
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return colaboration;
     
-    
-    
+     }
     
     //tri
     public static List<Colaborationevent> trier(List<Colaborationevent> listc) {
