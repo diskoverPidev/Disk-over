@@ -272,6 +272,7 @@ public void showsEvent(ActionEvent event) {
             document.open();
             document.add(new Paragraph(" PLATEFORME DISCOVER "));
             document.add(new Paragraph(" ------------------------- "));
+            
 
 //            Image img = Image.getInstance("C:\\Users\\ASUS\\OneDrive\\Documents\\NetBeansProjects\\PIDev\\logoartisty.PNG");
 //            img.scaleAbsoluteWidth(90);
@@ -303,6 +304,8 @@ public void showsEvent(ActionEvent event) {
             document.close();
 
             Desktop.getDesktop().open(new File("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\evenement.pdf"));
+            
+            
 
         } catch (DocumentException | IOException e) {
 
