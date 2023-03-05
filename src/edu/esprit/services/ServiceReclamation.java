@@ -55,13 +55,9 @@ public class ServiceReclamation implements IService<Reclamation> {
         if (t.getObjet().isEmpty() || t.getMessage().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Les champs Objet et Message sont obligatoires.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
         }
-        if (!t.getObjet().matches("[a-zA-Z]+") || !t.getMessage().matches("[a-zA-Z]+")) {
-            JOptionPane.showMessageDialog(null, "Les champs Type, Objet et Message ne peuvent contenir que des lettres.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
         try {
-            String req = "INSERT INTO `reclamation`(`type`, `objet`, `message`, `date`) VALUES (?,?,?,?)";
+            String req = "INSERT INTO `reclamation`(`cin`,`type`, `objet`, `message`, `date`) VALUES (?,?,?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
 
             // Vérifier si le message contient des mots offensants
@@ -71,11 +67,11 @@ public class ServiceReclamation implements IService<Reclamation> {
                 // Si le message contient des mots offensants, remplacer le contenu de l'objet par des étoiles
                 t.setMessage("*******");
             }
-
-            ps.setString(1, t.getType());
-            ps.setString(2, t.getObjet());
-            ps.setString(3, t.getMessage());
-            ps.setDate(4, t.getDate());
+            ps.setString(1, t.getCin());
+            ps.setString(2, t.getType());
+            ps.setString(3, t.getObjet());
+            ps.setString(4, t.getMessage());
+            ps.setDate(5, t.getDate());
             ps.executeUpdate();
             System.out.println("reclamation added ");
             // Afficher une notification système pour l'administrateur
@@ -96,7 +92,7 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
     public void supprimer(Reclamation t) {
      
-            String req = "DELETE FROM reclamation WHERE id="+t.getId(); 
+            String req = "DELETE FROM reclamation WHERE cin="+t.getCin(); 
            try {
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
@@ -110,7 +106,7 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
     public void modifier(Reclamation t) {
         try {
-            String req = "UPDATE `reclamation` SET `id` = '" + t.getId() + "', `type` = '" + t.getType() + "', `objet` = '" + t.getObjet() + "', `message` = '" + t.getMessage() + "', `date` = '" + t.getDate() + "' WHERE `reclamation`.`id` = " + t.getId();;
+            String req = "UPDATE `reclamation` SET `id` = '" + t.getId() + "', `type` = '" + t.getType() + "', `objet` = '" + t.getObjet() + "', `message` = '" + t.getMessage() + "', `date` = '" + t.getDate() + "' WHERE `reclamation`.`cin` = " + t.getCin();;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("reclamation updated ");
@@ -119,46 +115,146 @@ public class ServiceReclamation implements IService<Reclamation> {
         }
     }
 
-    @Override
-    public Reclamation getOneById(int id) {
-        Reclamation t = null;
-        try {
-            String req = "Select * from reclamation";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                t = new Reclamation(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5));
-                System.out.println("Reclamation afficher !");
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+//    @Override
+//    public Reclamation getOneById(String cin) {
+//        Reclamation t = null;
+//        try {
+//            String req = "Select * from reclamation";
+//            Statement st = cnx.createStatement();
+//            ResultSet rs = st.executeQuery(req);
+//            while (rs.next()) {
+//                t = new Reclamation(rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6));
+//                System.out.println("Reclamation afficher !");
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//
+//        return t;
+//    }
 
-        return t;
-    }
+
+
+//    public List<Reclamation> getonebycin(String cin) {
+//        List<Reclamation> list = new ArrayList<>();
+//        String reqs = "SELECT i.type,i.objet, i.message, i.date "
+//                + "FROM reclamation t "
+//                + "JOIN reponse i ON t.idJ = t.idJ "
+//                + "WHERE i.idJ = ?";
+//        try {
+//            String req = "Select * from reclamation ";
+//            Statement st = cnx.createStatement();
+//            ResultSet rs = st.executeQuery(req);
+//            while (rs.next()) {
+//                Reclamation t = new Reclamation(rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6));
+//                list.add(t);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//
+//        return list;
+//    }
     
-
+  
+    
+    
+    
+//    public Reclamation getOneById(String cin) {
+//        String query = "SELECT * FROM reclamation WHERE cin = " + cin + "";
+//        Reclamation c = new Reclamation();
+//        try{
+//            Statement ste = cnx.createStatement();
+//            ResultSet rs = ste.executeQuery(query);
+//            while (rs.next()){
+//                c.setCin(rs.getString("cin"));
+//                c.setType(rs.getString("type"));
+//                c.setObjet(rs.getString("objet"));
+//                                c.setMessage(rs.getString("message"));
+//
+//               c.setDate(rs.getDate("date"));
+//
+//                
+//            }
+//        }
+//        catch (SQLException e){
+//            e.getMessage();
+//        }
+//        return c;
+//    }
+    
+    
     @Override
     public List<Reclamation> getAll() {
-        List<Reclamation> list = new ArrayList<>();
-        String reqs = "SELECT i.type,i.objet, i.message, i.date "
-                + "FROM reclamation t "
-                + "JOIN reponse i ON t.idJ = t.idJ "
-                + "WHERE i.idJ = ?";
-        try {
-            String req = "Select * from reclamation";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Reclamation t = new Reclamation(rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5));
-                list.add(t);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+        List<Reclamation> liste = new ArrayList<>();
+        String query = "SELECT * FROM reclamation ";
+        try{
+            Statement ste = cnx.createStatement();
+            ResultSet rs = ste.executeQuery(query);
+            while (rs.next()){
+                Reclamation r = new Reclamation();
 
-        return list;
+                r.setCin(rs.getString("cin"));
+                r.setType(rs.getString("type"));
+                r.setObjet(rs.getString("objet"));
+                 r.setMessage(rs.getString("message"));
+                  r.setDate(rs.getDate("date"));
+               
+               
+                liste.add(r);
+            }
+        }
+        catch (SQLException e){
+            e.getMessage();
+        }
+        return liste;
     }
+    @Override
+    public List<Reclamation> getOneById(String cin) {
+        List<Reclamation> liste = new ArrayList<>();
+        String query = "SELECT * FROM reclamation WHERE cin = " + cin + "";
+        try{
+            Statement ste = cnx.createStatement();
+            ResultSet rs = ste.executeQuery(query);
+            while (rs.next()){
+                Reclamation r = new Reclamation();
+
+                r.setCin(rs.getString("cin"));
+                r.setType(rs.getString("type"));
+                r.setObjet(rs.getString("objet"));
+                 r.setMessage(rs.getString("message"));
+                  r.setDate(rs.getDate("date"));
+               
+               
+                liste.add(r);
+            }
+        }
+        catch (SQLException e){
+            e.getMessage();
+        }
+        return liste;
+    }
+//    @Override
+//    public List<Reclamation> getAll() {
+//        List<Reclamation> list = new ArrayList<>();
+//        String reqs = "SELECT i.type,i.objet, i.message, i.date "
+//                + "FROM reclamation t "
+//                + "JOIN reponse i ON t.idJ = t.idJ "
+//                + "WHERE i.idJ = ?";
+//        try {
+//            String req = "Select * from reclamation ";
+//            Statement st = cnx.createStatement();
+//            ResultSet rs = st.executeQuery(req);
+//            while (rs.next()) {
+//                Reclamation t = new Reclamation(rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6));
+//                list.add(t);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//
+//        return list;
+//    }
 
     public static List<Reclamation> trier(List<Reclamation> listc) {
         return listc.stream()

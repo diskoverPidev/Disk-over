@@ -5,6 +5,7 @@
  */
 package edu.esprit.gui;
 
+import com.twilio.http.Response;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.Reponse;
 import edu.esprit.services.ServiceReclamation;
@@ -13,6 +14,7 @@ import static java.awt.PageAttributes.MediaType.C;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -33,8 +35,24 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import java.io.IOException;
+import okhttp3.Credentials;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+
+import java.io.IOException;
+import okhttp3.*;
+import org.json.JSONObject;
 
 /**
  * FXML Controller class
@@ -53,8 +71,8 @@ public class BackController implements Initializable {
     private TextField numR;
     @FXML
     private TextField resR;
-     @FXML
-    private DatePicker datei;
+    @FXML
+    private DatePicker dateR1;
     @FXML
     private TableView<Reponse> tableView;
     @FXML
@@ -66,13 +84,41 @@ public class BackController implements Initializable {
     @FXML
     private TableColumn<Reponse, String> resir;
     @FXML
-    private TableColumn<?, ?> dateir;
+    private TableColumn<Reponse, Date> dateir;
     @FXML
     private Button btnSupp;
     @FXML
     private Button btnmodif;
     @FXML
-    private DatePicker dateR;
+    private TextField searchid;
+
+    @FXML
+    private Button btnRechercher;
+//    private DatePicker dateR;
+    @FXML
+    private TableView<Reclamation> tableView2;
+
+    @FXML
+    private TableColumn<Reclamation, String> typeRe;
+
+    @FXML
+    private TableColumn<Reclamation, String> objetRe;
+
+    @FXML
+    private TableColumn<Reclamation, String> messageRe;
+
+    @FXML
+    private TableColumn<Reclamation, Date> dateRe;
+    @FXML
+    private TableColumn<Reclamation, String> cinRe;
+    @FXML
+    private Button afficherid;
+    @FXML
+    private TextField mssg;
+    @FXML
+    private Button btntr;
+    @FXML
+    private TextField traduction;
 
     /**
      * Initializes the controller class.
@@ -80,7 +126,9 @@ public class BackController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
         afficherReponse();
+
     }
 
     @FXML
@@ -90,7 +138,7 @@ public class BackController implements Initializable {
         int idchauffeur = Integer.parseInt(idCh.getText());
         int num = Integer.parseInt(numR.getText());
         String resultat = resR.getText();
-        Date dateR = Date.valueOf(datei.getValue());
+        Date dateR = Date.valueOf(dateR1.getValue());
 
         Reponse r = new Reponse(idclient, idchauffeur, num, resultat, dateR);
         ServiceReponse sr = new ServiceReponse() {
@@ -99,6 +147,7 @@ public class BackController implements Initializable {
 
         Alert a = new Alert(Alert.AlertType.ERROR, "reponse ajouter", ButtonType.OK);
         a.showAndWait();
+        afficherReponse();
 
     }
 
@@ -108,13 +157,8 @@ public class BackController implements Initializable {
         ServiceReponse sr = new ServiceReponse() {
         };
         List<Reponse> reponse = sr.getAll();
-          List<Reponse> tri_rep = sr.trier(reponse);
+        List<Reponse> tri_rep = sr.trier(reponse);
         ObservableList<Reponse> observableClients = FXCollections.observableList(reponse);
-      
-
-        
-      
-
 
         tableView.setItems(observableClients);
         idi.setCellValueFactory(new PropertyValueFactory<>("idclient"));
@@ -151,32 +195,120 @@ public class BackController implements Initializable {
 
     @FXML
     private void modifierReponse(ActionEvent event) {
-//        ServiceReponse sr = new ServiceReponse() {
-//        };
-//
-//        String lieu = resir.getText();
-//        if (resir.getText().isEmpty()) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Erreur");
-//            alert.setHeaderText(null);
-//            alert.setContentText(" vérifier vos informations ");
-//
-//            alert.showAndWait();
-//        } else {
-//            String e = resR.getText();
-//            Reponse i = tableView.getSelectionModel().getSelectedItem();
-//      
-//            i.setIdClient(idC.getId());
-//            i.setIdChauffeur(idCh.getId());
-//            i.setNum(numR.getId());
-//            i.setResultat(resR.getText());
-////            i.setDate(datei.getValue());
-//            JOptionPane.showMessageDialog(null, "Reclamation modifiee !");
-//            sr.modifier(i);
-//            afficherReponse();
-//        }
-//
-//    }
 
+        {
+            int idclient = Integer.parseInt(idC.getText());
+            int idchauffeur = Integer.parseInt(idCh.getText());
+            int num = Integer.parseInt(numR.getText());
+            String resultat = resR.getText();
+            Date dateR = Date.valueOf(dateR1.getValue());
+
+            Reponse r = new Reponse(idclient, idchauffeur, num, resultat, dateR);
+            ServiceReponse sr = new ServiceReponse() {
+            };
+            sr.modifier(r);
+
+            Alert a = new Alert(Alert.AlertType.ERROR, "Reponse modifier", ButtonType.OK);
+            a.showAndWait();
+            afficherReponse();
+        }
+    }
+
+    @FXML
+    void rechercheR(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (searchid.getText().isEmpty()) {
+            alert.setContentText("remplir le champ a rechercher");
+            alert.showAndWait();
+            return;
+        }
+        ServiceReponse sr = new ServiceReponse() {
+        };
+        List<Reponse> reponse = sr.getAll();
+        List<Reponse> rep_cherche = sr.rechercher(reponse, searchid.getText());
+        ObservableList<Reponse> observableClients = FXCollections.observableList(rep_cherche);
+        tableView.setItems(observableClients);
+        idi.setCellValueFactory(new PropertyValueFactory<>("idclient"));
+        idic.setCellValueFactory(new PropertyValueFactory<>("idchauffeur"));
+
+        numir.setCellValueFactory(new PropertyValueFactory<>("num"));
+
+        resir.setCellValueFactory(new PropertyValueFactory<>("resultat"));
+        dateir.setCellValueFactory(new PropertyValueFactory<>("dateR"));
+
+    }
+
+    @FXML
+    private void getData(MouseEvent event) {
+        Reclamation r = tableView2.getSelectionModel().getSelectedItem();
+        mssg.setText(r.getMessage());
+    }
+
+    @FXML
+    private void showsReclamation2() {
+        ServiceReclamation sr = new ServiceReclamation();
+        List<Reclamation> r = sr.getAll();
+        List<Reclamation> trimmedReclamations = new ArrayList<>();
+
+        for (Reclamation reclamation : r) {
+            Reclamation trimmed = new Reclamation();
+            trimmed.setCin(reclamation.getCin());
+            trimmed.setType(reclamation.getType());
+            trimmed.setObjet(reclamation.getObjet());
+            trimmed.setMessage(reclamation.getMessage());
+            trimmed.setDate(reclamation.getDate());
+            trimmedReclamations.add(trimmed);
+        }
+
+        ObservableList<Reclamation> observableClients = FXCollections.observableList(trimmedReclamations);
+
+        tableView2.setItems(observableClients);
+        cinRe.setCellValueFactory(new PropertyValueFactory<>("cin"));
+        typeRe.setCellValueFactory(new PropertyValueFactory<>("type"));
+        objetRe.setCellValueFactory(new PropertyValueFactory<>("objet"));
+        messageRe.setCellValueFactory(new PropertyValueFactory<>("message"));
+        dateRe.setCellValueFactory(new PropertyValueFactory<>("date"));
+    }
+
+    @FXML
+    private void afficher() {
+        showsReclamation2();
+    }
+
+    @FXML
+    private void traduire(ActionEvent event) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+//        Response response = client.newCall(request).execute();
+        RequestBody body = new FormBody.Builder()
+                .add("q", mssg.getText())
+                .add("target", "fr")
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://google-translate1.p.rapidapi.com/language/translate/v2")
+                .post(body)
+                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .addHeader("Accept-Encoding", "application/gzip")
+                .addHeader("X-RapidAPI-Key", "cf9df17959msh795e091327e4e77p17dc55jsn58fccd786a0d")
+                .addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
+                .build();
+
+        okhttp3.Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            String responseBody = response.body().string();
+            JSONObject json = new JSONObject(responseBody);
+            String translatedText = json.getJSONObject("data")
+                    .getJSONArray("translations")
+                    .getJSONObject(0)
+                    .getString("translatedText");
+            System.out.println(translatedText);
+        } else {
+            System.out.println("Request failed");
+        }
+    }
+
+    public TextField getMssg() {
+        return mssg;
     }
 }

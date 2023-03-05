@@ -25,7 +25,7 @@ public interface IService<T> {
      * @param idRe
      * @return
      */
-    public T getOneById (int idRe);
+    public List<T> getOneById (String cin);
  
     
 }

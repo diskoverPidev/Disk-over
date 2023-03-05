@@ -10,6 +10,11 @@ import static com.sun.webkit.dom.EventImpl.SELECT;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.Reponse;
 import edu.esprit.utils.Datasource;
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,10 +41,6 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
         if (i.getResultat().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Le champs Resultat est obligatoires.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
         }
-        if (!i.getResultat().matches("[a-zA-Z]+")) {
-            JOptionPane.showMessageDialog(null, "Le champs Resultat ne peut contenir que des lettres.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
         try {
 
@@ -52,16 +53,30 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
             ps.setDate(5, i.getDateR());
             ps.executeUpdate();
             System.out.println("reponse added ");
+                 // Afficher une notification système pour l'administrateur
+            SystemTray tray = SystemTray.getSystemTray();
+            Image image = Toolkit.getDefaultToolkit().createImage("icon.png"); // chemin vers une icône pour la notification
+            TrayIcon trayIcon = new TrayIcon(image, "Nouvelle reponse");
+            trayIcon.setImageAutoSize(true);
+            trayIcon.setToolTip("Nouvelle reponse");
+            tray.add(trayIcon);
+            trayIcon.displayMessage("Nouvelle reponse ajoutée", "Une nouvelle reponse a été ajoutée pour vous , veillez consulter ceci.", TrayIcon.MessageType.INFO);
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Une erreur s'est produite lors de l'ajout de la reponse : " + ex.getMessage(), "Erreur de base de données", JOptionPane.ERROR_MESSAGE);
+        } catch (AWTException ex) {
+            System.out.println("essayer de nouveau");
         }
     }
+     
+
+        
+    
 
     @Override
     public void supprimer(Reponse i) {
-    
-            String req = "DELETE FROM reponse WHERE num = " +i.getNum();
-        
+
+        String req = "DELETE FROM reponse WHERE num = " + i.getNum();
+
         try {
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
@@ -140,7 +155,5 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
                 .filter(t -> t.getResultat().equalsIgnoreCase(resultat))
                 .collect(Collectors.toList());
     }
-
-  
 
 }

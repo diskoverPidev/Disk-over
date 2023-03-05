@@ -3,30 +3,82 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="624.0" style="-fx-background-color: #12477A; -fx-animation: myanimation 5s infinite;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ReclamationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="999.0" style="-fx-background-color: #12477A; -fx-animation: myanimation 5s infinite;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ReclamationController">
    <children>
-      <TextField fx:id="objetR" layoutX="434.0" layoutY="131.0" prefHeight="26.0" prefWidth="120.0" promptText="objet" />
-      <TextField fx:id="messageR" layoutX="434.0" layoutY="185.0" prefHeight="26.0" prefWidth="120.0" promptText="message" />
-      <TextField fx:id="typeR" layoutX="434.0" layoutY="84.0" prefHeight="26.0" prefWidth="120.0" promptText="type" />
-      <DatePicker fx:id="dateR" layoutX="434.0" layoutY="236.0" prefHeight="26.0" prefWidth="127.0" promptText="date" />
-      <Text fill="#e2d3d3" fontSmoothingType="LCD" layoutX="63.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="268.16278076171875" />
-      <BorderPane layoutX="-6.0" layoutY="-7.0" prefHeight="409.0" prefWidth="390.0">
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane layoutX="-4.0" layoutY="-4.0" prefHeight="531.0" prefWidth="1006.0">
+         <top>
+            <AnchorPane prefHeight="531.0" prefWidth="1075.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutY="7.0" prefHeight="396.0" prefWidth="377.0" style="-fx-background-color: white;" />
+                  <Separator layoutX="578.0" layoutY="120.0" orientation="VERTICAL" prefHeight="344.0" prefWidth="17.0" />
+                  <Text layoutX="136.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <TextField fx:id="typeR" layoutX="283.0" layoutY="292.0" prefHeight="26.0" prefWidth="120.0" promptText="type" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="objetR" layoutX="285.0" layoutY="349.0" prefHeight="26.0" prefWidth="116.0" promptText="objet" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="searchid" layoutX="613.0" layoutY="206.0" prefHeight="26.0" prefWidth="288.0" promptText="entrer un type ou objet" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="messageR" layoutX="283.0" layoutY="233.0" prefHeight="26.0" prefWidth="127.0" promptText="message" style="-fx-background-color: transparent;" />
+                  <DatePicker fx:id="dateR" layoutX="283.0" layoutY="403.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="cinrec" layoutX="285.0" layoutY="170.0" prefHeight="26.0" prefWidth="124.0" promptText="cin" style="-fx-background-color: transparent;" />
+                  <Button fx:id="afficherrec" layoutX="646.0" layoutY="475.0" mnemonicParsing="false" onAction="#afficherreclamation" prefHeight="29.0" prefWidth="90.0" style="-fx-background-color: #27ae60;" text="afficher" />
+                  <Button fx:id="btnmodifier" layoutX="845.0" layoutY="475.0" mnemonicParsing="false" onAction="#modifierReclamation" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #27ae60;" text="modifier" />
+                  <Button fx:id="btnSupprimer" layoutX="749.0" layoutY="475.0" mnemonicParsing="false" onAction="#supprimerReclamation" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #27ae60;" text="supprimer" />
+                  <BorderPane layoutX="5.0" layoutY="3.0" prefHeight="528.0" prefWidth="188.0" style="-fx-background-color: white;">
+                     <center>
+                        <ImageView fitHeight="150.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@../images/iconereclamation.png" />
+                           </image>
+                        </ImageView>
+                     </center>
+                     <top>
+                        <ImageView fitHeight="82.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@../images/333997974_725431422366658_1750111115337249527_n.png" />
+                           </image>
+                        </ImageView>
+                     </top>
+                  </BorderPane>
+                  <Button fx:id="btnRechercher" layoutX="908.0" layoutY="204.0" mnemonicParsing="false" onAction="#rechercheR" prefHeight="29.0" prefWidth="84.0" style="-fx-background-color: #27ae60;" text="rechercher" />
+                  <Button fx:id="btnValider" layoutX="412.0" layoutY="458.0" mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: #27ae60;" text="Valider" />
+                  <TableView fx:id="tableView" layoutX="610.0" layoutY="241.0" onMouseClicked="#getData" onSort="#showsReclamation" prefHeight="210.0" prefWidth="388.0" style="-fx-background-color: transparent;">
+                     <columns>
+                        <TableColumn fx:id="cinRe" prefWidth="59.0" text="cin" />
+                        <TableColumn fx:id="typeRe" prefWidth="60.33331298828125" text="type" />
+                        <TableColumn fx:id="objetRe" prefWidth="68.0" text="objet" />
+                        <TableColumn fx:id="messageRe" prefWidth="76.0" text="message" />
+                        <TableColumn fx:id="dateRe" prefWidth="160.0" text="date" />
+                     </columns>
+                  </TableView>
+                  <ImageView fitHeight="129.0" fitWidth="138.0" layoutX="446.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/image-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <TitledPane animated="false" layoutX="283.0" layoutY="-55.0" text="untitled" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="248.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="65.0" fitWidth="84.0" layoutX="276.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/FAIRE-UNE-RECLAMATION-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="173.0" fitWidth="396.0" layoutX="354.0" layoutY="-23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/download-removebg-preview.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
-         </center>
+         </top>
       </BorderPane>
-      <Button fx:id="menuRe" layoutX="528.0" layoutY="334.0" mnemonicParsing="false" onAction="#menuRe" prefHeight="36.0" prefWidth="66.0" style="-fx-background-color: #27ae60; -fx-border-color: 979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-translate-y: -1px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 1); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text=" suivant" />
-      <Button fx:id="btnValider" layoutX="423.0" layoutY="332.0" mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="38.0" prefWidth="69.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Valider " textAlignment="RIGHT" textOverrun="CLIP" underline="true" />
-      <Separator layoutX="400.0" layoutY="85.0" orientation="VERTICAL" prefHeight="200.0" />
     
    </children>
 </AnchorPane>

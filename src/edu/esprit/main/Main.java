@@ -25,20 +25,16 @@ public class Main {
         
         ServiceReponse sr = new ServiceReponse() {
         };
-        
-        Reponse r1 = new Reponse(50, 12, 122, "weeey", Date.valueOf("2015-12-12"));
-        Reponse r2 = new Reponse(90, 92, 19, "modifier", Date.valueOf("2018-12-12"));
-        Reponse r3 = new Reponse(10, 10, 20, "oui", Date.valueOf("2018-12-12"));
-        
-        sr.ajouter(r1);
+           Reponse r1= new Reponse (11,12,13,"num", Date.valueOf("2015-12-12"));
+  sr.ajouter(r1);
         
       
-        sr.modifier(r3);
+
         
         System.out.println(sr.getOneById(20));
         System.out.println(sr.getAll());
         
-        Reclamation s2 = new Reclamation("oumaima", "ghassen", "hhhhhhhh", Date.valueOf("2015-12-12"));
+//        Reclamation s2 = new Reclamation("oumaima", "ghassen", "hhhhhhhh", Date.valueOf("2015-12-12"));
         
         ServiceReclamation sp = new ServiceReclamation();
     
@@ -49,7 +45,7 @@ public class Main {
 //        Reclamation s4 = new Reclamation("kokokook", "oooooooo", "kkkkkkkkkkk", Date.valueOf("2015-10-10"));
 //        sp.ajouter(s4);
 //        sp.modifier(s3);
-        System.out.println(sp.getOneById(123));
+//        System.out.println(sp.getOneById(123));
         System.out.println(sp.getAll());
         
         List<Reclamation> listc = sp.getAll();

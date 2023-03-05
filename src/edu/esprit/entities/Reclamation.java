@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.logging.Logger;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
@@ -20,28 +21,66 @@ import javafx.scene.control.TextField;
 public class Reclamation {
 
     private int id;
+    private String cin ; 
     private String type;
     private String objet;
     private String message;
     public Date date;
 
-    public Reclamation(int id, String type, String objet, String message) {
-        this.id = id;
-        this.type = type;
-        this.objet = objet;
-        this.message = message;
+//    public Reclamation(int id,String cin ,String type, String objet, String message) {
+//        this.id = id;
+//        this.cin = cin ; 
+//        this.type = type;
+//        this.objet = objet;
+//        this.message = message;
+//    }
+//
+//    public Reclamation(int id) {
+//        this.id = id;
+//    }
+//
+//    public Reclamation(String type, String objet, String message, Date date) {
+//        this.type = type;
+//        this.objet = objet;
+//        this.message = message;
+//        this.date = date;
+//    }
+
+    public Reclamation(String text, String text0, String text1, LocalDate value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Reclamation(int id) {
-        this.id = id;
+    public String getCin() {
+        return cin;
     }
 
-    public Reclamation(String type, String objet, String message, Date date) {
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public Reclamation() {
+    }
+
+    public Reclamation(int id, String cin, String type, String objet, String message, Date date) {
+        this.id = id;
+        this.cin = cin;
         this.type = type;
         this.objet = objet;
         this.message = message;
         this.date = date;
     }
+
+    public Reclamation(String cin, String type, String objet, String message, Date date) {
+        this.cin = cin;
+        this.type = type;
+        this.objet = objet;
+        this.message = message;
+        this.date = date;
+    }
+    
+
+
+
 
    
 
@@ -123,11 +162,17 @@ public class Reclamation {
         }
         return Objects.equals(this.date, other.date);
     }
+//
+//    @Override
+////    public String toString() {
+////        return "Reclamation{" + "id=" + id + ", type=" + type + ", objet=" + objet + ", message=" + message + ", date=" + date + '}';
+////    }
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id=" + id + ", type=" + type + ", objet=" + objet + ", message=" + message + ", date=" + date + '}';
+        return "Reclamation{" + "id=" + id + ", cin=" + cin + ", type=" + type + ", objet=" + objet + ", message=" + message + ", date=" + date + '}';
     }
+    
 
     public void setMessage(String message) {
         this.message = message;
