@@ -40,5 +40,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="mychoixbox" layoutX="288.0" layoutY="335.0" prefWidth="150.0" />
+      <Button fx:id="pdf" layoutX="548.0" layoutY="375.0" mnemonicParsing="false" onAction="#listepdf" prefHeight="37.0" prefWidth="83.0" style="-fx-background-color: #27ae60;" text="PDF" textFill="WHITE" />
    </children>
 </AnchorPane>

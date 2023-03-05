@@ -10,6 +10,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import edu.discover.entities.Colaborationevent;
@@ -50,7 +51,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -171,16 +171,16 @@ public void showsEvent(ActionEvent event) {
         prix.setLayoutX(x + 446);
         prix.setLayoutY(y + 22);
 
-        InputStream imgStream = getClass().getResourceAsStream("/img/update.png");
-        Image img = new Image(imgStream, 25, 25, false, false);
-        ImageView imv = new ImageView(img);
-        imv.setOnMouseClicked(MouseEvent ->se.modifier(e, u) );
-        imv.setLayoutX(x + 518);
-        imv.setLayoutY(y + 22);
+//        InputStream imgStream = getClass().getResourceAsStream("/img/update.png");
+//        Image img = new Image(imgStream, 25, 25, false, false);
+//        ImageView imv = new ImageView(img);
+//        imv.setOnMouseClicked(MouseEvent ->se.modifier(e, u) );
+//        imv.setLayoutX(x + 518);
+//        imv.setLayoutY(y + 22);
 
         Button btnaffiche = new Button("Affichage");
 
-        an.getChildren().addAll(name, date, location, nbr, prix,imv);
+        an.getChildren().addAll(name, date, location, nbr, prix/*,imv*/);
         ev.getChildren().addAll(an);
 
         vbox.getChildren().add(an);
@@ -259,7 +259,12 @@ public void showsEvent(ActionEvent event) {
     
     
     
-    
+    private void addEmptyLine(Document document, int number) throws DocumentException {
+        for (int i = 0; i < number; i++) {
+            Paragraph p = new Paragraph(" ");
+            document.add(p);
+        }
+    }
     
     @FXML
     private void listepdf(ActionEvent event) throws FileNotFoundException, DocumentException, SQLException, IOException {
@@ -272,7 +277,14 @@ public void showsEvent(ActionEvent event) {
             document.open();
             document.add(new Paragraph(" PLATEFORME DISCOVER "));
             document.add(new Paragraph(" ------------------------- "));
-            
+            Image img1 = Image.getInstance("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\src\\img\\logo.png");
+            //document.add("") ;  
+            //   Image  img1 = Image.getInstance ("C:\\Users\\ASUS\\OneDrive\\Documents\\NetBeansProjects\\PIDev\\Capture.PNG");
+
+            img1.setAbsolutePosition(15, 690);
+            img1.scaleToFit(130, 150);
+            addEmptyLine(document, 1); // utiliser la méthode addEmptyLine pour les paragraphes
+            document.add(img1);
 
 //            Image img = Image.getInstance("C:\\Users\\ASUS\\OneDrive\\Documents\\NetBeansProjects\\PIDev\\logoartisty.PNG");
 //            img.scaleAbsoluteWidth(90);

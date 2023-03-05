@@ -5,10 +5,21 @@
  */
 package edu.discover.gui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import edu.discover.entities.Colaborationevent;
 import edu.discover.entities.Reservationevent;
 import edu.discover.services.Crudcolaboration;
 import edu.discover.services.Crudreservation;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -49,6 +60,8 @@ public class AjouterReservationController implements Initializable {
     @FXML
     private ChoiceBox<String> mychoixbox;
     //private final String[] event = {"RAMZI", "jouini", "ahlem", "bochra", "kamilia", "housem"};
+    @FXML
+    private Button pdf;
 
     @FXML
     private void listeres(ActionEvent event) throws IOException {
@@ -123,6 +136,103 @@ public class AjouterReservationController implements Initializable {
 //        alert.setContentText("Event Added!");
 //        alert.showAndWait();
 
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private void addEmptyLine(Document document, int number) throws DocumentException {
+        for (int i = 0; i < number; i++) {
+            Paragraph p = new Paragraph(" ");
+            document.add(p);
+        }
+    }
+    
+    
+    
+    @FXML
+    private void listepdf(ActionEvent event) {
+        
+        Document document = new Document(); //cration de l'instance document
+        try {
+            PdfWriter.getInstance(document,
+                    new FileOutputStream("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\Reservation.pdf"));
+            // creation de outputstream instance et pdfwriter instance
+            document.open();
+            document.add(new Paragraph(" PLATEFORME DISCOVER "));
+            document.add(new Paragraph(" -------------------------------------- "));
+            
+            //IMAGES
+            Image img1 = Image.getInstance("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\src\\img\\logo.png");
+
+            img1.setAbsolutePosition(450, 790);
+            img1.scaleToFit(130, 150);
+            addEmptyLine(document, 1); // utiliser la méthode addEmptyLine pour les paragraphes
+            document.add(img1);
+            
+            Image img2 = Image.getInstance("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\src\\img\\sign.png");
+            img2.setAbsolutePosition(450, 190);
+            img2.scaleToFit(130, 150);
+            addEmptyLine(document, 1); // utiliser la méthode addEmptyLine pour les paragraphes
+            document.add(img2);
+            
+//            Image img3 = Image.getInstance("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\src\\img\\titre.png");
+//            img3.setAbsolutePosition(150, 590);
+//            img3.scaleToFit(230, 350);
+//            addEmptyLine(document, 1); // utiliser la méthode addEmptyLine pour les paragraphes
+//            document.add(img3);
+            
+            
+
+//            Image img = Image.getInstance("C:\\Users\\ASUS\\OneDrive\\Documents\\NetBeansProjects\\PIDev\\logoartisty.PNG");
+//            img.scaleAbsoluteWidth(90);
+//            img.scaleAbsoluteHeight(90);
+//            img.setAlignment(Image.ALIGN_RIGHT);
+//            
+//            document.add(img);
+
+            Font font = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.UNDERLINE, BaseColor.BLACK);
+            Paragraph p = new Paragraph(" Votre Ticket De Réservation  ", font);
+            p.setAlignment(Element.ALIGN_CENTER);
+            document.add(p);
+
+            Crudcolaboration sr = new Crudcolaboration();
+            Crudcolaboration se = new Crudcolaboration();
+            Colaborationevent r = sr.AffichagePDF();
+//            Events e = new Events();
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Cher Client, "+nom.getText()+"" ));
+            document.add(new Paragraph("Vous avez reservé " +nbrp.getText() +" Place(s) dans l'evenement : " + mychoixbox.getValue() + " "));
+            document.add(new Paragraph("Cordialement ."));
+            
+
+            // Ajouter un nouveau paragraphe au document
+            document.add(new Paragraph(" "));
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("L'opération a été effectuée avec succès !");
+            alert.showAndWait();
+            document.close();
+
+            Desktop.getDesktop().open(new File("C:\\Users\\ramzi\\OneDrive\\Documents\\NetBeansProjects\\discover6\\Reservation.pdf"));
+            
+            
+
+        } catch (DocumentException | IOException e) {
+
+            System.out.println("ERROR PDF");
+
+            System.out.println(e.getMessage());
+
+        }
     }
 
 }
