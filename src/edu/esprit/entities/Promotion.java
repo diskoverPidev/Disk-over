@@ -18,6 +18,7 @@ public class Promotion {
     private int prix_avant;
     private int pourcentage;
     private int prix_apres;
+    private int idO;
     
 
     public Promotion() {
@@ -25,25 +26,27 @@ public class Promotion {
 
     
     
-    public Promotion(int id_promotion, String nom_promotion, int duree_promotion, int prix_avant, int pourcentage, int prixa_pres, int id_offre) {
+    public Promotion(int id_promotion, String nom_promotion, int duree_promotion, int prix_avant, int pourcentage, int prix_apres, int idO) {
         this.id_promotion = id_promotion;
         this.nom_promotion = nom_promotion;
         this.duree_promotion = duree_promotion;
         this.prix_avant = prix_avant;
         this.pourcentage = pourcentage;
         this.prix_apres = prix_apres;
-        
+        this.idO=idO;
     }
 
-   
-    public Promotion(String nom_promotion, int duree_promotion, int prix_avant, int pourcentage, int prix_apres   ) {
+    public Promotion(String nom_promotion, int duree_promotion, int prix_avant, int pourcentage, int prix_apres, int idO) {
         this.nom_promotion = nom_promotion;
         this.duree_promotion = duree_promotion;
         this.prix_avant = prix_avant;
         this.pourcentage = pourcentage;
         this.prix_apres = prix_apres;
-        
+        this.idO = idO;
     }
+
+   
+   
 
     public int getid_promotion() {
         return id_promotion;
@@ -92,16 +95,30 @@ public class Promotion {
         this.prix_apres = prix_apres;
     }
 
-    @Override
-    public String toString() {
-        return "promotion{" + "id_promotion=" + id_promotion + ", nom_promotion=" + nom_promotion + ", duree_promotion=" + duree_promotion + ", prix_avant=" + prix_avant + ", pourcentage=" + pourcentage + ", prix_apres=" + prix_apres + '}';
+    public int getIdO() {
+        return idO;
+    }
+
+    public void setIdO(int idO) {
+        this.idO = idO;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.id_promotion;
+        int hash = 5;
+        hash = 61 * hash + this.id_promotion;
+        hash = 61 * hash + Objects.hashCode(this.nom_promotion);
+        hash = 61 * hash + this.duree_promotion;
+        hash = 61 * hash + this.prix_avant;
+        hash = 61 * hash + this.pourcentage;
+        hash = 61 * hash + this.prix_apres;
+        hash = 61 * hash + this.idO;
         return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "Promotion{" + "id_promotion=" + id_promotion + ", nom_promotion=" + nom_promotion + ", duree_promotion=" + duree_promotion + ", prix_avant=" + prix_avant + ", pourcentage=" + pourcentage + ", prix_apres=" + prix_apres + ", idO=" + idO + '}';
     }
 
     @Override
@@ -122,7 +139,16 @@ public class Promotion {
         if (this.duree_promotion != other.duree_promotion) {
             return false;
         }
+        if (this.prix_avant != other.prix_avant) {
+            return false;
+        }
         if (this.pourcentage != other.pourcentage) {
+            return false;
+        }
+        if (this.prix_apres != other.prix_apres) {
+            return false;
+        }
+        if (this.idO != other.idO) {
             return false;
         }
         if (!Objects.equals(this.nom_promotion, other.nom_promotion)) {
@@ -130,7 +156,12 @@ public class Promotion {
         }
         return true;
     }
+    
 
+   
+
+    
+     
     
     
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.esprit.gui.FrontpromotionController">
+    <stylesheets>
+        <URL value="@frontpromotion.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="197.0" layoutY="-2.0" prefHeight="400.0" prefWidth="408.0" style="-fx-background-color: #007FFF;" />
+      <Button fx:id="btnback" layoutX="516.0" layoutY="359.0" mnemonicParsing="false" onAction="#gomenu" prefHeight="31.0" prefWidth="71.0" text="Menu" />
+      <TextField fx:id="search" layoutX="283.0" layoutY="23.0" onMouseClicked="#rechercheEq" prefHeight="31.0" prefWidth="268.0" promptText="Recherche" />
+      <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="5.0" layoutY="1.0">
+         <image>
+            <Image url="@../../../../../../Downloads/333997974_725431422366658_1750111115337249527_n.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="TableView1" layoutX="205.0" layoutY="67.0" onMouseClicked="#selectO" prefHeight="182.0" prefWidth="366.0">
+         <columns>
+            <TableColumn fx:id="nomColumn" prefWidth="61.0" text="Nom" />
+            <TableColumn fx:id="dureeColumn1" prefWidth="62.0" text="Duree" />
+            <TableColumn fx:id="prixAVColumn" prefWidth="83.0" text="Prix Avant" />
+            <TableColumn fx:id="pourColumn" prefWidth="62.0" text="\%" />
+            <TableColumn fx:id="prixAPColumn11" prefWidth="89.0" text="Prix Apres" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

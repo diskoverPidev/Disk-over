@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.PromotionCrudController">
+    <stylesheets>
+        <URL value="@promotioncrud.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="192.0" layoutY="2.0" prefHeight="400.0" prefWidth="478.0" style="-fx-background-color: #007FFF;" />
+      <Button fx:id="btnback" layoutX="511.0" layoutY="363.0" mnemonicParsing="false" onAction="#gomenu" prefHeight="31.0" prefWidth="71.0" text="Menu" />
+      <Button fx:id="deleteoffre" layoutX="373.0" layoutY="267.0" mnemonicParsing="false" onAction="#deleteOffre" prefHeight="31.0" prefWidth="79.0" text="Supprimer" />
+      <Button fx:id="modifierroffre" layoutX="265.0" layoutY="267.0" mnemonicParsing="false" onAction="#Update" prefHeight="31.0" prefWidth="79.0" text="Modifier" />
+      <Button fx:id="ajouteroffre" layoutX="480.0" layoutY="267.0" mnemonicParsing="false" onAction="#ajouterOffre" prefHeight="31.0" prefWidth="79.0" text="Ajouter" />
+      <TextField fx:id="search" layoutX="278.0" layoutY="27.0" onMouseClicked="#rechercheEq" prefHeight="31.0" prefWidth="268.0" promptText="Recherche" />
+      <Button fx:id="btnpdf" layoutX="489.0" layoutY="314.0" mnemonicParsing="false" onAction="#pdfP" prefHeight="31.0" prefWidth="71.0" text="PDF" />
+      <ImageView fitHeight="44.0" fitWidth="200.0" layoutY="5.0">
+         <image>
+            <Image url="@../../../../../../Downloads/333997974_725431422366658_1750111115337249527_n.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtAvant" layoutX="45.0" layoutY="203.0" prefHeight="31.0" prefWidth="129.0" promptText="prix Avant" />
+      <TextField fx:id="txtnom" layoutX="45.0" layoutY="90.0" prefHeight="31.0" prefWidth="129.0" promptText="nom" />
+      <TextField fx:id="txtpour" layoutX="45.0" layoutY="252.0" prefHeight="31.0" prefWidth="129.0" promptText="poucentage" />
+      <TextField fx:id="txtApres" layoutX="45.0" layoutY="299.0" prefHeight="31.0" prefWidth="129.0" promptText="prixApres" />
+      <TextField fx:id="txtido" layoutX="45.0" layoutY="348.0" prefHeight="31.0" prefWidth="129.0" promptText="Offre" />
+      <TextField fx:id="txtduree1" layoutX="45.0" layoutY="146.0" prefHeight="31.0" prefWidth="129.0" promptText="duree" />
+      <TableView fx:id="TableView1" layoutX="200.0" layoutY="71.0" onMouseClicked="#selectO" prefHeight="182.0" prefWidth="469.0">
+         <columns>
+            <TableColumn fx:id="nomColumn" prefWidth="61.0" text="Nom" />
+            <TableColumn fx:id="dureeColumn1" prefWidth="62.0" text="Duree" />
+            <TableColumn fx:id="prixAVColumn" prefWidth="83.0" text="Prix Avant" />
+            <TableColumn fx:id="pourColumn" prefWidth="62.0" text="\%" />
+            <TableColumn fx:id="prixAPColumn11" prefWidth="89.0" text="Prix Apres" />
+            <TableColumn fx:id="idProcolumn" prefWidth="89.0" text="ID" />
+         </columns>
+      </TableView>
+      <TextArea fx:id="idtxt" layoutX="46.0" layoutY="40.0" opacity="0.0" prefHeight="31.0" prefWidth="109.0" />
+   </children>
+</AnchorPane>

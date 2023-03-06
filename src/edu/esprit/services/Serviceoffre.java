@@ -29,54 +29,47 @@ import java.util.stream.Collectors;
  *
  * @author Hp
  */
-public class Serviceoffre implements IService<Offre> {
+public class Serviceoffre implements IOffreService<Offre> {
      Connection cnx = Datasource.getInstance().getConnection() ;
 
    
-   public void ajouter(Offre u) {
-try {
-if ( u.getdescription_offre().isEmpty()) {
-throw new IllegalArgumentException("La description de l'offre ne peut pas être vide ou nulle.");
-}
-if (u.getdescription_offre().length() > 8) {
-throw new IllegalArgumentException("La description de l'offre ne peut pas dépasser 8 caractères.");
-}
-if ( u.getduree_offre().isEmpty()) {
-throw new IllegalArgumentException("La durée de l'offre ne peut pas être vide ou nulle.");
-}
-
-
-String req = "INSERT INTO offre (DescO, DureeO) VALUES (?,?)";
-PreparedStatement ps = cnx.prepareStatement(req);
-
-ps.setString(1, u.getdescription_offre());
-ps.setString(2, u.getduree_offre());
-
-ps.executeUpdate();
-} catch (SQLException ex) {
-System.out.println(ex.getMessage());
-} catch (IllegalArgumentException ex) {
-
-System.out.println(ex.getMessage());
-}
+   public void ajouterOffre(Offre o) {
+ try {
+            String requete= "INSERT INTO offre (DescO,DureeO)"
+                    + "VALUES (?,?)";
+            PreparedStatement pst = Datasource.getInstance().getConnection()
+                    .prepareStatement(requete);
+           
+            pst.setString(1, o.getdescription_offre());
+            pst.setString(2, o.getduree_offre());
+            
+           
+            pst.executeUpdate();
+            System.out.println("Offre ajoutée");
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
 }
 
     @Override
-    public void supprimer(int id) {
-       try {
-            String req = "DELETE FROM offre WHERE idO = " + id;
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("offre deleted !");
+    public void supprimerOffre(Offre o) {
+        try {
+            String requete = "DELETE FROM offre where idO=?";
+            PreparedStatement pst = Datasource.getInstance().getConnection()
+                    .prepareStatement(requete);
+            pst.setInt(1, o.getid_offre());
+            pst.executeUpdate();
+            System.out.println("offre supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
     @Override
-    public void modifier(Offre u) {
+    public void modifierOffre(Offre u) {
         try {
-            String req = "UPDATE offre SET DureeO = '" + u.getduree_offre() + "', DescO = '" + u.getdescription_offre() + "' WHERE offre.`idO` = " + u.getid_offre();
+            String req = "UPDATE offre SET DescO = '" + u.getdescription_offre()+ "', DureeO = '" + u.getduree_offre()+ "' WHERE offre.`idO` = " + u.getid_offre();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("offre updated !");
@@ -86,27 +79,20 @@ System.out.println(ex.getMessage());
     }
     
 
-   public Offre getOneById(int id) {
-        String query = "SELECT * FROM offre WHERE idO = " + id + "";
-        Offre o  = new Offre();
-        try{
-            Statement ste = cnx.createStatement();
-            ResultSet rs = ste.executeQuery(query);
-            while (rs.next()){
-                o.setid_offre(rs.getInt("idO"));
-                o.setdescription_offre(rs.getString("DescO"));
-                o.setduree_offre(rs.getString("DureeO"));
-                
-            }
-        }
-        catch (SQLException e){
-            e.getMessage();
-        }
-        return o;
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
 
     
-    public List<Offre> getall() {
+     @Override
+    public List<Offre>afficherOffres() {
         List<Offre> listeoffre = new ArrayList<>();
         String query = "SELECT * FROM offre ";
         try{
@@ -117,6 +103,7 @@ System.out.println(ex.getMessage());
                  o.setid_offre(rs.getInt("idO"));
                 o.setdescription_offre(rs.getString("DescO"));
                 o.setduree_offre(rs.getString("DureeO"));
+                System.out.println(o.toString());
                 listeoffre.add(o);
             }
         }
@@ -138,10 +125,42 @@ System.out.println(ex.getMessage());
         .collect(Collectors.toList());
 }
 
-            
+         public void pdf(Offre o) throws FileNotFoundException, DocumentException {
+        try {
+        String file_name="C:\\Users\\Hp\\Desktop\\pdf\\nadejoffre.pdf";
+        Document doc =new Document();
+        PdfWriter.getInstance(doc, new FileOutputStream(file_name));
+        doc.open();
+        PreparedStatement ps=null;
+        ResultSet rs=null;
+         String querry="SELECT * FROM offre";
+
+            ps=cnx.prepareStatement(querry);
+            rs=ps.executeQuery();
+            while(rs.next()) {
+                Paragraph para=new Paragraph(rs.getInt("idO")+" "+rs.getString("DescO")+" "+rs.getString("DureeO")+" ");
+                doc.add(para);
+                doc.add(new Paragraph(" "));
+
+            }
+            doc.close();
+
+
+
+        }catch(Exception E){
+            System.err.println(E);
+
+        }
         
-        
+}
+
+    public List<Offre> findoffreByDescOAndDureeO(List<Offre> listo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+}   
+        
+        
+    
     
     
    

@@ -5,18 +5,19 @@
  */
 package edu.esprit.services;
 
+import static java.util.Collections.list;
 import java.util.List;
 
 /**
  *
  * @author Hp
- * @param <U>
+ * @param <Offre>
  */
-public interface IService<U> {
-    public void ajouter(U u); 
-    public void supprimer(int id) ; 
-    public void modifier(U u) ;
-    public U getOneById(int id) ; 
-    public List<U> getall() ; 
+public interface IOffreService<Offre> {
+    public void ajouterOffre(Offre o); 
+    public void supprimerOffre(Offre o) ; 
+    public void modifierOffre(Offre o) ;
+    public List<Offre> afficherOffres();
+    
     
 }

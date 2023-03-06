@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.OffreFXMLController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass">
+         <stylesheets>
+            <URL value="@offrecrud.css" />
+         </stylesheets>
+         <children>
+            <TextField fx:id="txtduree" layoutX="43.0" layoutY="255.0" prefHeight="31.0" prefWidth="129.0" promptText="duree" />
+            <TextField fx:id="txtdesc" layoutX="43.0" layoutY="200.0" prefHeight="31.0" prefWidth="129.0" promptText="descreption" />
+            <TextField fx:id="txtid" layoutX="43.0" layoutY="149.0" prefHeight="31.0" prefWidth="129.0" promptText="id" />
+            <VBox layoutX="192.0" prefHeight="400.0" prefWidth="408.0" style="-fx-background-color: #007FFF;">
+               <children>
+                  <Button fx:id="buttonpdf" mnemonicParsing="false" onMouseClicked="#addpdf" text="PDF" />
+                  <Button fx:id="triiii" mnemonicParsing="false" onMouseClicked="#triisignaaal" text="TRIER" />
+               </children></VBox>
+            <Button fx:id="btnback" layoutX="511.0" layoutY="358.0" mnemonicParsing="false" onAction="#gomenu" prefHeight="31.0" prefWidth="71.0" text="Menu" />
+            <TableView fx:id="TableviewOffre" layoutX="265.0" layoutY="73.0" onMouseClicked="#selected" prefHeight="182.0" prefWidth="295.0">
+               <columns>
+                  <TableColumn fx:id="idoffre" prefWidth="69.0" text="IDOFFRE" />
+                  <TableColumn fx:id="description" prefWidth="129.0" text="description" />
+                  <TableColumn fx:id="duree" prefWidth="131.0" text="duree" />
+               </columns>
+            </TableView>
+            <Button fx:id="supprimerOffre" layoutX="373.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#deleteOffre" prefHeight="31.0" prefWidth="79.0" text="Supprimer" />
+            <Button fx:id="modifierOffre" layoutX="265.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#updateOffre" prefHeight="31.0" prefWidth="79.0" text="Modifier" />
+            <Button fx:id="ajouterOffre" layoutX="480.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#addOffre" prefHeight="31.0" prefWidth="79.0" text="Ajouter" />
+            <TextField fx:id="search" layoutX="278.0" layoutY="22.0" onMouseClicked="#rechercheEq" prefHeight="31.0" prefWidth="268.0" promptText="Recherche" />
+            <ImageView fitHeight="44.0" fitWidth="200.0">
+               <image>
+                  <Image url="@../../../../../../Downloads/333997974_725431422366658_1750111115337249527_n.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -28,76 +28,52 @@ import java.util.stream.Collectors;
  *
  * @author Hp
  */
-public class Servicepromotion implements IService<Promotion> {
+public class Servicepromotion implements IPromotionService<Promotion> {
     Connection cnx = Datasource.getInstance().getConnection() ;
 
    
-  public void ajouter(Promotion u) {
-    try {
-        // Vérifier si le nom de la promotion est unique
-        String reqCheck = "SELECT nomP FROM promotion WHERE nomP = ?";
-        PreparedStatement psCheck = cnx.prepareStatement(reqCheck);
-        psCheck.setString(1, u.getnom_promotion());
-        ResultSet rs = psCheck.executeQuery();
-        if (rs.next()) {
-            throw new IllegalArgumentException("Le nom de la promotion doit être unique.");
+  public void ajouterPromotion(Promotion p) {
+   
+               try {
+            String requete= "INSERT INTO promotion (nomP,DureeP,PrixAvant,Pourcentage,PrixApres,idO)"
+                    + "VALUES (?,?,?,?,?,?)";
+            PreparedStatement pst = Datasource.getInstance().getConnection()
+                    .prepareStatement(requete);
+           
+            pst.setString(1, p.getnom_promotion());
+            pst.setInt(2, p.getduree_promotion());
+            pst.setInt(3,p.getprix_avant());
+            pst.setInt(4,p.getpourcentage());
+            pst.setInt(5,p.getprix_apres());
+            pst.setInt(6,p.getIdO());
+            
+           
+            pst.executeUpdate();
+            System.out.println("promotion ajoutée");
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
-
-        // Vérifier que les champs ont une longueur minimale et maximale
-        if (u.getnom_promotion().isEmpty()) {
-            throw new IllegalArgumentException("Le nom de la promotion ne peut pas être vide ou nul.");
-        }
-        if (u.getnom_promotion().length() > 4) {
-            throw new IllegalArgumentException("Le nom de la promotion ne peut pas dépasser 50 caractères.");
-        }
-        if (u.getduree_promotion() < 0 || u.getduree_promotion() > 30) {
-            throw new IllegalArgumentException("La durée de la promotion doit être comprise entre 0 et 365 jours.");
-        }
-        if (u.getprix_avant() < 0) {
-            throw new IllegalArgumentException("Le prix avant la promotion ne peut pas être négatif.");
-        }
-        if (u.getprix_apres() < 0) {
-            throw new IllegalArgumentException("Le prix après la promotion ne peut pas être négatif.");
-        }
-        if (u.getprix_apres() > u.getprix_avant()) {
-            throw new IllegalArgumentException("Le prix après la promotion doit être inférieur au prix avant la promotion.");
-        }
-        if (u.getpourcentage() < 0 || u.getpourcentage() > 100) {
-            throw new IllegalArgumentException("Le pourcentage de réduction doit être compris entre 0 et 100.");
-        }
-
-        // Insérer la nouvelle promotion si les contrôles sont réussis
-        String req = "INSERT INTO promotion (nomP, DureeP, PrixAvant, Pourcentage, PrixApres) VALUES (?,?,?,?,?)";
-        PreparedStatement ps = cnx.prepareStatement(req);
-        ps.setString(1, u.getnom_promotion());
-        ps.setInt(2, u.getduree_promotion());
-        ps.setInt(3, u.getprix_avant());
-        ps.setInt(4, u.getpourcentage());
-        ps.setInt(5, u.getprix_apres());
-        ps.executeUpdate();
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-    } catch (IllegalArgumentException ex) {
-        System.out.println(ex.getMessage());
-    }
 }
 
     @Override
-    public void supprimer(int id) {
+    public void supprimerPromotion(Promotion p) {
        try {
-            String req = "DELETE FROM promotion WHERE IdPro = " + id;
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("promotion deleted !");
+            String requete = "DELETE FROM promotion where IdPro=?";
+            PreparedStatement pst = Datasource.getInstance().getConnection()
+                    .prepareStatement(requete);
+            pst.setInt(1, p.getid_promotion());
+            pst.executeUpdate();
+            System.out.println("promotion supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
     @Override
-    public void modifier(Promotion u) {
+    public void modifierPromotion(Promotion u) {
         try {
-            String req = "UPDATE promotion SET idPro = '" + u.getid_promotion() + "', nomP = '" + u.getnom_promotion() + "' WHERE promotion.`idPro` = " + u.getid_promotion();
+            String req = "UPDATE promotion SET idPro = '" + u.getid_promotion() + "', nomP = '" + u.getnom_promotion() +  "', DureeP = '" + u.getduree_promotion() +  "', PrixAvant = '" +   u.getprix_avant() + "', Pourcentage = '" +u.getpourcentage() + "', PrixApres = '"  + u.getprix_apres() + "', idO = '"+   u.getIdO()                          + "' WHERE promotion.`idPro` = " + u.getid_promotion();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("promotion updated !");
@@ -120,6 +96,8 @@ public class Servicepromotion implements IService<Promotion> {
                 o.setprix_avant(rs.getInt("PrixAvant"));
                 o.setpourcentage(rs.getInt("Pourcentage"));
                                 o.setprix_apres(rs.getInt("PrixApres"));
+                                o.setIdO(rs.getInt("IdO"));
+
 
 
                 
@@ -146,6 +124,8 @@ public class Servicepromotion implements IService<Promotion> {
                 o.setprix_avant(rs.getInt("PrixAvant"));
                 o.setpourcentage(rs.getInt("Pourcentage"));
                o.setprix_apres(rs.getInt("PrixApres"));
+                o.setIdO(rs.getInt("IdO"));
+
                 listepromotion.add(o);
             }
         }
@@ -162,9 +142,106 @@ public class Servicepromotion implements IService<Promotion> {
        
     }
          
+public void pdf(Promotion p) throws FileNotFoundException, DocumentException {
+        try {
+        String file_name="C:\\Users\\Hp\\Desktop\\pdf\\nadejpromotion.pdf";
+        Document doc =new Document();
+        PdfWriter.getInstance(doc, new FileOutputStream(file_name));
+        doc.open();
+        PreparedStatement ps=null;
+        ResultSet rs=null;
+         String querry="SELECT * FROM promotion";
 
-    }
+            ps=cnx.prepareStatement(querry);
+            rs=ps.executeQuery();
+            while(rs.next()) {
+                Paragraph para=new Paragraph(rs.getInt("IdPRO")+" "+rs.getString("nomP")+" "+rs.getInt("DureeP")+" "+rs.getInt("PrixAvant")+" "+rs.getInt("Pourcentage")+" "+rs.getInt("PrixApres")+" ");
+                doc.add(para);
+                doc.add(new Paragraph(" "));
+
+            }
+            doc.close();
+
+
+
+        }catch(Exception E){
+            System.err.println(E);
+
+        }
     
+    }
+
+ List<Offre> getoffrebyIdPro(int idPro) throws SQLException{
+        List<Offre> arr = new ArrayList<>();
+         try {
+        PreparedStatement pre = cnx.prepareStatement("SELECT DescO , DureeO from offre o , promotion p where p.idO=o.idO and p.idPro=?;"); //ORDER BY P asc
+         pre.setInt(1, idPro);
+         ResultSet rs = pre.executeQuery();
+
+             while(rs.next()){
+                     String DescO = rs.getString("DescO");
+                       String DureeO = rs.getString("DureeO");
+                        
+                    
+                     Offre m=new Offre(DescO,DureeO);
+                    arr.add(m);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return arr;
+    }
+
+
+
+
+
+
+ public List<Promotion>afficherPromotions() {
+        List<Promotion> listepromotion = new ArrayList<>();
+        String query = "SELECT * FROM promotion ";
+        try{
+            Statement ste = cnx.createStatement();
+            ResultSet rs = ste.executeQuery(query);
+            while (rs.next()){
+                Promotion p = new Promotion();
+                 p.setid_promotion(rs.getInt("IdPro"));
+                p.setnom_promotion(rs.getString("nomP"));
+                p.setduree_promotion(rs.getInt("DureeP"));
+                p.setprix_avant(rs.getInt("PrixAvant"));
+                p.setpourcentage(rs.getInt("Pourcentage"));
+                p.setprix_apres(rs.getInt("PrixApres"));
+                p.setIdO(rs.getInt("idO"));
+                
+                System.out.println(p.toString());
+                listepromotion.add(p);
+            }
+        }
+        catch (SQLException e){
+            e.getMessage();
+        }
+        return listepromotion;
+    }
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
     
 
