@@ -64,27 +64,35 @@ public class BackController implements Initializable {
     @FXML
     private Button repondre;
     @FXML
-    private TextField idC;
+    private TextField cin1;
+
     @FXML
-    private TextField idCh;
+    private TextField res1;
+
     @FXML
-    private TextField numR;
+    private TextField num1;
+
     @FXML
-    private TextField resR;
+    private TextField reclamation1;
+
     @FXML
-    private DatePicker dateR1;
+    private DatePicker date1;
+
     @FXML
     private TableView<Reponse> tableView;
+
     @FXML
-    private TableColumn<Reponse, Integer> idi;
+    private TableColumn<Reponse, Integer> cin2;
+
     @FXML
-    private TableColumn<Reponse, Integer> idic;
+    private TableColumn<Reponse, String> res2;
+
     @FXML
-    private TableColumn<Reponse, Integer> numir;
+    private TableColumn<Reponse, Integer> num2;
+
     @FXML
-    private TableColumn<Reponse, String> resir;
-    @FXML
-    private TableColumn<Reponse, Date> dateir;
+    private TableColumn<Reponse, Date> date2;
+
     @FXML
     private Button btnSupp;
     @FXML
@@ -119,10 +127,26 @@ public class BackController implements Initializable {
     private Button btntr;
     @FXML
     private TextField traduction;
+    @FXML
+    private Button btnAfficher;
+    @FXML
+    private Button btnAppuyez;
 
     /**
      * Initializes the controller class.
      */
+    @FXML
+    void appuiyez(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("apiSms.fxml"));
+        Parent root = loader.load();
+        Scene newScene = new Scene(root);
+        Stage stage = (Stage) btnAppuyez.getScene().getWindow();
+        stage.setScene(newScene);
+        stage.show();
+    }
+
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -134,13 +158,13 @@ public class BackController implements Initializable {
     @FXML
     private void ajouterReponse(ActionEvent event) {
 
-        int idclient = Integer.parseInt(idC.getText());
-        int idchauffeur = Integer.parseInt(idCh.getText());
-        int num = Integer.parseInt(numR.getText());
-        String resultat = resR.getText();
-        Date dateR = Date.valueOf(dateR1.getValue());
+        int cin = Integer.parseInt(cin1.getText());
+        String resultat = res1.getText();
+        int num = Integer.parseInt(num1.getText());
+        Date dateR = Date.valueOf(date1.getValue());
+        int reclamationId = Integer.parseInt(reclamation1.getText());
 
-        Reponse r = new Reponse(idclient, idchauffeur, num, resultat, dateR);
+        Reponse r = new Reponse(cin, resultat, num, dateR, reclamationId);
         ServiceReponse sr = new ServiceReponse() {
         };
         sr.ajouter(r);
@@ -161,13 +185,13 @@ public class BackController implements Initializable {
         ObservableList<Reponse> observableClients = FXCollections.observableList(reponse);
 
         tableView.setItems(observableClients);
-        idi.setCellValueFactory(new PropertyValueFactory<>("idclient"));
-        idic.setCellValueFactory(new PropertyValueFactory<>("idchauffeur"));
+        cin2.setCellValueFactory(new PropertyValueFactory<>("cin"));
+        res2.setCellValueFactory(new PropertyValueFactory<>("resultat"));
 
-        numir.setCellValueFactory(new PropertyValueFactory<>("num"));
+        num2.setCellValueFactory(new PropertyValueFactory<>("num"));
 
-        resir.setCellValueFactory(new PropertyValueFactory<>("resultat"));
-        dateir.setCellValueFactory(new PropertyValueFactory<>("dateR"));
+        date2.setCellValueFactory(new PropertyValueFactory<>("dateR"));
+
     }
 
     @FXML
@@ -197,13 +221,13 @@ public class BackController implements Initializable {
     private void modifierReponse(ActionEvent event) {
 
         {
-            int idclient = Integer.parseInt(idC.getText());
-            int idchauffeur = Integer.parseInt(idCh.getText());
-            int num = Integer.parseInt(numR.getText());
-            String resultat = resR.getText();
-            Date dateR = Date.valueOf(dateR1.getValue());
+            int cin = Integer.parseInt(cin1.getText());
+            String resultat = res1.getText();
+            int num = Integer.parseInt(num1.getText());
 
-            Reponse r = new Reponse(idclient, idchauffeur, num, resultat, dateR);
+            Date dateR = Date.valueOf(date1.getValue());
+
+            Reponse r = new Reponse(cin, resultat, num, dateR);
             ServiceReponse sr = new ServiceReponse() {
             };
             sr.modifier(r);
@@ -228,13 +252,12 @@ public class BackController implements Initializable {
         List<Reponse> rep_cherche = sr.rechercher(reponse, searchid.getText());
         ObservableList<Reponse> observableClients = FXCollections.observableList(rep_cherche);
         tableView.setItems(observableClients);
-        idi.setCellValueFactory(new PropertyValueFactory<>("idclient"));
-        idic.setCellValueFactory(new PropertyValueFactory<>("idchauffeur"));
+        cin2.setCellValueFactory(new PropertyValueFactory<>("cin"));
+        res2.setCellValueFactory(new PropertyValueFactory<>("resultat"));
 
-        numir.setCellValueFactory(new PropertyValueFactory<>("num"));
+        num2.setCellValueFactory(new PropertyValueFactory<>("num"));
 
-        resir.setCellValueFactory(new PropertyValueFactory<>("resultat"));
-        dateir.setCellValueFactory(new PropertyValueFactory<>("dateR"));
+        date2.setCellValueFactory(new PropertyValueFactory<>("dateR"));
 
     }
 
@@ -277,21 +300,20 @@ public class BackController implements Initializable {
 
     @FXML
     private void traduire(ActionEvent event) throws IOException {
-       OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient();
 
-RequestBody body = new FormBody.Builder()
-	.add("q", "English is hard, but detectably so")
-	.build();
+        RequestBody body = new FormBody.Builder()
+                .add("q", "English is hard, but detectably so")
+                .build();
 
-Request request = new Request.Builder()
-	.url("https://google-translate1.p.rapidapi.com/language/translate/v2/detect")
-	.post(body)
-	.addHeader("content-type", "application/x-www-form-urlencoded")
-	.addHeader("Accept-Encoding", "application/gzip")
-	.addHeader("X-RapidAPI-Key", "cf9df17959msh795e091327e4e77p17dc55jsn58fccd786a0d\"")
-	.addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
-	.build();
-
+        Request request = new Request.Builder()
+                .url("https://google-translate1.p.rapidapi.com/language/translate/v2/detect")
+                .post(body)
+                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .addHeader("Accept-Encoding", "application/gzip")
+                .addHeader("X-RapidAPI-Key", "cf9df17959msh795e091327e4e77p17dc55jsn58fccd786a0d\"")
+                .addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
+                .build();
 
     }
 

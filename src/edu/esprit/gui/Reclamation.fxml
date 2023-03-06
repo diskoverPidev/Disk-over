@@ -18,7 +18,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="999.0" style="-fx-background-color: #12477A; -fx-animation: myanimation 5s infinite;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ReclamationController">
    <children>
       <BorderPane layoutX="-4.0" layoutY="-4.0" prefHeight="531.0" prefWidth="1006.0">
-         <top>
+         <bottom>
             <AnchorPane prefHeight="531.0" prefWidth="1075.0" BorderPane.alignment="CENTER">
                <children>
                   <Separator layoutX="578.0" layoutY="120.0" orientation="VERTICAL" prefHeight="344.0" prefWidth="17.0" />
@@ -26,7 +26,7 @@
                   <TextField fx:id="typeR" layoutX="283.0" layoutY="292.0" prefHeight="26.0" prefWidth="120.0" promptText="type" style="-fx-background-color: transparent;" />
                   <TextField fx:id="objetR" layoutX="285.0" layoutY="349.0" prefHeight="26.0" prefWidth="116.0" promptText="objet" style="-fx-background-color: transparent;" />
                   <TextField fx:id="searchid" layoutX="613.0" layoutY="206.0" prefHeight="26.0" prefWidth="288.0" promptText="entrer un type ou objet" style="-fx-background-color: transparent;" />
-                  <TextField fx:id="messageR" layoutX="283.0" layoutY="233.0" prefHeight="26.0" prefWidth="127.0" promptText="message" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="messageR" layoutX="284.0" layoutY="233.0" prefHeight="26.0" prefWidth="127.0" promptText="message" style="-fx-background-color: transparent;" />
                   <DatePicker fx:id="dateR" layoutX="283.0" layoutY="403.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
                   <TextField fx:id="cinrec" layoutX="285.0" layoutY="170.0" prefHeight="26.0" prefWidth="124.0" promptText="cin" style="-fx-background-color: transparent;" />
                   <Button fx:id="afficherrec" layoutX="646.0" layoutY="475.0" mnemonicParsing="false" onAction="#afficherreclamation" prefHeight="29.0" prefWidth="90.0" style="-fx-background-color: #27ae60;" text="afficher" />
@@ -50,7 +50,7 @@
                   </BorderPane>
                   <Button fx:id="btnRechercher" layoutX="908.0" layoutY="204.0" mnemonicParsing="false" onAction="#rechercheR" prefHeight="29.0" prefWidth="84.0" style="-fx-background-color: #27ae60;" text="rechercher" />
                   <Button fx:id="btnValider" layoutX="412.0" layoutY="458.0" mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: #27ae60;" text="Valider" />
-                  <TableView fx:id="tableView" layoutX="610.0" layoutY="241.0" onMouseClicked="#getData" onSort="#showsReclamation" prefHeight="210.0" prefWidth="388.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="tableView" layoutX="610.0" layoutY="243.0" onMouseClicked="#getData" onSort="#showsReclamation" prefHeight="208.0" prefWidth="388.0" style="-fx-background-color: transparent;">
                      <columns>
                         <TableColumn fx:id="cinRe" prefWidth="59.0" text="cin" />
                         <TableColumn fx:id="typeRe" prefWidth="60.33331298828125" text="type" />
@@ -66,21 +66,26 @@
                   </ImageView>
                   <TitledPane animated="false" layoutX="283.0" layoutY="-55.0" text="untitled" />
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="248.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="65.0" fitWidth="84.0" layoutX="276.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="56.0" fitWidth="64.0" layoutX="343.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/FAIRE-UNE-RECLAMATION-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="173.0" fitWidth="396.0" layoutX="394.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="208.0" fitWidth="427.0" layoutX="393.0" layoutY="-70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/download-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Rating fx:id="rating" layoutX="747.0" layoutY="120.0" />
-                  <Label fx:id="msg" layoutX="727.0" layoutY="72.0" prefHeight="35.0" prefWidth="237.0" style="-fx-background-color: yellow;" text="Donner votre avis a propos du service :" />
+                  <Rating fx:id="rating" layoutX="768.0" layoutY="120.0" />
+                  <Label fx:id="msg" layoutX="749.0" layoutY="89.0" prefHeight="25.0" prefWidth="235.0" style="-fx-background-color: white;" text="Donner votre avis a propos du service :" />
+                  <ImageView fitHeight="79.0" fitWidth="126.0" layoutX="610.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/download__1_-removebg-preview.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
-         </top>
+         </bottom>
       </BorderPane>
     
    </children>

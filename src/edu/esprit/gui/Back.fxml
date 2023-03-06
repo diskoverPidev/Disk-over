@@ -15,26 +15,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="1255.0" style="-fx-background-color: red; -fx-background-color: #12477A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.BackController">
    <children>
-      <TextField fx:id="idC" layoutX="296.0" layoutY="189.0" prefHeight="25.0" prefWidth="135.0" promptText="IdClient" style="-fx-background-color: transparent;" />
-      <TextField fx:id="idCh" layoutX="296.0" layoutY="229.0" prefHeight="25.0" prefWidth="127.0" promptText="IdChauffeur" style="-fx-background-color: transparent;" />
-      <TextField fx:id="numR" layoutX="292.0" layoutY="270.0" prefHeight="25.0" prefWidth="135.0" promptText="Num Reponse" style="-fx-background-color: transparent;" />
-      <TextField fx:id="resR" layoutX="292.0" layoutY="323.0" prefHeight="25.0" prefWidth="127.0" promptText="Resultat" style="-fx-background-color: transparent;" />
-      <DatePicker fx:id="dateR1" layoutX="292.0" layoutY="377.0" prefHeight="25.0" prefWidth="135.0" promptText="date" style="-fx-background-color: transparent;" />
-      <TableView fx:id="tableView" layoutX="471.0" layoutY="230.0" onSort="#afficherReponse" prefHeight="219.0" prefWidth="376.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="cin1" layoutX="296.0" layoutY="189.0" prefHeight="25.0" prefWidth="135.0" promptText="Cin" style="-fx-background-color: transparent;" />
+      <TextField fx:id="res1" layoutX="296.0" layoutY="230.0" prefHeight="25.0" prefWidth="135.0" promptText="Resultat" style="-fx-background-color: transparent;" />
+      <TextField fx:id="num1" layoutX="296.0" layoutY="270.0" prefHeight="25.0" prefWidth="135.0" promptText="Numero" style="-fx-background-color: transparent;" />
+      <TextField fx:id="reclamation1" layoutX="299.0" layoutY="364.0" prefHeight="25.0" prefWidth="120.0" promptText="ReclamationId" style="-fx-background-color: transparent;" />
+      <DatePicker fx:id="date1" layoutX="300.0" layoutY="308.0" prefHeight="25.0" prefWidth="127.0" promptText="date" style="-fx-background-color: transparent;" />
+      <TableView fx:id="tableView" layoutX="471.0" layoutY="146.0" onSort="#afficherReponse" prefHeight="219.0" prefWidth="376.0" style="-fx-background-color: transparent;">
         <columns>
-          <TableColumn fx:id="idi" prefWidth="75.0" text="IdClient" />
-          <TableColumn fx:id="idic" prefWidth="75.0" text="IdChauffeur" />
-            <TableColumn fx:id="numir" prefWidth="75.0" text="Num reponse" />
-            <TableColumn fx:id="resir" prefWidth="75.0" text="Resultat" />
-            <TableColumn fx:id="dateir" prefWidth="75.0" text="Date" />
+          <TableColumn fx:id="cin2" prefWidth="75.0" text="Cin" />
+            <TableColumn fx:id="num2" prefWidth="75.0" text="Numero" />
+            <TableColumn fx:id="res2" prefWidth="75.0" text="Resultat" />
+            <TableColumn fx:id="date2" prefWidth="75.0" text="Date" />
         </columns>
       </TableView>
       <Button fx:id="repondre" layoutX="361.0" layoutY="450.0" mnemonicParsing="false" onAction="#ajouterReponse" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Repondre" textAlignment="RIGHT" textFill="#f8efef" textOverrun="CLIP" underline="true" />
-      <Button fx:id="btnSupp" layoutX="776.0" layoutY="464.0" mnemonicParsing="false" onAction="#supprimerReponse" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" text="Supprimer" textAlignment="RIGHT" textFill="#f8f6f6" textOverrun="CLIP" underline="true" />
-      <Button fx:id="btnmodif" layoutX="661.0" layoutY="464.0" mnemonicParsing="false" onAction="#modifierReponse" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Modifier" textAlignment="RIGHT" textFill="#ede2e2" textOverrun="CLIP" underline="true" />
-      <Separator layoutX="858.0" layoutY="95.0" orientation="VERTICAL" prefHeight="294.0" prefWidth="11.0" />
-      <TextField fx:id="searchid" layoutX="471.0" layoutY="187.0" onAction="#rechercheR" prefHeight="26.0" prefWidth="285.0" promptText="Entrer une resultat du reponse" style="-fx-background-color: transparent;" />
-      <Button fx:id="btnRechercher" layoutX="778.0" layoutY="187.0" mnemonicParsing="false" onAction="#rechercheR" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Rechercher" textAlignment="RIGHT" textFill="#fdfcfc" textOverrun="CLIP" underline="true" />
+      <Button fx:id="btnSupp" layoutX="745.0" layoutY="392.0" mnemonicParsing="false" onAction="#supprimerReponse" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" text="Supprimer" textAlignment="RIGHT" textFill="#f8f6f6" textOverrun="CLIP" underline="true" />
+      <Button fx:id="btnmodif" layoutX="630.0" layoutY="392.0" mnemonicParsing="false" onAction="#modifierReponse" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Modifier" textAlignment="RIGHT" textFill="#ede2e2" textOverrun="CLIP" underline="true" />
+      <Separator layoutX="858.0" layoutY="87.0" orientation="VERTICAL" prefHeight="318.0" prefWidth="11.0" />
+      <TextField fx:id="searchid" layoutX="469.0" layoutY="97.0" onAction="#rechercheR" prefHeight="26.0" prefWidth="285.0" promptText="Entrer une resultat du reponse" style="-fx-background-color: transparent;" />
+      <Button fx:id="btnRechercher" layoutX="769.0" layoutY="96.0" mnemonicParsing="false" onAction="#rechercheR" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Rechercher" textAlignment="RIGHT" textFill="#fdfcfc" textOverrun="CLIP" underline="true" />
       <TableView fx:id="tableView2" layoutX="869.0" layoutY="94.0" onMouseClicked="#getData" onSort="#showsReclamation2" prefHeight="188.0" prefWidth="366.0" style="-fx-background-color: transparent;">
          <columns>
             <TableColumn fx:id="cinRe" prefWidth="53.6666259765625" text="cin" />
@@ -46,9 +45,7 @@
       </TableView>
       <Button fx:id="afficherid" layoutX="916.0" layoutY="401.0" mnemonicParsing="false" onAction="#afficher" prefHeight="28.0" prefWidth="65.0" style="-fx-background-color: #27ae60;" text="afficher" textFill="#f4eded" />
       <TextField fx:id="mssg" editable="false" layoutX="991.0" layoutY="402.0" />
-      <Button fx:id="btntr" layoutX="913.0" layoutY="455.0" mnemonicParsing="false" onAction="#traduire" style="-fx-background-color: #27ae60;" text="traduction" textFill="#f2eeee" />
-      <TextField fx:id="traduction" layoutX="991.0" layoutY="455.0" prefHeight="25.0" prefWidth="149.0" />
-      <Separator layoutX="458.0" layoutY="173.0" orientation="VERTICAL" prefHeight="294.0" prefWidth="11.0" />
+      <Separator layoutX="452.0" layoutY="80.0" orientation="VERTICAL" prefHeight="318.0" prefWidth="17.0" />
       <BorderPane layoutY="-1.0" prefHeight="542.0" prefWidth="212.0" style="-fx-background-color: white;">
          <top>
             <ImageView fitHeight="92.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
@@ -75,9 +72,16 @@
             <Image url="@../images/image-removebg-preview%20(1).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="78.0" fitWidth="71.0" layoutX="1155.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="78.0" fitWidth="71.0" layoutX="1164.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/image-removebg-preview%20(2).png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnAfficher" layoutX="521.0" layoutY="392.0" mnemonicParsing="false" onAction="#afficherReponse" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: #27ae60; -fx-border-color: #979797; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-scale-x: 1.05; -fx-scale-y: 1.05; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-transition: all 0.5s ease;" text="Afficher " textAlignment="RIGHT" textFill="#ede2e2" textOverrun="CLIP" underline="true" />
+      <Button fx:id="btnAppuyez" layoutX="1164.0" layoutY="504.0" mnemonicParsing="false" onAction="#appuiyez" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #27ae60;" text="appuyez" textFill="#f4eded" />
+      <ImageView fitHeight="67.0" fitWidth="43.0" layoutX="1112.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/download-removebg-preview%20(1).png" />
          </image>
       </ImageView>
    </children>

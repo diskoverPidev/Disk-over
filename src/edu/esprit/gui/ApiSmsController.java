@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import edu.esprit.gui.TwilioSMS;
 import javafx.event.ActionEvent;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -33,18 +32,16 @@ public class ApiSmsController implements Initializable {
     @FXML
     private Button btnEnvoyer;
     
- public  final String ACCOUNT_SID = "";
-  public  final String AUTH_TOKEN = "";
-    
-    public void sendMessage(String assoName,String titlePost){
-    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    Message message = Message.creator(
-      new com.twilio.type.PhoneNumber(""),
-      "MG5c01c879f4f2b9148bd6a3efe7fdd3c9",
-      "Bonjour, l'association "+assoName +" vient de publier un nouvel Post de don intitulé "+titlePost+".")
-    .create();
 
-    System.out.println(message.getSid());
+    
+    public void sendMessage(String message,String numero){
+    Twilio.init("ACf08d1bcd88962f492de0135480183899", "45ca8e7e796cf077533702c4e928bc5f");
+      Message msg = Message.creator(new PhoneNumber(numero), new PhoneNumber("+12706790747"), message).create();
+        System.out.println("twilio");
+        System.out.println(msg.getSid());
+ 
+
+
     }
   
 
@@ -61,7 +58,7 @@ public class ApiSmsController implements Initializable {
     void envoyerSMS(ActionEvent event) {
         String message = smsText.getText();
         String numero = numText.getText();
-        TwilioSMS.envoyerSMS(message, numero);
+      sendMessage(message, numero);
 
     }
 }

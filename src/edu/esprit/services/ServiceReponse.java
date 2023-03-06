@@ -44,16 +44,16 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
 
         try {
 
-            String req = "INSERT INTO `reponse`(`idclient`, `idchauffeur`, `num`, `resultat`, `dateR`) VALUES (?,?,?,?,?)";
+            String req = "INSERT INTO `reponse`(`cin`, `resultat`, `num`, `dateR`, `reclamationId`) VALUES (?,?,?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, i.getIdclient());
-            ps.setInt(2, i.getIdchauffeur());
+            ps.setInt(1, i.getCin());
+            ps.setString(2, i.getResultat());
             ps.setInt(3, i.getNum());
-            ps.setString(4, i.getResultat());
-            ps.setDate(5, i.getDateR());
+            ps.setDate(4, i.getDateR());
+            ps.setInt(5, i.getReclamationId());
             ps.executeUpdate();
             System.out.println("reponse added ");
-                 // Afficher une notification système pour l'administrateur
+            // Afficher une notification système pour l'administrateur
             SystemTray tray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().createImage("icon.png"); // chemin vers une icône pour la notification
             TrayIcon trayIcon = new TrayIcon(image, "Nouvelle reponse");
@@ -67,10 +67,6 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
             System.out.println("essayer de nouveau");
         }
     }
-     
-
-        
-    
 
     @Override
     public void supprimer(Reponse i) {
@@ -89,7 +85,7 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
     @Override
     public void modifier(Reponse i) {
         try {
-            String req = "UPDATE `reponse` SET `idclient` = '" + i.getIdclient() + "', `idchauffeur` = '" + i.getIdchauffeur() + "', `num` = '" + i.getNum() + "', `resultat` = '" + i.getResultat() + "', `dateR` = '" + i.getDateR() + "' WHERE `reponse`.`num` = " + i.getNum();
+            String req = "UPDATE `reponse` SET `cin` = '" + i.getCin() + "', `resultat` = '" + i.getResultat() + "', `num` = '" + i.getNum() + "', `dateR` = '" + i.getDateR() + "', `reclamationId` = '" + i.getReclamationId() + "' WHERE `reponse`.`num` = " + i.getNum();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("reponse updated ");
@@ -101,16 +97,13 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
     @Override
     public Reponse getOneById(int numR) {
         Reponse i = null;
-        String reqs = "SELECT i.type,i.objet, i.message, i.date "
-                + "FROM reclamation t "
-                + "JOIN reponse i ON t.idJ = t.idJ "
-                + "WHERE i.idJ = ?";
+
         try {
             String req = "Select * from reponse";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                i = new Reponse(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5));
+                i = new Reponse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getInt(5));
                 System.out.println("Reponse afficher !");
             }
         } catch (SQLException ex) {
@@ -133,7 +126,7 @@ public abstract class ServiceReponse implements IReponse<Reponse> {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Reponse i = new Reponse(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5));
+                Reponse i = new Reponse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getInt(5));
                 list.add(i);
             }
         } catch (SQLException ex) {

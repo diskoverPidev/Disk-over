@@ -6,6 +6,8 @@
 package edu.esprit.entities;
 
 import java.sql.Date;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,59 +15,84 @@ import java.sql.Date;
  */
 public class Reponse {
 
-    private final int idclient;
-    private final int idchauffeur;
-    private final int num;
-    private final String resultat;
-    private final Date dateR;
+    private String resultat;
 
-    public Reponse(int idclient, int idchauffeur, int num, String resultat, Date dateR) {
-        this.idclient = idclient;
-        this.idchauffeur = idchauffeur;
-        this.num = num;
-        this.resultat = resultat;
-        this.dateR = dateR;
-    }
+    private int num;
 
-    public Reponse(int idclient, int idchauffeur, int num, String resultat, Date dateR, Reclamation id) {
-        this.idclient = idclient;
-        this.idchauffeur = idchauffeur;
-        this.num = num;
-        this.resultat = resultat;
-        this.dateR = dateR;
+    private Date dateR;
+    private int reclamationId;
 
-    }
+    private int cin;
 
-    public Reponse(int aInt, int aInt0, String string, Date date) {
+    public Reponse(int cin, int idchauffeur, int num, String resultat, Date dateR) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getIdclient() {
-        return idclient;
+    public Reponse(int cin, String resultat, int num, Date dateR) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getIdchauffeur() {
-        return idchauffeur;
+    public void setCin(int cin) {
+        this.cin = cin;
     }
 
-    public int getNum() {
-        return num;
+    public void setResultat(String resultat) {
+        this.resultat = resultat;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public void setDateR(Date dateR) {
+        this.dateR = dateR;
+    }
+
+    public Reponse(int cin, String resultat, int num, Date dateR, int reclamationId) {
+        this.cin = cin;
+        this.resultat = resultat;
+        this.num = num;
+        this.dateR = dateR;
+        this.reclamationId = reclamationId;
+    }
+    private static final Logger LOG = Logger.getLogger(Reponse.class.getName());
+
+    public int getCin() {
+        return cin;
     }
 
     public String getResultat() {
         return resultat;
     }
 
+    public int getNum() {
+        return num;
+    }
+
     public Date getDateR() {
         return dateR;
     }
 
+    public int getReclamationId() {
+        return reclamationId;
+    }
+
+    public static Logger getLOG() {
+        return LOG;
+    }
+
+    public void setReclamationId(int reclamationId) {
+        this.reclamationId = reclamationId;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.idclient;
-        hash = 89 * hash + this.idchauffeur;
-        hash = 89 * hash + this.num;
+        int hash = 3;
+        hash = 37 * hash + this.cin;
+        hash = 37 * hash + Objects.hashCode(this.resultat);
+        hash = 37 * hash + this.num;
+        hash = 37 * hash + Objects.hashCode(this.dateR);
+        hash = 37 * hash + Objects.hashCode(this.reclamationId);
         return hash;
     }
 
@@ -81,52 +108,27 @@ public class Reponse {
             return false;
         }
         final Reponse other = (Reponse) obj;
-        if (this.idclient != other.idclient) {
+        if (this.cin != other.cin) {
             return false;
         }
-        if (this.idchauffeur != other.idchauffeur) {
+        if (this.num != other.num) {
             return false;
         }
-        return this.num == other.num;
+        if (!Objects.equals(this.resultat, other.resultat)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateR, other.dateR)) {
+            return false;
+        }
+        if (!Objects.equals(this.reclamationId, other.reclamationId)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Reponse{" + "idclient=" + idclient + ", idchauffeur=" + idchauffeur + ", num=" + num + ", resultat=" + resultat + ", dateR=" + dateR + '}';
-    }
-
-    public Object getIdR() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setObjet(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setResultat(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setIdClient(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setIdChauffeur(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setNum(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setDate(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public class getResultat {
-
-        public getResultat() {
-        }
+        return "Reponse{" + "cin=" + cin + ", resultat=" + resultat + ", num=" + num + ", dateR=" + dateR + ", reclamationId=" + reclamationId + '}';
     }
 
 }
